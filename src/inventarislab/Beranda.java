@@ -54,12 +54,15 @@ public class Beranda extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton2.setText("(Logout)");
         jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Welcome, Welcome");
+        jLabel1.setText("Welcome, Username ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -83,9 +86,9 @@ public class Beranda extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 549, 70);
+        jPanel1.setBounds(0, 0, 760, 70);
 
-        jPanel2.setBackground(new java.awt.Color(241, 169, 160));
+        jPanel2.setBackground(new java.awt.Color(228, 241, 254));
         jPanel2.setLayout(null);
 
         jPanel3.setBackground(new java.awt.Color(255, 204, 255));
@@ -199,11 +202,11 @@ public class Beranda extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanel6);
-        jPanel6.setBounds(110, 230, 150, 10);
+        jPanel6.setBounds(110, 230, 150, 140);
 
         jPanel7.setBackground(new java.awt.Color(255, 204, 255));
 
@@ -225,13 +228,13 @@ public class Beranda extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addComponent(jLabel8)
                 .addGap(25, 25, 25))
         );
 
         jPanel2.add(jPanel7);
-        jPanel7.setBounds(350, 230, 150, 10);
+        jPanel7.setBounds(350, 230, 150, 140);
 
         jPanel8.setBackground(new java.awt.Color(255, 204, 255));
 
@@ -253,16 +256,16 @@ public class Beranda extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addGap(23, 23, 23))
         );
 
         jPanel2.add(jPanel8);
-        jPanel8.setBounds(600, 230, 120, 9);
+        jPanel8.setBounds(600, 230, 120, 140);
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(0, 75, 761, 400);
+        jPanel2.setBounds(0, 75, 761, 420);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
