@@ -3,18 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/InventarisLab.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/ReturnForm.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/RiwayatPeminjaman.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/Home.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/TambahPeminjam.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/Beranda.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/Login.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/TambahBarang.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/TambahLaboran.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/DetailLaboran.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/TambahMember.java</file>
-            <file>file:/C:/Users/USER/Documents/GitHub/Laboratory-Management-System/src/inventarislab/DetailStok.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/TambahLaboran.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/Login.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/DetailLaboran.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/TambahMember.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/UpdateBarang.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/ReturnForm.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/RiwayatPeminjaman.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/TambahBarang.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/Beranda.java</file>
+            <file>file:/C:/Users/muham/Documents/Project/LabMS/src/view/TambahPeminjam.java</file>
         </group>
     </open-files>
 </project-private>
