@@ -144,7 +144,6 @@
                               </Group>
                               <Component id="jTextField1" pref="280" max="32767" attributes="0"/>
                               <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                              <Component id="dateChooserCombo1" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                               <Component id="jTextField3" max="32767" attributes="0"/>
                               <Component id="jComboBox3" min="-2" pref="110" max="-2" attributes="0"/>
                               <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
@@ -201,10 +200,7 @@
                       <Component id="jLabel24" alignment="3" min="-2" pref="17" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                      <Component id="dateChooserCombo1" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -305,8 +301,6 @@
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
           </Properties>
-        </Component>
-        <Component class="datechooser.beans.DateChooserCombo" name="dateChooserCombo1">
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
