@@ -21,7 +21,7 @@ public class Beranda extends javax.swing.JFrame {
             labeldetailadmin.setVisible(false);
             labelnewstock.setVisible(false);
         }
-        labelwelcome.setText("Welcome "+siapah);
+        labelwelcome.setText("Welcome "+siapah+" ,");
     }
 
     /**
