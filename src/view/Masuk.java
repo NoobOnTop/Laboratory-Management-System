@@ -98,6 +98,11 @@ public class Masuk extends javax.swing.JFrame {
                 jButtonOKMouseClicked(evt);
             }
         });
+        jButtonOK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonOKKeyPressed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Cancel");
@@ -194,6 +199,32 @@ public class Masuk extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonOKMouseClicked
+
+    private void jButtonOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonOKKeyPressed
+        // TODO add your handling code here:
+        username=jTextFieldUsername.getText();
+        password=jPasswordField.getText();
+        CheckLogin check = new CheckLogin(username, password);
+        if(check.checkLoginMember()){
+            JOptionPane.showMessageDialog(this, "Berhasil!");
+            dispose();
+
+        }else{
+            if(check.checkLoginLaboran()){
+                JOptionPane.showMessageDialog(this, "Login laboran!");
+                //BerandaAdmin badmin = new BerandaAdmin();
+//                badmin.setVisible(true);
+//                badmin.setLocationRelativeTo(null);
+                dispose();
+                            Beranda beranda=new Beranda();
+                            beranda.setVisible(true);
+                            beranda.setLocationRelativeTo(null);
+            }else{
+            JOptionPane.showMessageDialog(this, "Failed!");
+            }
+        }
+        
+    }//GEN-LAST:event_jButtonOKKeyPressed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

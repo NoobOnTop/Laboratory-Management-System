@@ -32,24 +32,24 @@ public class Beranda extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        jButtonborrow = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        jButtonaccount = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jPanel6 = new javax.swing.JPanel();
+        jButtonstock = new javax.swing.JButton();
+        jPanelborrow = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jPanel7 = new javax.swing.JPanel();
+        jPanelstock = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jPanel8 = new javax.swing.JPanel();
+        jPanelaccount = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -94,9 +94,14 @@ public class Beranda extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(92, 151, 191));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Borrowing Manager");
-        jButton1.setBorder(null);
+        jButtonborrow.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonborrow.setText("Borrowing Manager");
+        jButtonborrow.setBorder(null);
+        jButtonborrow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonborrowMouseClicked(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/attach.png"))); // NOI18N
 
@@ -108,7 +113,7 @@ public class Beranda extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonborrow, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -119,20 +124,25 @@ public class Beranda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonborrow, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
 
         jPanel2.add(jPanel3);
-        jPanel3.setBounds(80, 30, 150, 240);
+        jPanel3.setBounds(80, 30, 150, 239);
 
         jPanel4.setBackground(new java.awt.Color(92, 151, 191));
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton3.setText("Account");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonaccount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonaccount.setText("Account");
+        jButtonaccount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonaccountMouseClicked(evt);
+            }
+        });
+        jButtonaccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonaccountActionPerformed(evt);
             }
         });
 
@@ -145,7 +155,7 @@ public class Beranda extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonaccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
@@ -157,7 +167,7 @@ public class Beranda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(jButtonaccount)
                 .addContainerGap())
         );
 
@@ -168,9 +178,14 @@ public class Beranda extends javax.swing.JFrame {
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/stockd.png"))); // NOI18N
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setText("Stock");
+        jButtonstock.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonstock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonstock.setText("Stock");
+        jButtonstock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonstockMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -179,7 +194,7 @@ public class Beranda extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonstock, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 2, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -188,14 +203,22 @@ public class Beranda extends javax.swing.JFrame {
                 .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonstock, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32))
         );
 
         jPanel2.add(jPanel5);
         jPanel5.setBounds(330, 50, 130, 230);
 
-        jPanel6.setBackground(new java.awt.Color(92, 151, 191));
+        jPanelborrow.setBackground(new java.awt.Color(92, 151, 191));
+        jPanelborrow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelborrowMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelborrowMouseExited(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Borrowing Form");
@@ -206,17 +229,17 @@ public class Beranda extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel11.setText("Returning Form");
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelborrowLayout = new javax.swing.GroupLayout(jPanelborrow);
+        jPanelborrow.setLayout(jPanelborrowLayout);
+        jPanelborrowLayout.setHorizontalGroup(
+            jPanelborrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
             .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+        jPanelborrowLayout.setVerticalGroup(
+            jPanelborrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelborrowLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(28, 28, 28)
@@ -225,10 +248,18 @@ public class Beranda extends javax.swing.JFrame {
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(jPanel6);
-        jPanel6.setBounds(140, 270, 150, 130);
+        jPanel2.add(jPanelborrow);
+        jPanelborrow.setBounds(140, 260, 130, 10);
 
-        jPanel7.setBackground(new java.awt.Color(92, 151, 191));
+        jPanelstock.setBackground(new java.awt.Color(92, 151, 191));
+        jPanelstock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelstockMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelstockMouseExited(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("New Stock");
@@ -236,16 +267,16 @@ public class Beranda extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Detail Stock");
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelstockLayout = new javax.swing.GroupLayout(jPanelstock);
+        jPanelstock.setLayout(jPanelstockLayout);
+        jPanelstockLayout.setHorizontalGroup(
+            jPanelstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        jPanelstockLayout.setVerticalGroup(
+            jPanelstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelstockLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jLabel7)
                 .addGap(31, 31, 31)
@@ -253,10 +284,18 @@ public class Beranda extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.add(jPanel7);
-        jPanel7.setBounds(390, 260, 120, 100);
+        jPanel2.add(jPanelstock);
+        jPanelstock.setBounds(390, 260, 120, 20);
 
-        jPanel8.setBackground(new java.awt.Color(92, 151, 191));
+        jPanelaccount.setBackground(new java.awt.Color(92, 151, 191));
+        jPanelaccount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanelaccountMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanelaccountMouseExited(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("Create Admin");
@@ -270,34 +309,34 @@ public class Beranda extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel14.setText("Detail Member");
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelaccountLayout = new javax.swing.GroupLayout(jPanelaccount);
+        jPanelaccount.setLayout(jPanelaccountLayout);
+        jPanelaccountLayout.setHorizontalGroup(
+            jPanelaccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelaccountLayout.createSequentialGroup()
+                .addGroup(jPanelaccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
                     .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        jPanelaccountLayout.setVerticalGroup(
+            jPanelaccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelaccountLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel9)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel10)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14)
                 .addGap(25, 25, 25))
         );
 
-        jPanel2.add(jPanel8);
-        jPanel8.setBounds(620, 260, 120, 210);
+        jPanel2.add(jPanelaccount);
+        jPanelaccount.setBounds(620, 260, 118, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -317,9 +356,54 @@ public class Beranda extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaccountActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonaccountActionPerformed
+
+    private void jPanelborrowMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelborrowMouseEntered
+        // TODO add your handling code here:
+        jPanelborrow.setSize(140, 270);
+    }//GEN-LAST:event_jPanelborrowMouseEntered
+
+    private void jPanelborrowMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelborrowMouseExited
+        // TODO add your handling code here:
+        jPanelborrow.setSize(0, 0);
+    }//GEN-LAST:event_jPanelborrowMouseExited
+
+    private void jButtonborrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonborrowMouseClicked
+        // TODO add your handling code here:
+        jPanelborrow.setSize(140, 270);
+    }//GEN-LAST:event_jButtonborrowMouseClicked
+
+    private void jButtonstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonstockMouseClicked
+        // TODO add your handling code here:
+        jPanelstock.setSize(120, 104);
+    }//GEN-LAST:event_jButtonstockMouseClicked
+
+    private void jPanelstockMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelstockMouseEntered
+        // TODO add your handling code here:
+        jPanelstock.setSize(120, 104);
+    }//GEN-LAST:event_jPanelstockMouseEntered
+
+    private void jPanelstockMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelstockMouseExited
+        // TODO add your handling code here:
+        jPanelstock.setSize(0, 0);
+    }//GEN-LAST:event_jPanelstockMouseExited
+
+    private void jButtonaccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonaccountMouseClicked
+        // TODO add your handling code here:
+        jPanelaccount.setSize(118, 260);
+    }//GEN-LAST:event_jButtonaccountMouseClicked
+
+    private void jPanelaccountMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelaccountMouseEntered
+        // TODO add your handling code here:
+        jPanelaccount.setSize(118, 260);
+    }//GEN-LAST:event_jPanelaccountMouseEntered
+
+    private void jPanelaccountMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelaccountMouseExited
+        // TODO add your handling code here:
+        jPanelaccount.setSize(0,0);
+    }//GEN-LAST:event_jPanelaccountMouseExited
 
     /**
      * @param args the command line arguments
@@ -357,10 +441,10 @@ public class Beranda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonaccount;
+    private javax.swing.JButton jButtonborrow;
+    private javax.swing.JButton jButtonstock;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -381,8 +465,8 @@ public class Beranda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanelaccount;
+    private javax.swing.JPanel jPanelborrow;
+    private javax.swing.JPanel jPanelstock;
     // End of variables declaration//GEN-END:variables
 }
