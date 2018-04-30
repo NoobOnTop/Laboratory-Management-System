@@ -178,7 +178,7 @@ public class Masuk extends javax.swing.JFrame {
         if(check.checkLoginMember()){
             JOptionPane.showMessageDialog(this, "Berhasil!");
             dispose();
-            
+
         }else{
             if(check.checkLoginLaboran()){
                 JOptionPane.showMessageDialog(this, "Login laboran!");
@@ -186,6 +186,9 @@ public class Masuk extends javax.swing.JFrame {
 //                badmin.setVisible(true);
 //                badmin.setLocationRelativeTo(null);
                 dispose();
+                            Beranda beranda=new Beranda();
+                            beranda.setVisible(true);
+                            beranda.setLocationRelativeTo(null);
             }else{
             JOptionPane.showMessageDialog(this, "Failed!");
             }
