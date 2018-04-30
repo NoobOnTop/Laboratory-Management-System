@@ -177,23 +177,23 @@ public class Masuk extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordFieldActionPerformed
 
     private void jButtonOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOKMouseClicked
-        username=jTextFieldUsername.getText();
+       username=jTextFieldUsername.getText();
         password=jPasswordField.getText();
         CheckLogin check = new CheckLogin(username, password);
         if(check.checkLoginMember()){
             JOptionPane.showMessageDialog(this, "Berhasil!");
+            Beranda beranda=new Beranda('m',username);
+            beranda.setVisible(true);
+            beranda.setLocationRelativeTo(null);
             dispose();
 
         }else{
             if(check.checkLoginLaboran()){
                 JOptionPane.showMessageDialog(this, "Login laboran!");
-                //BerandaAdmin badmin = new BerandaAdmin();
-//                badmin.setVisible(true);
-//                badmin.setLocationRelativeTo(null);
                 dispose();
-                            Beranda beranda=new Beranda();
-                            beranda.setVisible(true);
-                            beranda.setLocationRelativeTo(null);
+                Beranda beranda=new Beranda('l',username);
+                beranda.setVisible(true);
+                beranda.setLocationRelativeTo(null);
             }else{
             JOptionPane.showMessageDialog(this, "Failed!");
             }
@@ -207,18 +207,18 @@ public class Masuk extends javax.swing.JFrame {
         CheckLogin check = new CheckLogin(username, password);
         if(check.checkLoginMember()){
             JOptionPane.showMessageDialog(this, "Berhasil!");
+            Beranda beranda=new Beranda('m',username);
+            beranda.setVisible(true);
+            beranda.setLocationRelativeTo(null);
             dispose();
 
         }else{
             if(check.checkLoginLaboran()){
                 JOptionPane.showMessageDialog(this, "Login laboran!");
-                //BerandaAdmin badmin = new BerandaAdmin();
-//                badmin.setVisible(true);
-//                badmin.setLocationRelativeTo(null);
                 dispose();
-                            Beranda beranda=new Beranda();
-                            beranda.setVisible(true);
-                            beranda.setLocationRelativeTo(null);
+                Beranda beranda=new Beranda('l',username);
+                beranda.setVisible(true);
+                beranda.setLocationRelativeTo(null);
             }else{
             JOptionPane.showMessageDialog(this, "Failed!");
             }
@@ -247,6 +247,7 @@ public class Masuk extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Masuk.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

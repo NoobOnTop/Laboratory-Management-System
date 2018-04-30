@@ -1,21 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-/**
- *
- * @author USER
- */
+import java.awt.event.ActionEvent;
+
 public class Beranda extends javax.swing.JFrame {
 
     /**
      * Creates new form Beranda
      */
-    public Beranda() {
+    char siapa='l';
+    public Beranda(){
         initComponents();
+    }
+    public Beranda(char siapa,String siapah) {
+        initComponents();
+        this.siapa=siapa;
+        if(siapa=='m'){
+            labelnewstock.setVisible(false);
+            labelcreatemember.setVisible(false);
+            labelcreateadmin.setVisible(false);
+            labeldetailadmin.setVisible(false);
+            labelnewstock.setVisible(false);
+        }
+        labelwelcome.setText("Welcome "+siapah);
     }
 
     /**
@@ -28,8 +34,8 @@ public class Beranda extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jButtonlogout = new javax.swing.JButton();
+        labelwelcome = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButtonborrow = new javax.swing.JButton();
@@ -43,30 +49,35 @@ public class Beranda extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jButtonstock = new javax.swing.JButton();
         jPanelborrow = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        labelborrowingform = new javax.swing.JLabel();
+        labelhistory = new javax.swing.JLabel();
+        labelreturnform = new javax.swing.JLabel();
         jPanelstock = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        labelnewstock = new javax.swing.JLabel();
+        labeldetailstock = new javax.swing.JLabel();
         jPanelaccount = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        labelcreateadmin = new javax.swing.JLabel();
+        labeldetailadmin = new javax.swing.JLabel();
+        labelcreatemember = new javax.swing.JLabel();
+        labeldetailmember = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(228, 241, 254));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("(Logout)");
-        jButton2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButtonlogout.setBackground(new java.awt.Color(255, 255, 255));
+        jButtonlogout.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButtonlogout.setText("(Logout)");
+        jButtonlogout.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jButtonlogout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonlogoutMouseClicked(evt);
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Welcome, Username ");
+        labelwelcome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        labelwelcome.setText("Welcome, Username ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,18 +85,18 @@ public class Beranda extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(293, 293, 293)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelwelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jButtonlogout)
+                .addContainerGap(244, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton2))
+                    .addComponent(labelwelcome)
+                    .addComponent(jButtonlogout))
                 .addGap(23, 23, 23))
         );
 
@@ -211,76 +222,85 @@ public class Beranda extends javax.swing.JFrame {
         jPanel5.setBounds(330, 50, 130, 230);
 
         jPanelborrow.setBackground(new java.awt.Color(92, 151, 191));
-        jPanelborrow.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanelborrowMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanelborrowMouseExited(evt);
+
+        labelborrowingform.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelborrowingform.setText("Borrowing Form");
+        labelborrowingform.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelborrowingformMouseClicked(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Borrowing Form");
+        labelhistory.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelhistory.setText("History");
+        labelhistory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelhistoryMouseClicked(evt);
+            }
+        });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("History");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Returning Form");
+        labelreturnform.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelreturnform.setText("Returning Form");
+        labelreturnform.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelreturnformMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelborrowLayout = new javax.swing.GroupLayout(jPanelborrow);
         jPanelborrow.setLayout(jPanelborrowLayout);
         jPanelborrowLayout.setHorizontalGroup(
             jPanelborrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelhistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelborrowingform, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+            .addComponent(labelreturnform, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelborrowLayout.setVerticalGroup(
             jPanelborrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelborrowLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addComponent(labelborrowingform)
                 .addGap(28, 28, 28)
-                .addComponent(jLabel6)
+                .addComponent(labelhistory)
                 .addGap(31, 31, 31)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(labelreturnform, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jPanel2.add(jPanelborrow);
         jPanelborrow.setBounds(140, 260, 130, 10);
 
         jPanelstock.setBackground(new java.awt.Color(92, 151, 191));
-        jPanelstock.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanelstockMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanelstockMouseExited(evt);
+
+        labelnewstock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelnewstock.setText("New Stock");
+        labelnewstock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelnewstockMouseClicked(evt);
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("New Stock");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Detail Stock");
+        labeldetailstock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labeldetailstock.setText("Detail Stock");
+        labeldetailstock.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labeldetailstockMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelstockLayout = new javax.swing.GroupLayout(jPanelstock);
         jPanelstock.setLayout(jPanelstockLayout);
         jPanelstockLayout.setHorizontalGroup(
             jPanelstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labeldetailstock, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+            .addComponent(labelnewstock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanelstockLayout.setVerticalGroup(
             jPanelstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelstockLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(jLabel7)
+                .addComponent(labelnewstock)
                 .addGap(31, 31, 31)
-                .addComponent(jLabel8)
+                .addComponent(labeldetailstock)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -288,50 +308,62 @@ public class Beranda extends javax.swing.JFrame {
         jPanelstock.setBounds(390, 260, 120, 20);
 
         jPanelaccount.setBackground(new java.awt.Color(92, 151, 191));
-        jPanelaccount.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jPanelaccountMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                jPanelaccountMouseExited(evt);
+
+        labelcreateadmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelcreateadmin.setText("Create Admin");
+        labelcreateadmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelcreateadminMouseClicked(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Create Admin");
+        labeldetailadmin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labeldetailadmin.setText("Detail Admin");
+        labeldetailadmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labeldetailadminMouseClicked(evt);
+            }
+        });
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Detail Admin");
+        labelcreatemember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labelcreatemember.setText("Create Member");
+        labelcreatemember.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelcreatememberMouseClicked(evt);
+            }
+        });
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel13.setText("Create Member");
-
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel14.setText("Detail Member");
+        labeldetailmember.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        labeldetailmember.setText("Detail Member");
+        labeldetailmember.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labeldetailmemberMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelaccountLayout = new javax.swing.GroupLayout(jPanelaccount);
         jPanelaccount.setLayout(jPanelaccountLayout);
         jPanelaccountLayout.setHorizontalGroup(
             jPanelaccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labeldetailadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelcreateadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelaccountLayout.createSequentialGroup()
                 .addGroup(jPanelaccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labelcreatemember, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addComponent(labeldetailmember, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelaccountLayout.setVerticalGroup(
             jPanelaccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelaccountLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel9)
+                .addComponent(labelcreateadmin)
                 .addGap(29, 29, 29)
-                .addComponent(jLabel10)
+                .addComponent(labeldetailadmin)
                 .addGap(31, 31, 31)
-                .addComponent(jLabel13)
+                .addComponent(labelcreatemember)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel14)
+                .addComponent(labeldetailmember)
                 .addGap(25, 25, 25))
         );
 
@@ -342,8 +374,11 @@ public class Beranda extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,51 +394,108 @@ public class Beranda extends javax.swing.JFrame {
     private void jButtonaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaccountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonaccountActionPerformed
-
-    private void jPanelborrowMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelborrowMouseEntered
-        // TODO add your handling code here:
-        jPanelborrow.setSize(140, 270);
-    }//GEN-LAST:event_jPanelborrowMouseEntered
-
-    private void jPanelborrowMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelborrowMouseExited
-        // TODO add your handling code here:
-        jPanelborrow.setSize(0, 0);
-    }//GEN-LAST:event_jPanelborrowMouseExited
-
+    int countbo=0;
     private void jButtonborrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonborrowMouseClicked
         // TODO add your handling code here:
-        jPanelborrow.setSize(140, 270);
+        countbo++;
+        if(countbo%2==1){
+             jPanelborrow.setSize(140, 270);            
+        }else{
+            jPanelborrow.setSize(0, 0);
+        }
     }//GEN-LAST:event_jButtonborrowMouseClicked
-
+    int countst=0;
     private void jButtonstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonstockMouseClicked
         // TODO add your handling code here:
-        jPanelstock.setSize(120, 104);
+        countst++;
+        if(countst%2==1){
+            jPanelstock.setSize(120, 104);
+        }else{
+            jPanelstock.setSize(0, 0);
+        }
+        
     }//GEN-LAST:event_jButtonstockMouseClicked
-
-    private void jPanelstockMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelstockMouseEntered
-        // TODO add your handling code here:
-        jPanelstock.setSize(120, 104);
-    }//GEN-LAST:event_jPanelstockMouseEntered
-
-    private void jPanelstockMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelstockMouseExited
-        // TODO add your handling code here:
-        jPanelstock.setSize(0, 0);
-    }//GEN-LAST:event_jPanelstockMouseExited
-
+    int countacc=0;
     private void jButtonaccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonaccountMouseClicked
         // TODO add your handling code here:
-        jPanelaccount.setSize(118, 260);
+        countacc++;
+        if(countacc%2==1){
+            jPanelaccount.setSize(118, 260);
+        }else{
+            jPanelaccount.setSize(0,0);
+        }
+        
     }//GEN-LAST:event_jButtonaccountMouseClicked
 
-    private void jPanelaccountMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelaccountMouseEntered
+    private void jButtonlogoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonlogoutMouseClicked
         // TODO add your handling code here:
-        jPanelaccount.setSize(118, 260);
-    }//GEN-LAST:event_jPanelaccountMouseEntered
+        Masuk login=new Masuk();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonlogoutMouseClicked
 
-    private void jPanelaccountMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelaccountMouseExited
+    private void labelborrowingformMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelborrowingformMouseClicked
         // TODO add your handling code here:
-        jPanelaccount.setSize(0,0);
-    }//GEN-LAST:event_jPanelaccountMouseExited
+        TambahPeminjam bor=new TambahPeminjam();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labelborrowingformMouseClicked
+
+    private void labelhistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelhistoryMouseClicked
+        // TODO add your handling code here:
+        RiwayatPeminjaman bor=new RiwayatPeminjaman();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labelhistoryMouseClicked
+
+    private void labelreturnformMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelreturnformMouseClicked
+        // TODO add your handling code here:
+        ReturnForm bor=new ReturnForm();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labelreturnformMouseClicked
+
+    private void labelnewstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelnewstockMouseClicked
+        // TODO add your handling code here:
+        TambahBarang bor=new TambahBarang();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labelnewstockMouseClicked
+
+    private void labeldetailstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labeldetailstockMouseClicked
+        // TODO add your handling code here:
+        DetailStok bor= new DetailStok();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labeldetailstockMouseClicked
+
+    private void labelcreateadminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelcreateadminMouseClicked
+        // TODO add your handling code here:
+        TambahLaboran bor=new TambahLaboran();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labelcreateadminMouseClicked
+
+    private void labeldetailadminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labeldetailadminMouseClicked
+        // TODO add your handling code here:
+        DetailLaboran bor=new DetailLaboran();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labeldetailadminMouseClicked
+
+    private void labelcreatememberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelcreatememberMouseClicked
+        // TODO add your handling code here:
+        TambahMember bor=new TambahMember();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labelcreatememberMouseClicked
+
+    private void labeldetailmemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labeldetailmemberMouseClicked
+        // TODO add your handling code here:
+        DetailMember bor=new DetailMember();
+        dispose();
+        bor.setVisible(true);
+    }//GEN-LAST:event_labeldetailmemberMouseClicked
 
     /**
      * @param args the command line arguments
@@ -431,6 +523,7 @@ public class Beranda extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Beranda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -441,25 +534,15 @@ public class Beranda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonaccount;
     private javax.swing.JButton jButtonborrow;
+    private javax.swing.JButton jButtonlogout;
     private javax.swing.JButton jButtonstock;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -468,5 +551,15 @@ public class Beranda extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelaccount;
     private javax.swing.JPanel jPanelborrow;
     private javax.swing.JPanel jPanelstock;
+    private javax.swing.JLabel labelborrowingform;
+    private javax.swing.JLabel labelcreateadmin;
+    private javax.swing.JLabel labelcreatemember;
+    private javax.swing.JLabel labeldetailadmin;
+    private javax.swing.JLabel labeldetailmember;
+    private javax.swing.JLabel labeldetailstock;
+    private javax.swing.JLabel labelhistory;
+    private javax.swing.JLabel labelnewstock;
+    private javax.swing.JLabel labelreturnform;
+    private javax.swing.JLabel labelwelcome;
     // End of variables declaration//GEN-END:variables
 }
