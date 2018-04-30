@@ -1,30 +1,41 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.sql.Statement;
-/**
- *
- * @author muham
- */
+import javax.swing.JOptionPane;
+
 public class koneksidb {
-     public static Connection con;
-    public static Statement stm;
-    public static void main(String args[]){
-        try {
-            String url ="jdbc:mysql://localhost/labmanagement";
-            String user="root";
-            String pass="root";
-            Class.forName("com.mysql.jdbc.Driver");
-            con =DriverManager.getConnection(url,user,pass);
-            stm = con.createStatement();
-            System.out.println("koneksi berhasil;");
-        } catch (Exception e) {
-            System.err.println("koneksi gagal" +e.getMessage());
+    String host,username,pass;
+    Statement st=null;
+    public koneksidb(){
+        this.host="jdbc:mysql://localhost:3306/labmanagement";
+        this.username="root";
+        this.pass="";
+    }
+    public com.mysql.jdbc.Connection getConnection(){
+        com.mysql.jdbc.Connection con;
+        try{
+            con=(com.mysql.jdbc.Connection) DriverManager.getConnection(host, username, pass);
+            System.out.println("Connect!");
+            return con;
+        }catch(SQLException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Database not connected!");
+            return null;
+        }
+    }
+    
+    public void executeQuery(String query){
+        try{
+            com.mysql.jdbc.Connection con=getConnection();
+            st=con.createStatement();
+            if(st.executeUpdate(query)==1){
+                JOptionPane.showMessageDialog(null, "Sukses!");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Failed!");
         }
     }
 }
