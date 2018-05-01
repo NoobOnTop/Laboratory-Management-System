@@ -26,7 +26,7 @@ public class Masuk extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jPasswordField = new javax.swing.JPasswordField();
         jButtonOK = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtoncancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,8 +104,18 @@ public class Masuk extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Cancel");
+        jButtoncancel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtoncancel.setText("Cancel");
+        jButtoncancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtoncancelMouseClicked(evt);
+            }
+        });
+        jButtoncancel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtoncancelKeyPressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel7.setText("Sign In");
@@ -127,7 +137,7 @@ public class Masuk extends javax.swing.JFrame {
                         .addGap(85, 85, 85)
                         .addComponent(jButtonOK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(jButtoncancel)))
                 .addGap(40, 40, 40))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -150,7 +160,7 @@ public class Masuk extends javax.swing.JFrame {
                 .addGap(38, 38, 38)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonOK)
-                    .addComponent(jButton2))
+                    .addComponent(jButtoncancel))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
 
@@ -225,6 +235,18 @@ public class Masuk extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButtonOKKeyPressed
+
+    private void jButtoncancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoncancelMouseClicked
+        // TODO add your handling code here:
+        jTextFieldUsername.setText("");
+        jPasswordField.setText("");
+    }//GEN-LAST:event_jButtoncancelMouseClicked
+
+    private void jButtoncancelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtoncancelKeyPressed
+        // TODO add your handling code here:
+        jTextFieldUsername.setText("");
+        jPasswordField.setText("");
+    }//GEN-LAST:event_jButtoncancelKeyPressed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -259,8 +281,8 @@ public class Masuk extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonOK;
+    private javax.swing.JButton jButtoncancel;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;

@@ -1,8 +1,8 @@
 package model;
 import java.util.Date;
 public class Orang {
-    String nama,address;
-    Date tgl_lahir;
+    public String nama,address;
+    public Date tgl_lahir;
     public Orang(String nama,String address,Date tgl_lahir){
         this.nama=nama;
         this.address=address;

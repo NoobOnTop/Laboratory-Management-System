@@ -8,20 +8,26 @@ public class Beranda extends javax.swing.JFrame {
      * Creates new form Beranda
      */
     char siapa='l';
+    String siapah;
     public Beranda(){
         initComponents();
     }
     public Beranda(char siapa,String siapah) {
+        //siapa adalah variabel untuk mengetahui yang login itu member atau laboran
+        //'l' untuk laboran dan 'm' untuk member
+        //siapah adalah variabel untuk mengambil username dari Masuk.java
         initComponents();
         this.siapa=siapa;
+        this.siapah=siapah;
         if(siapa=='m'){
             labelnewstock.setVisible(false);
             labelcreatemember.setVisible(false);
             labelcreateadmin.setVisible(false);
             labeldetailadmin.setVisible(false);
             labelnewstock.setVisible(false);
+            labeldetailmember.setText("Account Detail");
         }
-        labelwelcome.setText("Welcome "+siapah+" ,");
+        labelusername.setText(siapah);
     }
 
     /**
@@ -36,6 +42,7 @@ public class Beranda extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jButtonlogout = new javax.swing.JButton();
         labelwelcome = new javax.swing.JLabel();
+        labelusername = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButtonborrow = new javax.swing.JButton();
@@ -77,7 +84,10 @@ public class Beranda extends javax.swing.JFrame {
         });
 
         labelwelcome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        labelwelcome.setText("Welcome, Username ");
+        labelwelcome.setText("Welcome ,");
+
+        labelusername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        labelusername.setText("Username");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -85,10 +95,12 @@ public class Beranda extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(293, 293, 293)
-                .addComponent(labelwelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(labelwelcome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labelusername)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonlogout)
-                .addContainerGap(244, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,7 +108,8 @@ public class Beranda extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelwelcome)
-                    .addComponent(jButtonlogout))
+                    .addComponent(jButtonlogout)
+                    .addComponent(labelusername))
                 .addGap(23, 23, 23))
         );
 
@@ -211,7 +224,7 @@ public class Beranda extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(39, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonstock, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -251,23 +264,28 @@ public class Beranda extends javax.swing.JFrame {
         jPanelborrow.setLayout(jPanelborrowLayout);
         jPanelborrowLayout.setHorizontalGroup(
             jPanelborrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labelhistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(labelborrowingform, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-            .addComponent(labelreturnform, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanelborrowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanelborrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelborrowingform, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                    .addComponent(labelhistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelreturnform, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanelborrowLayout.setVerticalGroup(
             jPanelborrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelborrowLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addComponent(labelborrowingform)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(labelhistory)
-                .addGap(31, 31, 31)
-                .addComponent(labelreturnform, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(labelreturnform, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanelborrow);
-        jPanelborrow.setBounds(140, 260, 130, 10);
+        jPanelborrow.setBounds(140, 260, 130, 20);
 
         jPanelstock.setBackground(new java.awt.Color(92, 151, 191));
 
@@ -297,10 +315,10 @@ public class Beranda extends javax.swing.JFrame {
         jPanelstockLayout.setVerticalGroup(
             jPanelstockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelstockLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(labelnewstock)
-                .addGap(31, 31, 31)
+                .addGap(23, 23, 23)
                 .addComponent(labeldetailstock)
+                .addGap(18, 18, 18)
+                .addComponent(labelnewstock)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -349,22 +367,22 @@ public class Beranda extends javax.swing.JFrame {
             .addComponent(labelcreateadmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanelaccountLayout.createSequentialGroup()
                 .addGroup(jPanelaccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelcreatemember, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                    .addComponent(labeldetailmember, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(labeldetailmember, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                    .addComponent(labelcreatemember, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanelaccountLayout.setVerticalGroup(
             jPanelaccountLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelaccountLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(labelcreateadmin)
-                .addGap(29, 29, 29)
-                .addComponent(labeldetailadmin)
-                .addGap(31, 31, 31)
-                .addComponent(labelcreatemember)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(25, 25, 25)
                 .addComponent(labeldetailmember)
-                .addGap(25, 25, 25))
+                .addGap(18, 18, 18)
+                .addComponent(labeldetailadmin)
+                .addGap(18, 18, 18)
+                .addComponent(labelcreatemember)
+                .addGap(18, 18, 18)
+                .addComponent(labelcreateadmin)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.add(jPanelaccount);
@@ -375,10 +393,7 @@ public class Beranda extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -437,64 +452,63 @@ public class Beranda extends javax.swing.JFrame {
     private void labelborrowingformMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelborrowingformMouseClicked
         // TODO add your handling code here:
         TambahPeminjam bor=new TambahPeminjam();
-        dispose();
+       
         bor.setVisible(true);
     }//GEN-LAST:event_labelborrowingformMouseClicked
 
     private void labelhistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelhistoryMouseClicked
         // TODO add your handling code here:
         RiwayatPeminjaman bor=new RiwayatPeminjaman();
-        dispose();
+        
         bor.setVisible(true);
     }//GEN-LAST:event_labelhistoryMouseClicked
 
     private void labelreturnformMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelreturnformMouseClicked
         // TODO add your handling code here:
         ReturnForm bor=new ReturnForm();
-        dispose();
+
         bor.setVisible(true);
     }//GEN-LAST:event_labelreturnformMouseClicked
 
     private void labelnewstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelnewstockMouseClicked
         // TODO add your handling code here:
         TambahBarang bor=new TambahBarang();
-        dispose();
+        
         bor.setVisible(true);
     }//GEN-LAST:event_labelnewstockMouseClicked
 
     private void labeldetailstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labeldetailstockMouseClicked
         // TODO add your handling code here:
         DetailStok bor= new DetailStok();
-        dispose();
+        
         bor.setVisible(true);
     }//GEN-LAST:event_labeldetailstockMouseClicked
 
     private void labelcreateadminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelcreateadminMouseClicked
         // TODO add your handling code here:
         TambahLaboran bor=new TambahLaboran();
-        dispose();
+        
         bor.setVisible(true);
     }//GEN-LAST:event_labelcreateadminMouseClicked
 
     private void labeldetailadminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labeldetailadminMouseClicked
         // TODO add your handling code here:
         DetailLaboran bor=new DetailLaboran();
-        dispose();
+        
         bor.setVisible(true);
     }//GEN-LAST:event_labeldetailadminMouseClicked
 
     private void labelcreatememberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelcreatememberMouseClicked
         // TODO add your handling code here:
         TambahMember bor=new TambahMember();
-        dispose();
+       
         bor.setVisible(true);
     }//GEN-LAST:event_labelcreatememberMouseClicked
 
     private void labeldetailmemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labeldetailmemberMouseClicked
         // TODO add your handling code here:
-        DetailMember bor=new DetailMember();
-        dispose();
-        bor.setVisible(true);
+            DetailMember bor=new DetailMember();
+            bor.setVisible(true);
     }//GEN-LAST:event_labeldetailmemberMouseClicked
 
     /**
@@ -560,6 +574,7 @@ public class Beranda extends javax.swing.JFrame {
     private javax.swing.JLabel labelhistory;
     private javax.swing.JLabel labelnewstock;
     private javax.swing.JLabel labelreturnform;
+    private javax.swing.JLabel labelusername;
     private javax.swing.JLabel labelwelcome;
     // End of variables declaration//GEN-END:variables
 }
