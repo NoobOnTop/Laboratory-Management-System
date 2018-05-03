@@ -107,6 +107,11 @@ public class TambahMember extends javax.swing.JFrame {
         confirm.setBackground(new java.awt.Color(242, 241, 239));
 
         jButtonupdate.setText("Update");
+        jButtonupdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonupdateMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -295,6 +300,20 @@ public class TambahMember extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jLabelbackMouseClicked
+
+    private void jButtonupdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonupdateMouseClicked
+        // TODO add your handling code here:
+        try {
+           //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
+            String sql = "UPDATE `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+tgl.getDate()+"', '"+usernametext.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
+            con=datacon.getConnection();
+            java.sql.PreparedStatement pst=con.prepareStatement(sql);
+            pst.execute();
+            //JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+        } catch (Exception e) {
+            //JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonupdateMouseClicked
 
     /**
      * @param args the command line arguments
