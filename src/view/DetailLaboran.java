@@ -5,17 +5,22 @@
  */
 package view;
 
+import model.koneksidb;
+import java.sql.Connection;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author USER
  */
 public class DetailLaboran extends javax.swing.JFrame {
-
+    koneksidb datacon = new koneksidb();
+    private Connection con;
     /**
      * Creates new form DetailLaboran
      */
     public DetailLaboran() {
         initComponents();
+        load_table();
     }
 
     /**
@@ -215,7 +220,34 @@ public class DetailLaboran extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    private void load_table(){
+        // membuat tampilan model tabel
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Tanggal Lahir");
+        model.addColumn("Username");
+        model.addColumn("password");
+        model.addColumn("Address");
+        //model.addColumn("Alamat");
+       // model.addColumn("Phone");
+        
+        //menampilkan data database kedalam tabel
+        try {
+            int no=1;
+            String sql = "select * from laboran";
+            //java.sql.Connection conn=(Connection)config.configDB();
+            con = datacon.getConnection();
+            java.sql.Statement stm=con.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
+            }
+            jTable1.setModel(model);
+        } catch (Exception e) {
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -249,6 +281,7 @@ public class DetailLaboran extends javax.swing.JFrame {
                 new DetailLaboran().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
