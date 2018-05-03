@@ -49,6 +49,11 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(228, 241, 254));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("History");
@@ -193,6 +198,10 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel1MouseClicked
     private void load_table(){
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();

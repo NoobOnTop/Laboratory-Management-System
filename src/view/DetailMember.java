@@ -57,6 +57,11 @@ public class DetailMember extends javax.swing.JFrame {
         jLabel2.setText("Member Detail");
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/left-arrow.png"))); // NOI18N
+        jLabel22.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel22MouseClicked(evt);
+            }
+        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/curriculum.png"))); // NOI18N
 
@@ -227,6 +232,10 @@ public class DetailMember extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
+dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel22MouseClicked
     
     private void load_table(){
         // membuat tampilan model tabel
