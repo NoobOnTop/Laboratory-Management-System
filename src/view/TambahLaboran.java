@@ -239,16 +239,12 @@ public class TambahLaboran extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try {
-           //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
             String sql = "INSERT INTO `laboran` (`id_laboran`, `nama_laboran`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+date.getText()+"', '"+username.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
             con=datacon.getConnection();
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();
-            //JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
         } catch (Exception e) {
-          //  JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        //System.out.println(nama.getText()+date.getText()+username.getText()+password.getText()+address.getText());
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
