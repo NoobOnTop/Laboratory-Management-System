@@ -507,8 +507,15 @@ public class Beranda extends javax.swing.JFrame {
 
     private void labeldetailmemberMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labeldetailmemberMouseClicked
         // TODO add your handling code here:
-            DetailMember bor=new DetailMember();
-            bor.setVisible(true);
+            if(labeldetailmember.getText()=="Detail Member"){
+                DetailMember bor=new DetailMember();
+                bor.setVisible(true);                
+            }else if(labeldetailmember.getText()=="Account Detail"){
+                String nama=labelusername.getText();
+                TambahMember bor=new TambahMember(nama);
+                bor.setVisible(true);
+            }
+
     }//GEN-LAST:event_labeldetailmemberMouseClicked
 
     /**

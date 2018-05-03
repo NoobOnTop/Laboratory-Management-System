@@ -9,6 +9,7 @@ public class Masuk extends javax.swing.JFrame {
     String username,password;
     public Masuk() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -276,6 +277,7 @@ public class Masuk extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Masuk().setVisible(true);
+               
             }
         });
     }

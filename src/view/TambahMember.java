@@ -18,10 +18,13 @@ public class TambahMember extends javax.swing.JFrame {
      */
     public TambahMember() {
         initComponents();
+        jButtonupdate.setVisible(false);
     }
     public TambahMember(String username){
         initComponents();
-        
+        isiform(username);
+        jTextFieldregisternewmembe.setText("Account Detail");
+        jButtoncreate.setVisible(false);
     }
 
     /**
@@ -37,7 +40,7 @@ public class TambahMember extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         nama = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        username = new javax.swing.JTextField();
+        usernametext = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -45,13 +48,14 @@ public class TambahMember extends javax.swing.JFrame {
         jButtoncreate = new javax.swing.JButton();
         jButtoncancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        date = new datechooser.beans.DateChooserCombo();
         password = new javax.swing.JTextField();
         confirm = new javax.swing.JTextField();
+        tgl = new com.toedter.calendar.JDateChooser();
+        jButtonupdate = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextFieldregisternewmembe = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelback = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(0, 0));
@@ -68,7 +72,7 @@ public class TambahMember extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Birth Date");
 
-        username.setBackground(new java.awt.Color(242, 241, 239));
+        usernametext.setBackground(new java.awt.Color(242, 241, 239));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Username");
@@ -89,6 +93,11 @@ public class TambahMember extends javax.swing.JFrame {
         });
 
         jButtoncancel.setText("Cancel");
+        jButtoncancel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtoncancelMouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Address");
@@ -96,6 +105,8 @@ public class TambahMember extends javax.swing.JFrame {
         password.setBackground(new java.awt.Color(242, 241, 239));
 
         confirm.setBackground(new java.awt.Color(242, 241, 239));
+
+        jButtonupdate.setText("Update");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,17 +127,20 @@ public class TambahMember extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtoncreate)
-                        .addGap(45, 45, 45)
-                        .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(80, 80, 80))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(nama)
+                        .addComponent(usernametext, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(confirm, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(address, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jButtoncreate)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                            .addComponent(jButtonupdate)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tgl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,11 +154,11 @@ public class TambahMember extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tgl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(usernametext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -159,7 +173,9 @@ public class TambahMember extends javax.swing.JFrame {
                     .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtoncreate)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtoncreate)
+                        .addComponent(jButtonupdate))
                     .addComponent(jButtoncancel))
                 .addGap(293, 293, 293))
         );
@@ -168,15 +184,21 @@ public class TambahMember extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
 
-        jTextField7.setBackground(new java.awt.Color(37, 116, 169));
-        jTextField7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField7.setText("Register New Member");
-        jTextField7.setBorder(null);
+        jTextFieldregisternewmembe.setEditable(false);
+        jTextFieldregisternewmembe.setBackground(new java.awt.Color(37, 116, 169));
+        jTextFieldregisternewmembe.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jTextFieldregisternewmembe.setForeground(new java.awt.Color(255, 255, 255));
+        jTextFieldregisternewmembe.setText("Register New Member");
+        jTextFieldregisternewmembe.setBorder(null);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user.png"))); // NOI18N
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/left-arrow.png"))); // NOI18N
+        jLabelback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/left-arrow.png"))); // NOI18N
+        jLabelback.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelbackMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,9 +206,9 @@ public class TambahMember extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelback, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldregisternewmembe, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -197,12 +219,12 @@ public class TambahMember extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(13, 13, 13)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
+                        .addComponent(jLabelback, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jTextFieldregisternewmembe, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -224,21 +246,55 @@ public class TambahMember extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void isiform(String username){
+        try
+            {
+                String sql="SELECT * from `member` WHERE `username`='"+username+"'";
+                con = datacon.getConnection();
+                java.sql.Statement stm=con.createStatement();
+                java.sql.ResultSet rs=stm.executeQuery(sql);
+                while(rs.next()){
+                    nama.setText(rs.getString(2));
+                    tgl.setDate(rs.getDate(3));
+                    usernametext.setText(rs.getString(4));
+                    password.setText(rs.getString(5));
+                    confirm.setText(rs.getString(5));
+                    address.setText(rs.getString(6));
+                }
+            }catch(Exception e)
+            {
+                //JOptionPane.showMessageDialog(null,"GAGAL");
+            }         
+    }
     private void jButtoncreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncreateActionPerformed
         // TODO add your handling code here:
         try {
            //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
-            String sql = "INSERT INTO `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+date.getText()+"', '"+username.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
+            String sql = "INSERT INTO `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+tgl.getDate()+"', '"+usernametext.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
             con=datacon.getConnection();
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();
             //JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
         } catch (Exception e) {
-          //  JOptionPane.showMessageDialog(this, e.getMessage());
+            //JOptionPane.showMessageDialog(this, e.getMessage());
         }
+//        dispose();
+//        new TambahMember().setVisible(true);
+        
         //System.out.println(nama.getText()+date.getText()+username.getText()+password.getText()+address.getText());
        
     }//GEN-LAST:event_jButtoncreateActionPerformed
+
+    private void jButtoncancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoncancelMouseClicked
+        // TODO add your handling code here:
+        dispose();
+        new TambahMember().setVisible(true);
+    }//GEN-LAST:event_jButtoncancelMouseClicked
+
+    private void jLabelbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelbackMouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jLabelbackMouseClicked
 
     /**
      * @param args the command line arguments
@@ -278,22 +334,23 @@ public class TambahMember extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address;
     private javax.swing.JTextField confirm;
-    private datechooser.beans.DateChooserCombo date;
     private javax.swing.JButton jButtoncancel;
     private javax.swing.JButton jButtoncreate;
+    private javax.swing.JButton jButtonupdate;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelback;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextFieldregisternewmembe;
     private javax.swing.JTextField nama;
     private javax.swing.JTextField password;
-    private javax.swing.JTextField username;
+    private com.toedter.calendar.JDateChooser tgl;
+    private javax.swing.JTextField usernametext;
     // End of variables declaration//GEN-END:variables
 }
