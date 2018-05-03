@@ -4,13 +4,19 @@
  * and open the template in the editor.
  */
 package view;
-
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import model.koneksidb;
 /**
  *
  * @author USER
  */
 public class TambahMember extends javax.swing.JFrame {
-
+    koneksidb datacon = new koneksidb();
+    private Connection con;
     /**
      * Creates new form TambahMember
      */
@@ -33,20 +39,19 @@ public class TambahMember extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldname = new javax.swing.JTextField();
+        nama = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldusername = new javax.swing.JTextField();
+        username = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldpassword = new javax.swing.JTextField();
-        jTextFieldconfpassword = new javax.swing.JTextField();
+        address = new javax.swing.JTextField();
         jButtoncreate = new javax.swing.JButton();
         jButtoncancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        dateChooserCombo1 = new datechooser.beans.DateChooserCombo();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextAreaaddress = new javax.swing.JTextArea();
+        date = new datechooser.beans.DateChooserCombo();
+        password = new javax.swing.JTextField();
+        confirm = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jTextField7 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -62,12 +67,12 @@ public class TambahMember extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Name");
 
-        jTextFieldname.setBackground(new java.awt.Color(242, 241, 239));
+        nama.setBackground(new java.awt.Color(242, 241, 239));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Birth Date");
 
-        jTextFieldusername.setBackground(new java.awt.Color(242, 241, 239));
+        username.setBackground(new java.awt.Color(242, 241, 239));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Username");
@@ -78,15 +83,7 @@ public class TambahMember extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Confirm Password");
 
-        jTextFieldpassword.setEditable(false);
-        jTextFieldpassword.setBackground(new java.awt.Color(242, 241, 239));
-        jTextFieldpassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldpasswordActionPerformed(evt);
-            }
-        });
-
-        jTextFieldconfpassword.setBackground(new java.awt.Color(242, 241, 239));
+        address.setBackground(new java.awt.Color(242, 241, 239));
 
         jButtoncreate.setText("Create");
         jButtoncreate.addActionListener(new java.awt.event.ActionListener() {
@@ -100,11 +97,9 @@ public class TambahMember extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Address");
 
-        jTextAreaaddress.setEditable(false);
-        jTextAreaaddress.setBackground(new java.awt.Color(242, 241, 239));
-        jTextAreaaddress.setColumns(20);
-        jTextAreaaddress.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaaddress);
+        password.setBackground(new java.awt.Color(242, 241, 239));
+
+        confirm.setBackground(new java.awt.Color(242, 241, 239));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -115,23 +110,27 @@ public class TambahMember extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(32, 32, 32)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jButtoncreate)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextFieldconfpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldname, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldusername, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35))
+                        .addGap(45, 45, 45)
+                        .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(80, 80, 80))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,32 +140,32 @@ public class TambahMember extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel1))
-                    .addComponent(jTextFieldname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextFieldusername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextFieldpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextFieldconfpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtoncreate)
                     .addComponent(jButtoncancel))
-                .addGap(92, 92, 92))
+                .addGap(293, 293, 293))
         );
 
         jPanel1.setBackground(new java.awt.Color(37, 116, 169));
@@ -229,12 +228,20 @@ public class TambahMember extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldpasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldpasswordActionPerformed
-
     private void jButtoncreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncreateActionPerformed
         // TODO add your handling code here:
+        try {
+           //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
+            String sql = "INSERT INTO `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+date.getText()+"', '"+username.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
+            con=datacon.getConnection();
+            java.sql.PreparedStatement pst=con.prepareStatement(sql);
+            pst.execute();
+            //JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+        } catch (Exception e) {
+          //  JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+        //System.out.println(nama.getText()+date.getText()+username.getText()+password.getText()+address.getText());
+       
     }//GEN-LAST:event_jButtoncreateActionPerformed
 
     /**
@@ -273,7 +280,9 @@ public class TambahMember extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private datechooser.beans.DateChooserCombo dateChooserCombo1;
+    private javax.swing.JTextField address;
+    private javax.swing.JTextField confirm;
+    private datechooser.beans.DateChooserCombo date;
     private javax.swing.JButton jButtoncancel;
     private javax.swing.JButton jButtoncreate;
     private javax.swing.JLabel jLabel1;
@@ -286,12 +295,9 @@ public class TambahMember extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextAreaaddress;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextFieldconfpassword;
-    private javax.swing.JTextField jTextFieldname;
-    private javax.swing.JTextField jTextFieldpassword;
-    private javax.swing.JTextField jTextFieldusername;
+    private javax.swing.JTextField nama;
+    private javax.swing.JTextField password;
+    private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }
