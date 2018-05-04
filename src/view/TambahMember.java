@@ -5,7 +5,9 @@
  */
 package view;
 import java.sql.Connection;
+import javax.swing.JOptionPane;
 import model.koneksidb;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author USER
@@ -13,6 +15,7 @@ import model.koneksidb;
 public class TambahMember extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
+    
     /**
      * Creates new form TambahMember
      */
@@ -50,8 +53,8 @@ public class TambahMember extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         password = new javax.swing.JTextField();
         confirm = new javax.swing.JTextField();
-        tgl = new com.toedter.calendar.JDateChooser();
         jButtonupdate = new javax.swing.JButton();
+        date = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jTextFieldregisternewmembe = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -113,6 +116,12 @@ public class TambahMember extends javax.swing.JFrame {
             }
         });
 
+        date.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                datePropertyChange(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -144,7 +153,7 @@ public class TambahMember extends javax.swing.JFrame {
                             .addComponent(jButtonupdate)
                             .addGap(18, 18, 18)
                             .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(tgl, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
         jPanel2Layout.setVerticalGroup(
@@ -156,11 +165,11 @@ public class TambahMember extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jLabel1))
                     .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(tgl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(usernametext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -260,7 +269,7 @@ public class TambahMember extends javax.swing.JFrame {
                 java.sql.ResultSet rs=stm.executeQuery(sql);
                 while(rs.next()){
                     nama.setText(rs.getString(2));
-                    tgl.setDate(rs.getDate(3));
+                    date.setDate(rs.getDate(3));
                     usernametext.setText(rs.getString(4));
                     password.setText(rs.getString(5));
                     confirm.setText(rs.getString(5));
@@ -273,17 +282,20 @@ public class TambahMember extends javax.swing.JFrame {
     }
     private void jButtoncreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncreateActionPerformed
         // TODO add your handling code here:
+            
+            
+
         try {
            //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
-            String sql = "INSERT INTO `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+tgl.getDate()+"', '"+usernametext.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
+            String sql = "INSERT INTO `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+usernametext.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
             con=datacon.getConnection();
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();
-            //JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
         } catch (Exception e) {
-            //JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
-//        dispose();
+        dispose();
 //        new TambahMember().setVisible(true);
         
         //System.out.println(nama.getText()+date.getText()+username.getText()+password.getText()+address.getText());
@@ -305,15 +317,24 @@ public class TambahMember extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
            //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
-            String sql = "UPDATE `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+tgl.getDate()+"', '"+usernametext.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
+            String sql = "UPDATE `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+date.getDate()+"', '"+usernametext.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
             con=datacon.getConnection();
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();
-            //JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
         } catch (Exception e) {
-            //JOptionPane.showMessageDialog(this, e.getMessage());
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_jButtonupdateMouseClicked
+public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
+    if(date != null) {
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return sqlDate;
+    }
+    return null;
+}
+    private void datePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_datePropertyChange
+    }//GEN-LAST:event_datePropertyChange
 
     /**
      * @param args the command line arguments
@@ -353,6 +374,7 @@ public class TambahMember extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address;
     private javax.swing.JTextField confirm;
+    private com.toedter.calendar.JDateChooser date;
     private javax.swing.JButton jButtoncancel;
     private javax.swing.JButton jButtoncreate;
     private javax.swing.JButton jButtonupdate;
@@ -369,7 +391,6 @@ public class TambahMember extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldregisternewmembe;
     private javax.swing.JTextField nama;
     private javax.swing.JTextField password;
-    private com.toedter.calendar.JDateChooser tgl;
     private javax.swing.JTextField usernametext;
     // End of variables declaration//GEN-END:variables
 }

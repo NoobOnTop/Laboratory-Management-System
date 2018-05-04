@@ -85,7 +85,7 @@
                               <Component id="jButtoncancel" min="-2" pref="73" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="tgl" min="-2" pref="147" max="-2" attributes="0"/>
+                      <Component id="date" min="-2" pref="159" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
@@ -102,12 +102,12 @@
                       </Group>
                       <Component id="nama" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tgl" min="-2" max="-2" attributes="0"/>
+                      <Component id="date" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="usernametext" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -243,14 +243,17 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="tgl">
-        </Component>
         <Component class="javax.swing.JButton" name="jButtonupdate">
           <Properties>
             <Property name="text" type="java.lang.String" value="Update"/>
           </Properties>
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButtonupdateMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="date">
+          <Events>
+            <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="datePropertyChange"/>
           </Events>
         </Component>
       </SubComponents>
