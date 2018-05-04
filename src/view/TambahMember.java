@@ -296,7 +296,7 @@ public class TambahMember extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
         dispose();
-//        new TambahMember().setVisible(true);
+        new TambahMember().setVisible(true);
         
         //System.out.println(nama.getText()+date.getText()+username.getText()+password.getText()+address.getText());
        

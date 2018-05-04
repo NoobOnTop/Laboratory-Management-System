@@ -161,18 +161,18 @@
                       <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="confirm" min="-2" pref="195" max="-2" attributes="0"/>
-                      <Component id="date" min="-2" pref="86" max="-2" attributes="0"/>
-                      <Component id="nama" min="-2" pref="195" max="-2" attributes="0"/>
-                      <Component id="username" min="-2" pref="195" max="-2" attributes="0"/>
-                      <Component id="password" min="-2" pref="195" max="-2" attributes="0"/>
-                      <Component id="address" min="-2" pref="195" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="confirm" pref="195" max="32767" attributes="0"/>
+                      <Component id="nama" pref="195" max="32767" attributes="0"/>
+                      <Component id="username" pref="195" max="32767" attributes="0"/>
+                      <Component id="password" pref="195" max="32767" attributes="0"/>
+                      <Component id="address" pref="195" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="jButton2" min="-2" pref="73" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="date" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
               </Group>
@@ -195,12 +195,12 @@
                               </Group>
                               <Component id="nama" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <Component id="date" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="username" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -325,14 +325,14 @@
             <Property name="text" type="java.lang.String" value="Address"/>
           </Properties>
         </Component>
-        <Component class="datechooser.beans.DateChooserCombo" name="date">
-        </Component>
         <Component class="javax.swing.JTextField" name="address">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ef" green="f1" red="f2" type="rgb"/>
             </Property>
           </Properties>
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="date">
         </Component>
       </SubComponents>
     </Container>
