@@ -16,6 +16,7 @@ public class TambahPeminjam extends javax.swing.JFrame {
      */
     public TambahPeminjam() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

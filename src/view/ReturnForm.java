@@ -16,6 +16,7 @@ public class ReturnForm extends javax.swing.JFrame {
      */
     public ReturnForm() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

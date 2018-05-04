@@ -19,6 +19,7 @@ public class DetailMember extends javax.swing.JFrame {
      */
     public DetailMember() {
         initComponents();
+        setLocationRelativeTo(null);
         load_table();
     }
 

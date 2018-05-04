@@ -6,6 +6,9 @@
 package view;
 import model.koneksidb;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -14,12 +17,14 @@ import javax.swing.table.DefaultTableModel;
 public class DetailStok extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
+    private int selectRow=-1;
 
     /**
      * Creates new form DetailStok
      */
     public DetailStok() {
         initComponents();
+        setLocationRelativeTo(null);
         load_table();
     }
 
@@ -39,9 +44,9 @@ public class DetailStok extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        buttondelete = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -91,8 +96,8 @@ public class DetailStok extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 110, 123));
 
-        jTable1.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEtchedBorder()));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEtchedBorder()));
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -122,18 +127,18 @@ public class DetailStok extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.addAncestorListener(new javax.swing.event.AncestorListener() {
+        jTable.setColumnSelectionAllowed(true);
+        jTable.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTable1AncestorAdded(evt);
+                jTableAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jTable);
+        jTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jButton2.setText("Show All");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -142,7 +147,12 @@ public class DetailStok extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Delete");
+        buttondelete.setText("Delete");
+        buttondelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttondeleteMouseClicked(evt);
+            }
+        });
 
         jButton3.setText("Save");
 
@@ -184,7 +194,7 @@ public class DetailStok extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(30, 30, 30)
-                        .addComponent(jButton1)
+                        .addComponent(buttondelete)
                         .addGap(31, 31, 31)
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -206,7 +216,7 @@ public class DetailStok extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton1)
+                    .addComponent(buttondelete)
                     .addComponent(jButton5)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
@@ -234,14 +244,31 @@ public class DetailStok extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTable1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTable1AncestorAdded
+    private void jTableAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTableAncestorAdded
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTable1AncestorAdded
+    }//GEN-LAST:event_jTableAncestorAdded
 
     private void jLabelbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelbackMouseClicked
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jLabelbackMouseClicked
+
+    private void buttondeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttondeleteMouseClicked
+        // TODO add your handling code here:
+        selectRow=jTable.getSelectedRow();
+        String query="DELETE FROM `barang` WHERE `id_barang`="+jTable.getValueAt(0,selectRow);
+        Connection con = new koneksidb().getConnection();
+        Statement st = null;
+        try{
+           st=con.createStatement();
+           if(st.executeUpdate(query)==1){
+//               showData();
+               JOptionPane.showMessageDialog(this, "Delete berhasil");
+           }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_buttondeleteMouseClicked
     
     private void load_table(){
         // membuat tampilan model tabel
@@ -266,7 +293,7 @@ public class DetailStok extends javax.swing.JFrame {
             while(res.next()){
                 model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
             }
-            jTable1.setModel(model);
+            jTable.setModel(model);
         } catch (Exception e) {
         }
     }
@@ -306,7 +333,7 @@ public class DetailStok extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttondelete;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -320,7 +347,7 @@ public class DetailStok extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

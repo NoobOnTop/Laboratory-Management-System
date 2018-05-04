@@ -20,6 +20,7 @@ public class DetailLaboran extends javax.swing.JFrame {
      */
     public DetailLaboran() {
         initComponents();
+        setLocationRelativeTo(null);
         load_table();
     }
 

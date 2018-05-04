@@ -21,6 +21,7 @@ public class TambahLaboran extends javax.swing.JFrame {
      */
     public TambahLaboran() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -71,6 +72,7 @@ public class TambahLaboran extends javax.swing.JFrame {
             }
         });
 
+        jTextField7.setEditable(false);
         jTextField7.setBackground(new java.awt.Color(37, 116, 169));
         jTextField7.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jTextField7.setForeground(new java.awt.Color(255, 255, 255));
@@ -294,6 +296,7 @@ dispose();        // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TambahLaboran().setVisible(true);
+                
             }
         });
     }

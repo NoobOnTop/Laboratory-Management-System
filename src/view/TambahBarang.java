@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 package view;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import model.koneksidb;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 /**
  *
  * @author USER
@@ -18,6 +22,7 @@ public class TambahBarang extends javax.swing.JFrame {
      */
     public TambahBarang() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -38,12 +43,12 @@ public class TambahBarang extends javax.swing.JFrame {
         harga = new javax.swing.JTextField();
         depresiasi = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonadd = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        date = new datechooser.beans.DateChooserCombo();
         jScrollPane1 = new javax.swing.JScrollPane();
         deskripsi = new javax.swing.JTextArea();
+        date = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -85,23 +90,39 @@ public class TambahBarang extends javax.swing.JFrame {
                 hargaActionPerformed(evt);
             }
         });
+        harga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                hargaKeyTyped(evt);
+            }
+        });
 
+        depresiasi.setEditable(false);
         depresiasi.setBackground(new java.awt.Color(242, 241, 239));
         depresiasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 depresiasiActionPerformed(evt);
             }
         });
+        depresiasi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                depresiasiKeyTyped(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Entry Date");
 
-        jButton1.setBackground(new java.awt.Color(253, 227, 167));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonadd.setBackground(new java.awt.Color(253, 227, 167));
+        jButtonadd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonadd.setText("Add");
+        jButtonadd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButtonaddMousePressed(evt);
+            }
+        });
+        jButtonadd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonaddActionPerformed(evt);
             }
         });
 
@@ -134,12 +155,12 @@ public class TambahBarang extends javax.swing.JFrame {
                     .addComponent(depresiasi, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(harga, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jButtonadd)
                         .addGap(27, 27, 27)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton2))
+                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -167,7 +188,7 @@ public class TambahBarang extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonadd)
                     .addComponent(jButton2))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
@@ -247,19 +268,21 @@ public class TambahBarang extends javax.swing.JFrame {
        
     }//GEN-LAST:event_namaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddActionPerformed
         int price = Integer.parseInt(harga.getText());
         int depresi = Integer.parseInt(depresiasi.getText());
         
         try {
-            String sql = "INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `depreciation`, `tgl_masuk`, `deskripsi`) VALUES (NULL, '"+nama.getText()+"', '"+price+"', '"+depresi+"', '"+date.getText()+"', '"+deskripsi.getText()+"')";
+            String sql = "INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `depreciation`, `tgl_masuk`, `deskripsi`) VALUES (NULL, '"+nama.getText()+"', '"+price+"', '"+depresi+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+deskripsi.getText()+"')";
             con=datacon.getConnection();
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();
+            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         }
           
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonaddActionPerformed
 
     private void hargaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_hargaFocusLost
         // TODO add your handling code here:
@@ -272,6 +295,42 @@ public class TambahBarang extends javax.swing.JFrame {
         dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_backMouseClicked
+
+    private void depresiasiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_depresiasiKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+}
+
+    }//GEN-LAST:event_depresiasiKeyTyped
+
+    private void hargaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_hargaKeyTyped
+
+    private void jButtonaddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonaddMousePressed
+
+        // TODO add your handling code here:
+        int price = Integer.parseInt(harga.getText());
+        int depresi = Integer.parseInt(depresiasi.getText());
+        
+        try {
+            String sql = "INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `depreciation`, `tgl_masuk`, `deskripsi`) VALUES (NULL, '"+nama.getText()+"', '"+price+"', '"+depresi+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+deskripsi.getText()+"')";
+            con=datacon.getConnection();
+            java.sql.PreparedStatement pst=con.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonaddMousePressed
 
     /**
      * @param args the command line arguments
@@ -310,12 +369,12 @@ public class TambahBarang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel back;
-    private datechooser.beans.DateChooserCombo date;
+    private com.toedter.calendar.JDateChooser date;
     private javax.swing.JTextField depresiasi;
     private javax.swing.JTextArea deskripsi;
     private javax.swing.JTextField harga;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonadd;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -329,4 +388,8 @@ public class TambahBarang extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField nama;
     // End of variables declaration//GEN-END:variables
+
+    private String convertUtilDateToSqlDate(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

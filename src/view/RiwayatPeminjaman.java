@@ -20,6 +20,7 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
      */
     public RiwayatPeminjaman() {
         initComponents();
+        setLocationRelativeTo(null);
         load_table();
     }
 
