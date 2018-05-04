@@ -207,9 +207,9 @@ dispose();        // TODO add your handling code here:
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Peminjaman");
-        model.addColumn("ID Barang");
-        model.addColumn("ID Laboran");
-        model.addColumn("ID Member");
+        model.addColumn("Nama Barang");
+        model.addColumn("Nama Laboran");
+        model.addColumn("Nama Member");
         model.addColumn("Tanggal Peminjaman");
         model.addColumn("Lama Peminjaman");
         model.addColumn("Status Peminjaman");
@@ -222,13 +222,13 @@ dispose();        // TODO add your handling code here:
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "select * from peminjaman";
+            String sql = "SELECT * from peminjaman JOIN barang on peminjaman.id_barang = barang.id_barang JOIN laboran on peminjaman.id_laboran=laboran.id_laboran JOIN member on peminjaman.id_member=member.id_member";
             //java.sql.Connection conn=(Connection)config.configDB();
             con = datacon.getConnection();
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),
+                model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
                     res.getString(6),res.getString(7),res.getString(8),res.getString(9),res.getString(10)});
             }
             jTable1.setModel(model);

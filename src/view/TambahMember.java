@@ -65,28 +65,45 @@ public class TambahMember extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(242, 241, 239));
         jPanel2.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
+        jPanel2.setLayout(null);
 
         jLabel1.setBackground(new java.awt.Color(145, 180, 150));
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Name");
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(33, 39, 35, 17);
 
         nama.setBackground(new java.awt.Color(242, 241, 239));
+        jPanel2.add(nama);
+        nama.setBounds(185, 37, 257, 22);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Birth Date");
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(33, 95, 61, 17);
 
         usernametext.setBackground(new java.awt.Color(242, 241, 239));
+        jPanel2.add(usernametext);
+        usernametext.setBounds(185, 147, 257, 22);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Username");
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(33, 149, 61, 17);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Password");
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(36, 214, 58, 17);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Confirm Password");
+        jPanel2.add(jLabel6);
+        jLabel6.setBounds(36, 282, 120, 17);
 
         address.setBackground(new java.awt.Color(242, 241, 239));
+        jPanel2.add(address);
+        address.setBounds(185, 330, 257, 131);
 
         jButtoncreate.setText("Create");
         jButtoncreate.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +111,8 @@ public class TambahMember extends javax.swing.JFrame {
                 jButtoncreateActionPerformed(evt);
             }
         });
+        jPanel2.add(jButtoncreate);
+        jButtoncreate.setBounds(185, 479, 71, 25);
 
         jButtoncancel.setText("Cancel");
         jButtoncancel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,13 +120,21 @@ public class TambahMember extends javax.swing.JFrame {
                 jButtoncancelMouseClicked(evt);
             }
         });
+        jPanel2.add(jButtoncancel);
+        jButtoncancel.setBounds(369, 479, 73, 25);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Address");
+        jPanel2.add(jLabel7);
+        jLabel7.setBounds(36, 330, 48, 17);
 
         password.setBackground(new java.awt.Color(242, 241, 239));
+        jPanel2.add(password);
+        password.setBounds(185, 212, 257, 22);
 
         confirm.setBackground(new java.awt.Color(242, 241, 239));
+        jPanel2.add(confirm);
+        confirm.setBounds(185, 277, 257, 22);
 
         jButtonupdate.setText("Update");
         jButtonupdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -115,84 +142,16 @@ public class TambahMember extends javax.swing.JFrame {
                 jButtonupdateMouseClicked(evt);
             }
         });
+        jPanel2.add(jButtonupdate);
+        jButtonupdate.setBounds(278, 479, 73, 25);
 
         date.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 datePropertyChange(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(29, 29, 29)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(nama)
-                        .addComponent(usernametext, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(password, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(confirm, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(address, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(jButtoncreate)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                            .addComponent(jButtonupdate)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel1))
-                    .addComponent(nama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(usernametext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtoncreate)
-                        .addComponent(jButtonupdate))
-                    .addComponent(jButtoncancel))
-                .addGap(293, 293, 293))
-        );
+        jPanel2.add(date);
+        date.setBounds(185, 90, 159, 22);
 
         jPanel1.setBackground(new java.awt.Color(37, 116, 169));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));

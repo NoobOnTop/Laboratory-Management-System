@@ -91,7 +91,6 @@ public class DetailMember extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 110, 123));
 
-        jTable1.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEtchedBorder()));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
