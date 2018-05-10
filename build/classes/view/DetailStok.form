@@ -277,14 +277,14 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jComboBoxfilter" alignment="0" pref="84" max="32767" attributes="0"/>
+                  <Component id="jComboBoxfilter" alignment="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel5" min="-2" pref="24" max="-2" attributes="0"/>
-                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jComboBoxfilter" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -304,13 +304,17 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBoxfilter">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="14" style="0"/>
+                </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="5">
+                  <StringArray count="6">
                     <StringItem index="0" value="Asceding"/>
                     <StringItem index="1" value="Desceding"/>
-                    <StringItem index="2" value="Harga Termahal"/>
-                    <StringItem index="3" value="Harga Termurah"/>
-                    <StringItem index="4" value="Tanggal Masuk"/>
+                    <StringItem index="2" value="Entry Date"/>
+                    <StringItem index="3" value="Highest Price"/>
+                    <StringItem index="4" value="Lower Price"/>
+                    <StringItem index="5" value=" "/>
                   </StringArray>
                 </Property>
               </Properties>
