@@ -342,7 +342,7 @@ public class TambahMember extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
            //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
-            String sql = "UPDATE `member` set `nama_member`='"+nama.getText()+"', `tgl_lahir`='"+convertUtilDateToSqlDate(date.getDate())+"', `username`='"+usernametext.getText()+"', `password`='"+password.getText()+"', `address`='"+address.getText()+"'"+"' where `username`='"+usernametext.getText()+"';";
+            String sql = "UPDATE `member` set `nama_member`='"+nama.getText()+"', `tgl_lahir`='"+convertUtilDateToSqlDate(date.getDate())+"', `username`='"+usernametext.getText()+"', `password`='"+password.getText()+"', `address`='"+address.getText()+"'"+" where `username`='"+usernametext.getText()+"';";
             con=datacon.getConnection();
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();

@@ -22,6 +22,7 @@ public class TambahBarang extends javax.swing.JFrame {
      */
     public TambahBarang() {
         initComponents();
+        jButtonupdate.setVisible(false);
         setLocationRelativeTo(null);
     }
 
@@ -29,6 +30,7 @@ public class TambahBarang extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         isiform(id);
+        jButtonadd.setVisible(false);
         jTextFieldadd.setText("Edit Barang");
         jButtonadd.setText("Edit");
     }
@@ -75,6 +77,7 @@ public class TambahBarang extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         deskripsi = new javax.swing.JTextArea();
         date = new com.toedter.calendar.JDateChooser();
+        jButtonupdate = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTextFieldadd = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -146,6 +149,9 @@ public class TambahBarang extends javax.swing.JFrame {
         jButtonadd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonadd.setText("Add");
         jButtonadd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonaddMouseClicked(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jButtonaddMousePressed(evt);
             }
@@ -167,6 +173,15 @@ public class TambahBarang extends javax.swing.JFrame {
         deskripsi.setColumns(20);
         deskripsi.setRows(5);
         jScrollPane1.setViewportView(deskripsi);
+
+        jButtonupdate.setBackground(new java.awt.Color(253, 227, 167));
+        jButtonupdate.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtonupdate.setText("Update");
+        jButtonupdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonupdateMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -199,13 +214,15 @@ public class TambahBarang extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jLabel6)
                         .addGap(98, 98, 98)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jButtonadd)
                                 .addGap(18, 18, 18)
+                                .addComponent(jButtonupdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jButton2)))))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +258,8 @@ public class TambahBarang extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonadd)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButtonupdate))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
@@ -319,7 +337,6 @@ public class TambahBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_namaActionPerformed
 
     private void jButtonaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddActionPerformed
-        if(jButtonadd.getText()=="Add"){
             int price = Integer.parseInt(harga.getText());
             int depresi = Integer.parseInt(depresiasi.getText());
         
@@ -331,23 +348,7 @@ public class TambahBarang extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
-            }
-        }else if(jButtonadd.getText()=="Edit"){
-            int price = Integer.parseInt(harga.getText());
-            int depresi = Integer.parseInt(depresiasi.getText());
-        
-            try {
-                String sql = "update `barang` set `nama_barang`='"+nama.getText()+"', `harga`='"+price+"', `depreciation`='"+depresi+"', `tgl_masuk`='"+convertUtilDateToSqlDate(date.getDate())+"', `deskripsi`='"+deskripsi.getText()+"')"; 
-                con=datacon.getConnection();
-                java.sql.PreparedStatement pst=con.prepareStatement(sql);
-                 pst.execute();
-                JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
-            }
-        }
-        
-          
+            }      
     }//GEN-LAST:event_jButtonaddActionPerformed
 
     private void hargaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_hargaFocusLost
@@ -398,6 +399,27 @@ public class TambahBarang extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonaddMousePressed
 
+    private void jButtonupdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonupdateMouseClicked
+        // TODO add your handling code here:
+            int price = Integer.parseInt(harga.getText());
+            int depresi = Integer.parseInt(depresiasi.getText());
+        
+            try {
+                String sql = "UPDATE `barang` set `nama_barang`='"+nama.getText()+"', `harga`='"+harga.getText()+"', `depreciation`='"+depresiasi.getText()+"', `tgl_masuk`='"+convertUtilDateToSqlDate(date.getDate())+"', `deskripsi`='"+deskripsi.getText()+"')"; 
+                con=datacon.getConnection();
+                java.sql.PreparedStatement pst=con.prepareStatement(sql);
+                 pst.execute();
+                JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+    }//GEN-LAST:event_jButtonupdateMouseClicked
+
+    private void jButtonaddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonaddMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonaddMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -441,6 +463,7 @@ public class TambahBarang extends javax.swing.JFrame {
     private javax.swing.JTextField harga;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonadd;
+    private javax.swing.JButton jButtonupdate;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
