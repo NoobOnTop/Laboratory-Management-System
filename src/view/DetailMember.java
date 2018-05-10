@@ -6,6 +6,9 @@
 package view;
 import model.koneksidb;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -14,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 public class DetailMember extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
+    int selectRow;
     /**
      * Creates new form DetailMember
      */
@@ -41,10 +45,9 @@ public class DetailMember extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtondelete = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
@@ -112,8 +115,16 @@ public class DetailMember extends javax.swing.JFrame {
             new String [] {
                 "ID", "Username", "Name", "Birthdate"
             }
-        ));
-        jTable1.setColumnSelectionAllowed(true);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jTable1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -124,20 +135,37 @@ public class DetailMember extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         jButton2.setText("Show All");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Delete");
+        jButtondelete.setText("Delete");
+        jButtondelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtondeleteMouseClicked(evt);
+            }
+        });
+        jButtondelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtondeleteActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Save");
-
-        jButton5.setText("Detail");
+        jButtonEdit.setText("Edit");
+        jButtonEdit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonEditMouseClicked(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-outline.png"))); // NOI18N
         jLabel4.setText("Filter");
@@ -168,12 +196,10 @@ public class DetailMember extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
-                        .addComponent(jButton3)
+                        .addComponent(jButtonEdit)
                         .addGap(34, 34, 34)
-                        .addComponent(jButton1)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton5)
-                        .addGap(165, 165, 165)
+                        .addComponent(jButtondelete)
+                        .addGap(259, 259, 259)
                         .addComponent(jButton2))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
@@ -200,9 +226,8 @@ public class DetailMember extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton1)
-                    .addComponent(jButton5)
+                    .addComponent(jButtonEdit)
+                    .addComponent(jButtondelete)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
@@ -236,6 +261,42 @@ public class DetailMember extends javax.swing.JFrame {
     private void jLabel22MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel22MouseClicked
 dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jLabel22MouseClicked
+
+    private void jButtonEditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEditMouseClicked
+        // TODO add your handling code here:
+        selectRow=jTable1.getSelectedRow();
+        
+        String username = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 3);
+        
+        new TambahMember(username).setVisible(true);
+    }//GEN-LAST:event_jButtonEditMouseClicked
+
+    private void jButtondeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtondeleteMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtondeleteMouseClicked
+
+    private void jButtondeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtondeleteActionPerformed
+        // TODO add your handling code here:
+         selectRow=jTable1.getSelectedRow();
+        String query="DELETE FROM member WHERE username='"+jTable1.getValueAt(selectRow, 3)+"';";
+        Connection con = new koneksidb().getConnection();
+        Statement st = null;
+        try{
+           st=con.createStatement();
+           if(st.executeUpdate(query)==1){
+               load_table();
+               JOptionPane.showMessageDialog(this, "Delete berhasil");
+           }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtondeleteActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        load_table();
+    }//GEN-LAST:event_jButton2MouseClicked
     
     private void load_table(){
         // membuat tampilan model tabel
@@ -300,11 +361,10 @@ dispose();        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonEdit;
+    private javax.swing.JButton jButtondelete;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

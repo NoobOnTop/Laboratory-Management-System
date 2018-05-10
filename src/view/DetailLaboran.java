@@ -7,6 +7,9 @@ package view;
 
 import model.koneksidb;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -15,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class DetailLaboran extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
+    int selectRow;
     /**
      * Creates new form DetailLaboran
      */
@@ -114,7 +118,16 @@ public class DetailLaboran extends javax.swing.JFrame {
             new String [] {
                 "ID", "Username", "Name", "Birthdate"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(1).setMinWidth(1);
@@ -133,9 +146,24 @@ public class DetailLaboran extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Save");
+        jButton3.setText("Edit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Delete");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-outline.png"))); // NOI18N
         jLabel4.setText("Filter");
@@ -231,6 +259,49 @@ public class DetailLaboran extends javax.swing.JFrame {
         dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabelbackMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        selectRow=jTable1.getSelectedRow();
+        
+        String username = (String) jTable1.getValueAt(jTable1.getSelectedRow(), 3);
+        
+        new TambahLaboran(username).setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+         selectRow=jTable1.getSelectedRow();
+        String query="DELETE FROM laboran WHERE username='"+jTable1.getValueAt(selectRow, 3)+"';";
+        Connection con = new koneksidb().getConnection();
+        Statement st = null;
+        try{
+           st=con.createStatement();
+           if(st.executeUpdate(query)==1){
+               load_table();
+               JOptionPane.showMessageDialog(this, "Delete berhasil");
+           }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+         selectRow=jTable1.getSelectedRow();
+        String query="DELETE FROM laboran WHERE username='"+jTable1.getValueAt(selectRow, 3)+"';";
+        Connection con = new koneksidb().getConnection();
+        Statement st = null;
+        try{
+           st=con.createStatement();
+           if(st.executeUpdate(query)==1){
+               load_table();
+               JOptionPane.showMessageDialog(this, "Delete berhasil");
+           }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
     
     private void load_table(){
         // membuat tampilan model tabel

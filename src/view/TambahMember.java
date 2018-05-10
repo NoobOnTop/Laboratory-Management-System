@@ -21,11 +21,13 @@ public class TambahMember extends javax.swing.JFrame {
      */
     public TambahMember() {
         initComponents();
+        setLocationRelativeTo(null);
         jButtonupdate.setVisible(false);
     }
     public TambahMember(String username){
-        initComponents();
+        initComponents();setLocationRelativeTo(null);
         isiform(username);
+        usernametext.setEditable(false);
         jTextFieldregisternewmembe.setText("Account Detail");
         jButtoncreate.setVisible(false);
     }
@@ -75,7 +77,7 @@ public class TambahMember extends javax.swing.JFrame {
 
         nama.setBackground(new java.awt.Color(242, 241, 239));
         jPanel2.add(nama);
-        nama.setBounds(185, 37, 257, 22);
+        nama.setBounds(185, 37, 257, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Birth Date");
@@ -84,7 +86,7 @@ public class TambahMember extends javax.swing.JFrame {
 
         usernametext.setBackground(new java.awt.Color(242, 241, 239));
         jPanel2.add(usernametext);
-        usernametext.setBounds(185, 147, 257, 22);
+        usernametext.setBounds(185, 147, 257, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Username");
@@ -112,7 +114,7 @@ public class TambahMember extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButtoncreate);
-        jButtoncreate.setBounds(185, 479, 71, 25);
+        jButtoncreate.setBounds(185, 479, 65, 23);
 
         jButtoncancel.setText("Cancel");
         jButtoncancel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,7 +123,7 @@ public class TambahMember extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButtoncancel);
-        jButtoncancel.setBounds(369, 479, 73, 25);
+        jButtoncancel.setBounds(369, 479, 73, 23);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Address");
@@ -130,11 +132,11 @@ public class TambahMember extends javax.swing.JFrame {
 
         password.setBackground(new java.awt.Color(242, 241, 239));
         jPanel2.add(password);
-        password.setBounds(185, 212, 257, 22);
+        password.setBounds(185, 212, 257, 30);
 
         confirm.setBackground(new java.awt.Color(242, 241, 239));
         jPanel2.add(confirm);
-        confirm.setBounds(185, 277, 257, 22);
+        confirm.setBounds(185, 277, 257, 30);
 
         jButtonupdate.setText("Update");
         jButtonupdate.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,7 +145,7 @@ public class TambahMember extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jButtonupdate);
-        jButtonupdate.setBounds(278, 479, 73, 25);
+        jButtonupdate.setBounds(278, 479, 67, 23);
 
         date.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -151,7 +153,7 @@ public class TambahMember extends javax.swing.JFrame {
             }
         });
         jPanel2.add(date);
-        date.setBounds(185, 90, 159, 22);
+        date.setBounds(185, 90, 159, 20);
 
         jPanel1.setBackground(new java.awt.Color(37, 116, 169));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -184,7 +186,7 @@ public class TambahMember extends javax.swing.JFrame {
                 .addComponent(jTextFieldregisternewmembe, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -263,8 +265,14 @@ public class TambahMember extends javax.swing.JFrame {
 
     private void jButtoncancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoncancelMouseClicked
         // TODO add your handling code here:
-        dispose();
-        new TambahMember().setVisible(true);
+       
+        if(jTextFieldregisternewmembe.getText()=="Register New Member"){
+            dispose();
+            new TambahMember().setVisible(true);
+        }else if(jTextFieldregisternewmembe.getText()=="Account Detail"){
+            isiform(usernametext.getText());
+        }
+        
     }//GEN-LAST:event_jButtoncancelMouseClicked
 
     private void jLabelbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelbackMouseClicked
@@ -326,6 +334,7 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TambahMember().setVisible(true);
+                
             }
         });
     }
