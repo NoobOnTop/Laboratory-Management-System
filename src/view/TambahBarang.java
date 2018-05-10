@@ -25,6 +25,32 @@ public class TambahBarang extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }
 
+    public TambahBarang(int id){
+        initComponents();
+        setLocationRelativeTo(null);
+        isiform(id);
+        jTextFieldadd.setText("Edit Barang");
+        jButtonadd.setText("Edit");
+    }
+    public void isiform(int id){
+        try
+            {
+                String sql="SELECT * from `barang` WHERE `id_barang`="+id;
+                con = datacon.getConnection();
+                java.sql.Statement stm=con.createStatement();
+                java.sql.ResultSet rs=stm.executeQuery(sql);
+                while(rs.next()){
+                    nama.setText(rs.getString(2));
+                    harga.setText(rs.getString(3));
+                    depresiasi.setText(rs.getString(4));
+                    date.setDate(rs.getDate(5));
+                    deskripsi.setText(rs.getString(6));
+                }
+            }catch(Exception e)
+            {
+                //JOptionPane.showMessageDialog(null,"GAGAL");
+            }         
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -50,7 +76,7 @@ public class TambahBarang extends javax.swing.JFrame {
         deskripsi = new javax.swing.JTextArea();
         date = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFieldadd = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         back = new javax.swing.JLabel();
 
@@ -162,7 +188,7 @@ public class TambahBarang extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jLabel6)
-                        .addGap(98, 98, 98)
+                        .addGap(90, 90, 90)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(195, 195, 195)
@@ -224,11 +250,12 @@ public class TambahBarang extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(37, 116, 169));
 
-        jTextField5.setBackground(new java.awt.Color(37, 116, 169));
-        jTextField5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(242, 241, 239));
-        jTextField5.setText("Add New Item");
-        jTextField5.setBorder(null);
+        jTextFieldadd.setEditable(false);
+        jTextFieldadd.setBackground(new java.awt.Color(37, 116, 169));
+        jTextFieldadd.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jTextFieldadd.setForeground(new java.awt.Color(242, 241, 239));
+        jTextFieldadd.setText("Add New Item");
+        jTextFieldadd.setBorder(null);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/download (1).png"))); // NOI18N
 
@@ -245,22 +272,19 @@ public class TambahBarang extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(back, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(4, 4, 4)
+                .addComponent(jTextFieldadd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel7))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField5)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(back)
+                    .addComponent(jTextFieldadd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)))
         );
 
         getContentPane().add(jPanel2);
@@ -284,18 +308,34 @@ public class TambahBarang extends javax.swing.JFrame {
     }//GEN-LAST:event_namaActionPerformed
 
     private void jButtonaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonaddActionPerformed
-        int price = Integer.parseInt(harga.getText());
-        int depresi = Integer.parseInt(depresiasi.getText());
+        if(jButtonadd.getText()=="Add"){
+            int price = Integer.parseInt(harga.getText());
+            int depresi = Integer.parseInt(depresiasi.getText());
         
-        try {
-            String sql = "INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `depreciation`, `tgl_masuk`, `deskripsi`) VALUES (NULL, '"+nama.getText()+"', '"+price+"', '"+depresi+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+deskripsi.getText()+"')";
-            con=datacon.getConnection();
-            java.sql.PreparedStatement pst=con.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            try {
+                String sql = "INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `depreciation`, `tgl_masuk`, `deskripsi`) VALUES (NULL, '"+nama.getText()+"', '"+price+"', '"+depresi+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+deskripsi.getText()+"')";
+               con=datacon.getConnection();
+               java.sql.PreparedStatement pst=con.prepareStatement(sql);
+                 pst.execute();
+                JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }else if(jButtonadd.getText()=="Edit"){
+            int price = Integer.parseInt(harga.getText());
+            int depresi = Integer.parseInt(depresiasi.getText());
+        
+            try {
+                String sql = "update `barang` set `nama_barang`='"+nama.getText()+"', `harga`='"+price+"', `depreciation`='"+depresi+"', `tgl_masuk`='"+convertUtilDateToSqlDate(date.getDate())+"', `deskripsi`='"+deskripsi.getText()+"')"; 
+                con=datacon.getConnection();
+                java.sql.PreparedStatement pst=con.prepareStatement(sql);
+                 pst.execute();
+                JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
         }
+        
           
     }//GEN-LAST:event_jButtonaddActionPerformed
 
@@ -400,7 +440,7 @@ public class TambahBarang extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextFieldadd;
     private javax.swing.JTextField nama;
     // End of variables declaration//GEN-END:variables
 

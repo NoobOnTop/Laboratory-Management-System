@@ -49,10 +49,9 @@ public class DetailStok extends javax.swing.JFrame {
         buttondelete = new javax.swing.JButton();
         jButtonedit = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButtondelete = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxfilter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -166,29 +165,37 @@ public class DetailStok extends javax.swing.JFrame {
         });
 
         jButtonedit.setText("Edit");
+        jButtonedit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtoneditMouseClicked(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
 
-        jButtondelete.setText("Detail");
-
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-outline.png"))); // NOI18N
         jLabel5.setText("Filter");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxfilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Asceding", "Desceding", "Harga Termahal", "Harga Termurah", "Tanggal Masuk" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jComboBox1, 0, 84, Short.MAX_VALUE)
+            .addComponent(jComboBoxfilter, 0, 84, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jComboBoxfilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -208,8 +215,6 @@ public class DetailStok extends javax.swing.JFrame {
                         .addComponent(jButtonedit)
                         .addGap(30, 30, 30)
                         .addComponent(buttondelete)
-                        .addGap(31, 31, 31)
-                        .addComponent(jButtondelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonshowall))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -230,7 +235,6 @@ public class DetailStok extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonedit)
                     .addComponent(buttondelete)
-                    .addComponent(jButtondelete)
                     .addComponent(jButtonshowall, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
@@ -286,6 +290,48 @@ public class DetailStok extends javax.swing.JFrame {
     private void jButtonshowallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonshowallMouseClicked
 load_table();        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonshowallMouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+ String sql="";
+                if(jComboBoxfilter.getSelectedItem()=="Asceding"){
+                    sql = "select * from barang order by `nama_barang` asc;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Desceding") {
+                    sql = "select * from barang order by `nama_barang` desc;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Harga Termahal"){
+                    sql = "select * from barang order by `harga` asc;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Harga Termurah"){
+                    sql = "select * from barang order by `harga` desc;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Tanggal Masuk"){
+                    sql = "select * from barang order by `tgl_masuk`;";
+                }
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("ID");
+            model.addColumn("Name");
+            model.addColumn("Harga");
+            model.addColumn("Depretiation");
+            model.addColumn("Tanggal Masuk");
+            model.addColumn("Deskripsi");
+            try {
+                con = datacon.getConnection();
+                java.sql.Statement stm=con.createStatement();
+                java.sql.ResultSet res=stm.executeQuery(sql);
+                while(res.next()){
+                    model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
+                }
+                jTable.setModel(model);
+             } catch (Exception e) {
+             }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jButtoneditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoneditMouseClicked
+        // TODO add your handling code here:
+        selectRow=jTable.getSelectedRow();
+        
+        String id = (String) jTable.getValueAt(jTable.getSelectedRow(), 0);
+        int ids=Integer.parseInt(id);
+        new TambahBarang(ids).setVisible(true);
+    }//GEN-LAST:event_jButtoneditMouseClicked
     
     private void load_table(){
         // membuat tampilan model tabel
@@ -352,10 +398,9 @@ load_table();        // TODO add your handling code here:
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttondelete;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButtondelete;
     private javax.swing.JButton jButtonedit;
     private javax.swing.JButton jButtonshowall;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxfilter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
