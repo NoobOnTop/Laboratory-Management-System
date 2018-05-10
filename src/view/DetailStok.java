@@ -167,6 +167,8 @@ public class DetailStok extends javax.swing.JFrame {
 
         jButtonedit.setText("Edit");
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+
         jButtondelete.setText("Detail");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-outline.png"))); // NOI18N
