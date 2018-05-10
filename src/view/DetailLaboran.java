@@ -49,7 +49,7 @@ public class DetailLaboran extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtondelete = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -140,6 +140,11 @@ public class DetailLaboran extends javax.swing.JFrame {
         });
 
         jButton2.setText("Show All");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -153,15 +158,15 @@ public class DetailLaboran extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Delete");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        jButtondelete.setText("Delete");
+        jButtondelete.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                jButtondeleteMouseClicked(evt);
             }
         });
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtondelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtondeleteActionPerformed(evt);
             }
         });
 
@@ -201,7 +206,7 @@ public class DetailLaboran extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jButton3)
                         .addGap(40, 40, 40)
-                        .addComponent(jButton4)
+                        .addComponent(jButtondelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -221,7 +226,7 @@ public class DetailLaboran extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
-                    .addComponent(jButton4)
+                    .addComponent(jButtondelete)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40))
         );
@@ -269,10 +274,10 @@ public class DetailLaboran extends javax.swing.JFrame {
         new TambahLaboran(username).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    private void jButtondeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtondeleteMouseClicked
         // TODO add your handling code here:
          selectRow=jTable1.getSelectedRow();
-        String query="DELETE FROM laboran WHERE username='"+jTable1.getValueAt(selectRow, 3)+"';";
+        String query="DELETE FROM `laboran` WHERE `username`='"+jTable1.getValueAt(selectRow, 3)+"';";
         Connection con = new koneksidb().getConnection();
         Statement st = null;
         try{
@@ -284,9 +289,9 @@ public class DetailLaboran extends javax.swing.JFrame {
         }catch(SQLException e){
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton4MouseClicked
+    }//GEN-LAST:event_jButtondeleteMouseClicked
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtondeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtondeleteActionPerformed
         // TODO add your handling code here:
          selectRow=jTable1.getSelectedRow();
         String query="DELETE FROM laboran WHERE username='"+jTable1.getValueAt(selectRow, 3)+"';";
@@ -301,7 +306,12 @@ public class DetailLaboran extends javax.swing.JFrame {
         }catch(SQLException e){
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtondeleteActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        load_table();
+    }//GEN-LAST:event_jButton2MouseClicked
     
     private void load_table(){
         // membuat tampilan model tabel
@@ -370,7 +380,7 @@ public class DetailLaboran extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtondelete;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

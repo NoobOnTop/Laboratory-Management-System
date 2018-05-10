@@ -279,7 +279,7 @@ dispose();        // TODO add your handling code here:
     private void jButtondeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtondeleteActionPerformed
         // TODO add your handling code here:
          selectRow=jTable1.getSelectedRow();
-        String query="DELETE FROM member WHERE username='"+jTable1.getValueAt(selectRow, 3)+"';";
+        String query="DELETE FROM `member` WHERE `username`='"+jTable1.getValueAt(selectRow, 3)+"';";
         Connection con = new koneksidb().getConnection();
         Statement st = null;
         try{
@@ -289,7 +289,7 @@ dispose();        // TODO add your handling code here:
                JOptionPane.showMessageDialog(this, "Delete berhasil");
            }
         }catch(SQLException e){
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Delete tidak berhasil,data ini sedang digunakan");
         }
     }//GEN-LAST:event_jButtondeleteActionPerformed
 

@@ -190,6 +190,11 @@ public class TambahLaboran extends javax.swing.JFrame {
         address.setBackground(new java.awt.Color(242, 241, 239));
 
         jButtonupdate.setText("Update");
+        jButtonupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonupdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -312,6 +317,20 @@ dispose();        // TODO add your handling code here:
             isiform(usernames.getText());
         }
     }//GEN-LAST:event_cancelActionPerformed
+
+    private void jButtonupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonupdateActionPerformed
+        // TODO add your handling code here:
+        try {
+           //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
+            String sql = "UPDATE `laboran` set `nama_laboran`='"+nama.getText()+"', `tgl_lahir`='"+convertUtilDateToSqlDate(date.getDate())+"', `username`='"+usernames.getText()+"', `password`='"+password.getText()+"', `address`='"+address.getText()+"' where `username`='"+usernames.getText()+"';";
+            con=datacon.getConnection();
+            java.sql.PreparedStatement pst=con.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jButtonupdateActionPerformed
 
     /**
      * @param args the command line arguments

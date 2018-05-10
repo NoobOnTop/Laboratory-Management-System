@@ -45,11 +45,11 @@ public class DetailStok extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        jButtonshowall = new javax.swing.JButton();
         buttondelete = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonedit = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtondelete = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -134,7 +134,6 @@ public class DetailStok extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable.setColumnSelectionAllowed(true);
         jTable.getTableHeader().setReorderingAllowed(false);
         jTable.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
@@ -146,12 +145,16 @@ public class DetailStok extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable);
-        jTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        jButton2.setText("Show All");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonshowall.setText("Show All");
+        jButtonshowall.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonshowallMouseClicked(evt);
+            }
+        });
+        jButtonshowall.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonshowallActionPerformed(evt);
             }
         });
 
@@ -162,9 +165,9 @@ public class DetailStok extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Edit");
+        jButtonedit.setText("Edit");
 
-        jButton5.setText("Detail");
+        jButtondelete.setText("Detail");
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-outline.png"))); // NOI18N
         jLabel5.setText("Filter");
@@ -200,13 +203,13 @@ public class DetailStok extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(jButtonedit)
                         .addGap(30, 30, 30)
                         .addComponent(buttondelete)
                         .addGap(31, 31, 31)
-                        .addComponent(jButton5)
+                        .addComponent(jButtondelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(jButtonshowall))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
@@ -223,10 +226,10 @@ public class DetailStok extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(jButtonedit)
                     .addComponent(buttondelete)
-                    .addComponent(jButton5)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtondelete)
+                    .addComponent(jButtonshowall, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
@@ -248,9 +251,9 @@ public class DetailStok extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonshowallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonshowallActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonshowallActionPerformed
 
     private void jTableAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTableAncestorAdded
         // TODO add your handling code here:
@@ -277,6 +280,10 @@ public class DetailStok extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_buttondeleteMouseClicked
+
+    private void jButtonshowallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonshowallMouseClicked
+load_table();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonshowallMouseClicked
     
     private void load_table(){
         // membuat tampilan model tabel
@@ -342,10 +349,10 @@ public class DetailStok extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttondelete;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtondelete;
+    private javax.swing.JButton jButtonedit;
+    private javax.swing.JButton jButtonshowall;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
