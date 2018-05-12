@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 public class ListArray {
         koneksidb datacon = new koneksidb();
         private Connection con;
@@ -40,6 +39,43 @@ public class ListArray {
             while(rs.next()){
                 laboran = new Laboran(rs.getString("nama_laboran"),rs.getString("address"),rs.getDate("tgl_lahir"), rs.getString("username"),rs.getString("password"),rs.getInt("id_laboran"));
                 listArrayDataLogin.add(laboran);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return listArrayDataLogin;
+    }
+    public ArrayList<Barang> getListDataBarang(){
+        ArrayList<Barang> listArrayDataLogin = new ArrayList<>();
+        con=datacon.getConnection();
+        Statement st;
+        ResultSet rs;
+        try{
+            st=con.createStatement();
+            rs=st.executeQuery("SELECT * FROM barang");
+            Barang barang;
+            while(rs.next()){
+                barang = new Barang(rs.getInt("id_barang"),rs.getString("nama_barang"),rs.getInt("harga"), rs.getInt("depreciation"),rs.getString("deskripsi"),rs.getDate("tgl_masuk"));
+                listArrayDataLogin.add(barang);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return listArrayDataLogin;
+    }
+    
+    public ArrayList<Peminjaman> getListDataPeminjaman(){
+        ArrayList<Peminjaman> listArrayDataLogin = new ArrayList<>();
+        con=datacon.getConnection();
+        Statement st;
+        ResultSet rs;
+        try{
+            st=con.createStatement();
+            rs=st.executeQuery("SELECT * FROM peminjaman");
+            Peminjaman peminjaman;
+            while(rs.next()){
+                peminjaman = new Peminjaman(rs.getInt("id_peminjaman"),rs.getInt("id_barang"),rs.getInt("id_laboran"), rs.getInt("id_member"),rs.getInt("lama_peminjaman"),rs.getInt("fee"),rs.getDate("tgl_peminjaman"),rs.getDate("tgl_pengembalian"),rs.getString("status_peminjaman"),rs.getString("kondisi"));
+                listArrayDataLogin.add(peminjaman);
             }
         }catch(SQLException e){
             e.printStackTrace();

@@ -10,6 +10,7 @@ import model.koneksidb;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+//import static view.TambahMember.convertUtilDateToSqlDate;
 /**
  *
  * @author USER
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 public class TambahBarang extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
+    int id;
     /**
      * Creates new form TambahBarang
      */
@@ -28,6 +30,7 @@ public class TambahBarang extends javax.swing.JFrame {
 
     public TambahBarang(int id){
         initComponents();
+        this.id=id;
         setLocationRelativeTo(null);
         isiform(id);
         jButtonadd.setVisible(false);
@@ -341,14 +344,15 @@ public class TambahBarang extends javax.swing.JFrame {
             int depresi = Integer.parseInt(depresiasi.getText());
         
             try {
-                String sql = "INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `depreciation`, `tgl_masuk`, `deskripsi`) VALUES (NULL, '"+nama.getText()+"', '"+price+"', '"+depresi+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+deskripsi.getText()+"')";
+                String sql = "INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `depreciation`, `tgl_masuk`, `deskripsi`) VALUES (NULL, '"+nama.getText()+"', "+price+", "+depresi+", '"+convertUtilDateToSqlDate(date.getDate())+"', '"+deskripsi.getText()+"')";
                con=datacon.getConnection();
                java.sql.PreparedStatement pst=con.prepareStatement(sql);
                  pst.execute();
                 JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
-            }      
+            }
+            new TambahBarang().setVisible(true);
     }//GEN-LAST:event_jButtonaddActionPerformed
 
     private void hargaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_hargaFocusLost
@@ -384,19 +388,6 @@ public class TambahBarang extends javax.swing.JFrame {
 
     private void jButtonaddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonaddMousePressed
 
-        // TODO add your handling code here:
-        int price = Integer.parseInt(harga.getText());
-        int depresi = Integer.parseInt(depresiasi.getText());
-        
-        try {
-            String sql = "INSERT INTO `barang` (`id_barang`, `nama_barang`, `harga`, `depreciation`, `tgl_masuk`, `deskripsi`) VALUES (NULL, '"+nama.getText()+"', '"+price+"', '"+depresi+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+deskripsi.getText()+"')";
-            con=datacon.getConnection();
-            java.sql.PreparedStatement pst=con.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
     }//GEN-LAST:event_jButtonaddMousePressed
 
     private void jButtonupdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonupdateMouseClicked
@@ -405,7 +396,7 @@ public class TambahBarang extends javax.swing.JFrame {
             int depresi = Integer.parseInt(depresiasi.getText());
         
             try {
-                String sql = "UPDATE `barang` set `nama_barang`='"+nama.getText()+"', `harga`='"+harga.getText()+"', `depreciation`='"+depresiasi.getText()+"', `tgl_masuk`='"+convertUtilDateToSqlDate(date.getDate())+"', `deskripsi`='"+deskripsi.getText()+"')"; 
+                String sql = "UPDATE `barang` set `nama_barang`='"+nama.getText()+"', `harga`='"+harga.getText()+"', `depreciation`='"+depresiasi.getText()+"', `tgl_masuk`='"+convertUtilDateToSqlDate(date.getDate())+"', `deskripsi`='"+deskripsi.getText()+"' where id_barang="+id+";"; 
                 con=datacon.getConnection();
                 java.sql.PreparedStatement pst=con.prepareStatement(sql);
                  pst.execute();
@@ -413,8 +404,15 @@ public class TambahBarang extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
+            dispose();
     }//GEN-LAST:event_jButtonupdateMouseClicked
-
+public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
+    if(date != null) {
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return sqlDate;
+    }
+    return null;
+}
     private void jButtonaddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonaddMouseClicked
         // TODO add your handling code here:
         
@@ -478,7 +476,5 @@ public class TambahBarang extends javax.swing.JFrame {
     private javax.swing.JTextField nama;
     // End of variables declaration//GEN-END:variables
 
-    private String convertUtilDateToSqlDate(Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 }

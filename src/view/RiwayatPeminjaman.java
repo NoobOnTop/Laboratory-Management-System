@@ -6,7 +6,10 @@
 package view;
 import model.koneksidb;
 import java.sql.Connection;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import model.ListArray;
+import model.Peminjaman;
 /**
  *
  * @author USER
@@ -42,12 +45,12 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtoncari = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabelfilter = new javax.swing.JLabel();
+        jComboBoxfilter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -77,7 +80,7 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(763, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,11 +116,16 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        jButtoncari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        jButtoncari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtoncariMouseClicked(evt);
+            }
+        });
 
-        jTable1.setBackground(new java.awt.Color(240, 240, 240));
-        jTable1.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEtchedBorder()));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setBackground(new java.awt.Color(240, 240, 240));
+        jTable.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEtchedBorder()));
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -138,29 +146,42 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
             new String [] {
                 "Borrowing ID", "Item ID", "Laboran ID", "Cust ID", "Borrowing Date", "Return Date", "Condition", "Status"
             }
-        ));
-        jTable1.setSelectionBackground(new java.awt.Color(240, 240, 240));
-        jTable1.setSelectionForeground(new java.awt.Color(240, 240, 240));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-outline.png"))); // NOI18N
-        jLabel4.setText("Filter");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable.setSelectionForeground(new java.awt.Color(240, 240, 240));
+        jTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Borrowing Date", "Condition", "Laboran ID", "Status", " " }));
+        jLabelfilter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-outline.png"))); // NOI18N
+        jLabelfilter.setText("Filter");
+        jLabelfilter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelfilterMouseClicked(evt);
+            }
+        });
+
+        jComboBoxfilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Borrowing Date", "Condition", "Laboran ID", "Status", " " }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabelfilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jComboBoxfilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jComboBoxfilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -173,7 +194,7 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtoncari, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(364, 364, 364)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -194,7 +215,7 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
                         .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButtoncari, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
@@ -213,6 +234,7 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        load_table();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -222,6 +244,89 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
 dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void jButtoncariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoncariMouseClicked
+        // TODO add your handling code here:
+        String cari=jTextField1.getText();
+        int car=Integer.parseInt(cari);
+        ListArray listArray=new ListArray();
+        ArrayList<Peminjaman> list = new ArrayList<>();
+        list=listArray.getListDataPeminjaman();
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getId()==car){
+                load_search(car);
+                
+            }
+            
+        }
+    }//GEN-LAST:event_jButtoncariMouseClicked
+
+    private void jLabelfilterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelfilterMouseClicked
+        // TODO add your handling code here:
+            String sql="";
+                if(jComboBoxfilter.getSelectedItem()=="Borrowing Date"){
+                    sql = "select * from peminjaman order by tgl_peminjaman;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Condition") {
+                    sql = "select * from peminjaman order by kondisi ;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Laboran ID"){
+                    sql = "select * from peminjaman order by id_laboran;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Status"){
+                    sql = "select * from peminjaman order by status;";
+               }
+            DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Peminjaman");
+        model.addColumn("Nama Barang");
+        model.addColumn("Nama Laboran");
+        model.addColumn("Nama Member");
+        model.addColumn("Tanggal Peminjaman");
+        model.addColumn("Lama Peminjaman");
+        model.addColumn("Status Peminjaman");
+        model.addColumn("Tanggal Pengembalian");
+        model.addColumn("Fee");
+        model.addColumn("Kondisi");
+            try {
+                 con = datacon.getConnection();
+            java.sql.Statement stm=con.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
+                    res.getString(6),res.getString(7),res.getString(8),res.getString(9),res.getString(10)});
+            }
+            jTable.setModel(model);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jLabelfilterMouseClicked
+    void load_search(int id){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Peminjaman");
+        model.addColumn("Nama Barang");
+        model.addColumn("Nama Laboran");
+        model.addColumn("Nama Member");
+        model.addColumn("Tanggal Peminjaman");
+        model.addColumn("Lama Peminjaman");
+        model.addColumn("Status Peminjaman");
+        model.addColumn("Tanggal Pengembalian");
+        model.addColumn("Fee");
+        model.addColumn("Kondisi");
+        //model.addColumn("Alamat");
+       // model.addColumn("Phone");
+        
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            String sql = "SELECT * from peminjaman JOIN barang on peminjaman.id_barang = barang.id_barang JOIN laboran on peminjaman.id_laboran=laboran.id_laboran JOIN member on peminjaman.id_member=member.id_member having id_peminjaman="+id;
+            //java.sql.Connection conn=(Connection)config.configDB();
+            con = datacon.getConnection();
+            java.sql.Statement stm=con.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
+                    res.getString(6),res.getString(7),res.getString(8),res.getString(9),res.getString(10)});
+            }
+            jTable.setModel(model);
+        } catch (Exception e) {
+        }
+    }
     private void load_table(){
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
@@ -250,7 +355,7 @@ dispose();        // TODO add your handling code here:
                 model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
                     res.getString(6),res.getString(7),res.getString(8),res.getString(9),res.getString(10)});
             }
-            jTable1.setModel(model);
+            jTable.setModel(model);
         } catch (Exception e) {
         }
     }
@@ -290,20 +395,20 @@ dispose();        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtoncari;
+    private javax.swing.JComboBox<String> jComboBoxfilter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelfilter;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

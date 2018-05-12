@@ -8,8 +8,11 @@ import model.koneksidb;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.ListArray;
+import model.Member;
 /**
  *
  * @author USER
@@ -47,7 +50,7 @@ public class DetailMember extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButtondelete = new javax.swing.JButton();
         jButtonEdit = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtoncari = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -164,8 +167,13 @@ public class DetailMember extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        jButtoncari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButtoncari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        jButtoncari.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtoncariMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -184,7 +192,7 @@ public class DetailMember extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtoncari, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -193,7 +201,7 @@ public class DetailMember extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtoncari, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
@@ -269,7 +277,45 @@ dispose();        // TODO add your handling code here:
         // TODO add your handling code here:
         load_table();
     }//GEN-LAST:event_jButton2MouseClicked
-    
+
+    private void jButtoncariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoncariMouseClicked
+        // TODO add your handling code here:
+        String cari=jTextField1.getText();
+        int car=Integer.parseInt(cari);
+        ListArray listArray=new ListArray();
+        ArrayList<Member> list = new ArrayList<>();
+        list=listArray.getListDataMembers();
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getId()==car){
+                load_search(car);
+            }
+        }
+    }//GEN-LAST:event_jButtoncariMouseClicked
+    void load_search(int id){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Tanggal Lahir");
+        model.addColumn("Username");
+        model.addColumn("password");
+        model.addColumn("Address");//model.addColumn("Alamat");
+       // model.addColumn("Phone");
+        
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            String sql = "select * from member where id_member="+id;
+            //java.sql.Connection conn=(Connection)config.configDB();
+            con = datacon.getConnection();
+            java.sql.Statement stm=con.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
+            }
+            jTable1.setModel(model);
+        } catch (Exception e) {
+        }
+    }
     private void load_table(){
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
@@ -334,8 +380,8 @@ dispose();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonEdit;
+    private javax.swing.JButton jButtoncari;
     private javax.swing.JButton jButtondelete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -9,8 +9,11 @@ import model.koneksidb;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Laboran;
+import model.ListArray;
 /**
  *
  * @author USER
@@ -46,7 +49,7 @@ public class DetailLaboran extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonsearch = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButtondelete = new javax.swing.JButton();
@@ -140,7 +143,12 @@ public class DetailLaboran extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Laboratory-Management-System/src/icon/search.png"))); // NOI18N
+        jButtonsearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Laboratory-Management-System/src/icon/search.png"))); // NOI18N
+        jButtonsearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonsearchMouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Show All");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -190,7 +198,7 @@ public class DetailLaboran extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(7, 7, 7)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
@@ -200,7 +208,7 @@ public class DetailLaboran extends javax.swing.JFrame {
                 .addGap(63, 63, 63)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
@@ -276,7 +284,47 @@ public class DetailLaboran extends javax.swing.JFrame {
         // TODO add your handling code here:
         load_table();
     }//GEN-LAST:event_jButton2MouseClicked
-    
+
+    private void jButtonsearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonsearchMouseClicked
+        // TODO add your handling code here:
+        String cari=jTextField1.getText();
+        int car=Integer.parseInt(cari);
+        ListArray listArray=new ListArray();
+        ArrayList<Laboran> list = new ArrayList<>();
+        list=listArray.getListDataLaboran();
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getId()==car){
+                load_search(car);
+                
+            }
+            
+        }
+    }//GEN-LAST:event_jButtonsearchMouseClicked
+    void load_search(int id){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Tanggal Lahir");
+        model.addColumn("Username");
+        model.addColumn("password");
+        model.addColumn("Address");//model.addColumn("Alamat");
+       // model.addColumn("Phone");
+        
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            String sql = "select * from laboran where id_laboran="+id;
+            //java.sql.Connection conn=(Connection)config.configDB();
+            con = datacon.getConnection();
+            java.sql.Statement stm=con.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
+            }
+            jTable1.setModel(model);
+        } catch (Exception e) {
+        }
+    }
     private void load_table(){
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
@@ -341,10 +389,10 @@ public class DetailLaboran extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtondelete;
+    private javax.swing.JButton jButtonsearch;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelback;

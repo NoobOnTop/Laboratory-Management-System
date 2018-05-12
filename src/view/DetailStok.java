@@ -8,8 +8,11 @@ import model.koneksidb;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Barang;
+import model.ListArray;
 /**
  *
  * @author USER
@@ -48,7 +51,7 @@ public class DetailStok extends javax.swing.JFrame {
         jButtonshowall = new javax.swing.JButton();
         buttondelete = new javax.swing.JButton();
         jButtonedit = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonsearch = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jComboBoxfilter = new javax.swing.JComboBox<>();
@@ -171,7 +174,12 @@ public class DetailStok extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        jButtonsearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search.png"))); // NOI18N
+        jButtonsearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonsearchMouseClicked(evt);
+            }
+        });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/filter-outline.png"))); // NOI18N
         jLabel5.setText("Filter");
@@ -209,7 +217,7 @@ public class DetailStok extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -227,7 +235,7 @@ public class DetailStok extends javax.swing.JFrame {
                 .addGap(43, 43, 43)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonsearch, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
@@ -274,18 +282,19 @@ public class DetailStok extends javax.swing.JFrame {
     private void buttondeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttondeleteMouseClicked
         // TODO add your handling code here:
         selectRow=jTable.getSelectedRow();
-        String query="DELETE FROM `barang` WHERE `id_barang`="+jTable.getValueAt(0,selectRow);
+        String query="DELETE FROM `barang` WHERE `id_barang`="+jTable.getValueAt(selectRow, 0)+";";
         Connection con = new koneksidb().getConnection();
         Statement st = null;
         try{
            st=con.createStatement();
            if(st.executeUpdate(query)==1){
-//               showData();
+               load_table();
                JOptionPane.showMessageDialog(this, "Delete berhasil");
            }
         }catch(SQLException e){
             e.printStackTrace();
         }
+        load_table();
     }//GEN-LAST:event_buttondeleteMouseClicked
 
     private void jButtonshowallMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonshowallMouseClicked
@@ -332,8 +341,48 @@ load_table();        // TODO add your handling code here:
         String id = (String) jTable.getValueAt(jTable.getSelectedRow(), 0);
         int ids=Integer.parseInt(id);
         new TambahBarang(ids).setVisible(true);
+        load_table();
     }//GEN-LAST:event_jButtoneditMouseClicked
-    
+
+    private void jButtonsearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonsearchMouseClicked
+        // TODO add your handling code here:
+        String cari=jTextField1.getText();
+        int car=Integer.parseInt(cari);
+        ListArray listArray=new ListArray();
+        ArrayList<Barang> list = new ArrayList<>();
+        list=listArray.getListDataBarang();
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getId()==car){
+                load_search(car);
+            }
+        }
+    }//GEN-LAST:event_jButtonsearchMouseClicked
+    void load_search(int id){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID");
+        model.addColumn("Name");
+        model.addColumn("Harga");
+        model.addColumn("Depretiation");
+        model.addColumn("Tanggal Masuk");
+        model.addColumn("Deskripsi");
+        //model.addColumn("Alamat");
+       // model.addColumn("Phone");
+        
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            String sql = "select * from barang where id_barang="+id;
+            //java.sql.Connection conn=(Connection)config.configDB();
+            con = datacon.getConnection();
+            java.sql.Statement stm=con.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
+            }
+            jTable.setModel(model);
+        } catch (Exception e) {
+        }
+    }
     private void load_table(){
         // membuat tampilan model tabel
         DefaultTableModel model = new DefaultTableModel();
@@ -398,8 +447,8 @@ load_table();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttondelete;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonedit;
+    private javax.swing.JButton jButtonsearch;
     private javax.swing.JButton jButtonshowall;
     private javax.swing.JComboBox<String> jComboBoxfilter;
     private javax.swing.JLabel jLabel1;

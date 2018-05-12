@@ -8,7 +8,7 @@ import java.sql.Connection;
 import model.koneksidb;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-import static view.TambahMember.convertUtilDateToSqlDate;
+//import static view.TambahMember.convertUtilDateToSqlDate;
 /**
  *
  * @author USER
@@ -340,7 +340,13 @@ dispose();        // TODO add your handling code here:
             isiform(usernames.getText());
         }
     }//GEN-LAST:event_cancelActionPerformed
-
+public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
+    if(date != null) {
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return sqlDate;
+    }
+    return null;
+}
     private void jButtonupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonupdateActionPerformed
         // TODO add your handling code here:
         try {
