@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import model.ListArray;
 import model.Peminjaman;
 import model.koneksidb;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -137,12 +138,20 @@ public class ReturnForm extends javax.swing.JFrame {
         jLabel4.setText("Cust ID");
 
         jComboBoxstatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBoxstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Borrowed", "Return", " " }));
+        jComboBoxstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Borrowed", "Returned", "" }));
 
         jTextFieldcari.setBackground(new java.awt.Color(228, 241, 254));
         jTextFieldcari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jComboBoxcondition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Good", "Broken", " " }));
+        jComboBoxcondition.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxconditionMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jComboBoxconditionMouseReleased(evt);
+            }
+        });
         jComboBoxcondition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxconditionActionPerformed(evt);
@@ -329,31 +338,31 @@ public class ReturnForm extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jTextFieldcari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextFielditemid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jTextFielditemname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel16))
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(jTextFieldlaboranid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
                             .addComponent(jTextFieldlaboranname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel17))
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jTextFieldcustid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18))
-                        .addGap(31, 31, 31)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
@@ -362,39 +371,39 @@ public class ReturnForm extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jLabel19)))
-                        .addGap(38, 38, 38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(jDateChooserbor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(30, 30, 30)
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jDateChooserreturn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addComponent(jLabel14))
                             .addComponent(jComboBoxcondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jTextFieldfee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel15))
                             .addComponent(jComboBoxstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonupdate)
                             .addComponent(jButton2)))
                     .addComponent(jButtoncari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -422,9 +431,25 @@ dispose();        // TODO add your handling code here:
     private void jComboBoxconditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxconditionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxconditionActionPerformed
-
+    public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
+    if(date != null) {
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return sqlDate;
+    }
+    return null;
+    }
     private void jButtonupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonupdateActionPerformed
         // TODO add your handling code here:
+        String condition = jComboBoxcondition.getSelectedItem().toString();
+        String statusku = jComboBoxstatus.getSelectedItem().toString();
+        try {
+            String sql = "UPDATE `peminjaman` SET `status_peminjaman` = '"+statusku+"', `tgl_pengembalian` = '"+convertUtilDateToSqlDate(jDateChooserreturn.getDate())+"', `fee` = '"+jTextFieldfee.getText()+"',`kondisi` = '"+condition+"' WHERE `peminjaman`.`id_peminjaman` = "+jTextFieldcari.getText()+"";
+            java.sql.PreparedStatement pst=con.prepareStatement(sql);
+            pst.execute();
+            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_jButtonupdateActionPerformed
 
     private void jButtoncariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncariActionPerformed
@@ -451,6 +476,30 @@ dispose();        // TODO add your handling code here:
         }
     }//GEN-LAST:event_jButtoncariMouseClicked
 
+    private void jComboBoxconditionMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxconditionMouseReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jComboBoxconditionMouseReleased
+
+    private void jComboBoxconditionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxconditionMouseClicked
+        // TODO add your handling code here:
+        try
+      {
+          String sql="select datediff(NOW(),tgl_peminjaman) as selisih from peminjaman where peminjaman.id_peminjaman = "+jTextFieldcari.getText()+";";
+          con = datacon.getConnection();
+          java.sql.Statement stm=con.createStatement();
+          java.sql.ResultSet rs=stm.executeQuery(sql);
+          while(rs.next()){
+              int a = Integer.parseInt(rs.getString(1))*10000;
+              String b= String.valueOf(a);
+              jTextFieldfee.setText(b);
+          }
+      }catch(Exception e)
+      {
+          //JOptionPane.showMessageDialog(null,"GAGAL");
+      }
+    }//GEN-LAST:event_jComboBoxconditionMouseClicked
+
     public void load_search(int cari){
         try
             {
@@ -462,9 +511,9 @@ dispose();        // TODO add your handling code here:
                     jTextFielditemid.setText(rs.getString(2));
                     jTextFielditemname.setText(rs.getString(12));
                     jTextFieldlaboranid.setText(rs.getString(3));
-                    jTextFieldlaboranname.setText(rs.getString(13));
+                    jTextFieldlaboranname.setText(rs.getString(18));
                     jTextFieldcustid.setText(rs.getString(17));
-                    jTextFieldcustname.setText(rs.getString(18));
+                    jTextFieldcustname.setText(rs.getString(24));
                     jDateChooserbor.setDate(rs.getDate(5));
 //                    jDateChooserreturn.setDate(rs.getDate(8));
 //                    jComboBoxcondition.setText(rs.getString(9))
