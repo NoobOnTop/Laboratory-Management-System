@@ -26,6 +26,8 @@ public class Beranda extends javax.swing.JFrame {
             labeldetailadmin.setVisible(false);
             labelnewstock.setVisible(false);
             labeldetailmember.setText("Account Detail");
+            labelborrowingform.setVisible(false);
+            labelreturnform.setVisible(false);
         }
         labelusername.setText(siapah);
     }
@@ -275,12 +277,12 @@ public class Beranda extends javax.swing.JFrame {
         jPanelborrowLayout.setVerticalGroup(
             jPanelborrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelborrowLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(labelborrowingform)
-                .addGap(18, 18, 18)
+                .addGap(21, 21, 21)
                 .addComponent(labelhistory)
                 .addGap(18, 18, 18)
                 .addComponent(labelreturnform, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(labelborrowingform)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -458,9 +460,14 @@ public class Beranda extends javax.swing.JFrame {
 
     private void labelhistoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelhistoryMouseClicked
         // TODO add your handling code here:
-        RiwayatPeminjaman bor=new RiwayatPeminjaman();
-        
-        bor.setVisible(true);
+        if(this.siapa=='l'){
+            RiwayatPeminjaman bor=new RiwayatPeminjaman();        
+            bor.setVisible(true);            
+        }else{
+            RiwayatPeminjaman bor=new RiwayatPeminjaman(this.siapah);
+            bor.setVisible(true);
+        }
+
     }//GEN-LAST:event_labelhistoryMouseClicked
 
     private void labelreturnformMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelreturnformMouseClicked

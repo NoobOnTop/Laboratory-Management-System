@@ -6,7 +6,10 @@
 package view;
 import model.koneksidb;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.ListArray;
 import model.Peminjaman;
@@ -26,7 +29,12 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         load_table();
     }
-
+    public RiwayatPeminjaman(String username) {
+        initComponents();
+        setLocationRelativeTo(null);
+        jButtondelete.setVisible(false);
+        load_member(username);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -41,8 +49,7 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtondelete = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButtoncari = new javax.swing.JButton();
@@ -97,9 +104,12 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 110, 123));
 
-        jButton3.setText("Save");
-
-        jButton4.setText("Delete");
+        jButtondelete.setText("Delete");
+        jButtondelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtondeleteMouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Show All");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -199,10 +209,8 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 849, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addGap(26, 26, 26)
-                        .addComponent(jButton4)
-                        .addGap(610, 610, 610)
+                        .addComponent(jButtondelete)
+                        .addGap(693, 693, 693)
                         .addComponent(jButton2))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -219,11 +227,9 @@ public class RiwayatPeminjaman extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4))
-                    .addComponent(jButton2))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButtondelete))
                 .addGap(6, 6, 6))
         );
 
@@ -248,6 +254,7 @@ dispose();        // TODO add your handling code here:
     private void jButtoncariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoncariMouseClicked
         // TODO add your handling code here:
         String cari=jTextField1.getText();
+        boolean found=false;
         int car=Integer.parseInt(cari);
         ListArray listArray=new ListArray();
         ArrayList<Peminjaman> list = new ArrayList<>();
@@ -255,9 +262,11 @@ dispose();        // TODO add your handling code here:
         for(int i=0;i<list.size();i++){
             if(list.get(i).getId()==car){
                 load_search(car);
-                
+                found=true;
             }
-            
+        }
+        if(found==false){
+             JOptionPane.showMessageDialog(null, "Data yang dicari tidak ada!");
         }
     }//GEN-LAST:event_jButtoncariMouseClicked
 
@@ -296,6 +305,54 @@ dispose();        // TODO add your handling code here:
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jLabelfilterMouseClicked
+
+    private void jButtondeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtondeleteMouseClicked
+        // TODO add your handling code here:
+        int selectRow=jTable.getSelectedRow();
+        String query="DELETE FROM `peminjaman` WHERE `id_peminjaman`="+jTable.getValueAt(selectRow, 0);
+        Connection con = new koneksidb().getConnection();
+        Statement st = null;
+        try{
+           st=con.createStatement();
+           if(st.executeUpdate(query)==1){
+               load_table();
+               JOptionPane.showMessageDialog(this, "Delete berhasil");
+           }
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(this, "Delete tidak berhasil");
+        }
+    }//GEN-LAST:event_jButtondeleteMouseClicked
+    void load_member(String username){
+         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("ID Peminjaman");
+        model.addColumn("Nama Barang");
+        model.addColumn("Nama Laboran");
+        model.addColumn("Nama Member");
+        model.addColumn("Tanggal Peminjaman");
+        model.addColumn("Lama Peminjaman");
+        model.addColumn("Status Peminjaman");
+        model.addColumn("Tanggal Pengembalian");
+        model.addColumn("Fee");
+        model.addColumn("Kondisi");
+        //model.addColumn("Alamat");
+       // model.addColumn("Phone");
+        
+        //menampilkan data database kedalam tabel
+        try {
+            //int no=1;
+            String sql = "SELECT * from peminjaman JOIN barang on peminjaman.id_barang = barang.id_barang JOIN laboran on peminjaman.id_laboran=laboran.id_laboran JOIN member on peminjaman.id_member=member.id_member where member.username='"+username+"';";
+            //java.sql.Connection conn=(Connection)config.configDB();
+            con = datacon.getConnection();
+            java.sql.Statement stm=con.createStatement();
+            java.sql.ResultSet res=stm.executeQuery(sql);
+            while(res.next()){
+                model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
+                    res.getString(6),res.getString(7),res.getString(8),res.getString(9),res.getString(10)});
+            }
+            jTable.setModel(model);
+        } catch (Exception e) {
+        }
+    }
     void load_search(int id){
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Peminjaman");
@@ -312,6 +369,7 @@ dispose();        // TODO add your handling code here:
        // model.addColumn("Phone");
         
         //menampilkan data database kedalam tabel
+        
         try {
             //int no=1;
             String sql = "SELECT * from peminjaman JOIN barang on peminjaman.id_barang = barang.id_barang JOIN laboran on peminjaman.id_laboran=laboran.id_laboran JOIN member on peminjaman.id_member=member.id_member having id_peminjaman="+id;
@@ -396,9 +454,8 @@ dispose();        // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtoncari;
+    private javax.swing.JButton jButtondelete;
     private javax.swing.JComboBox<String> jComboBoxfilter;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
