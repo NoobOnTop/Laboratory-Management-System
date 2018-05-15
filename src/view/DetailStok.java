@@ -190,7 +190,7 @@ public class DetailStok extends javax.swing.JFrame {
         });
 
         jComboBoxfilter.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBoxfilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Asceding", "Desceding", "Entry Date", "Highest Price", "Lower Price", " " }));
+        jComboBoxfilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Asceding", "Desceding", "Entry Date", "Highest Price", "Lowest Price", "" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -311,12 +311,12 @@ load_table();        // TODO add your handling code here:
                     sql = "select * from barang order by `nama_barang` asc;";
                 } else if(jComboBoxfilter.getSelectedItem()=="Desceding") {
                     sql = "select * from barang order by `nama_barang` desc;";
-                } else if(jComboBoxfilter.getSelectedItem()=="Harga Termahal"){
-                    sql = "select * from barang order by `harga` asc;";
-                } else if(jComboBoxfilter.getSelectedItem()=="Harga Termurah"){
+                } else if(jComboBoxfilter.getSelectedItem()=="Highest Price"){
                     sql = "select * from barang order by `harga` desc;";
-                } else if(jComboBoxfilter.getSelectedItem()=="Tanggal Masuk"){
-                    sql = "select * from barang order by `tgl_masuk`;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Lowest Price"){
+                    sql = "select * from barang order by `harga` asc;";
+                } else if(jComboBoxfilter.getSelectedItem()=="Entry Date"){
+                    sql = "select * from barang order by `tgl_masuk` desc;";
                 }
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("ID");

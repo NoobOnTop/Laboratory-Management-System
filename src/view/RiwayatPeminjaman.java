@@ -265,13 +265,13 @@ dispose();        // TODO add your handling code here:
         // TODO add your handling code here:
             String sql="";
                 if(jComboBoxfilter.getSelectedItem()=="Borrowing Date"){
-                    sql = "select * from peminjaman order by tgl_peminjaman;";
+                    sql = "SELECT * from peminjaman JOIN barang on peminjaman.id_barang = barang.id_barang JOIN laboran on peminjaman.id_laboran=laboran.id_laboran JOIN member on peminjaman.id_member=member.id_member order by tgl_peminjaman desc;";
                 } else if(jComboBoxfilter.getSelectedItem()=="Condition") {
-                    sql = "select * from peminjaman order by kondisi ;";
+                    sql = "SELECT * from peminjaman JOIN barang on peminjaman.id_barang = barang.id_barang JOIN laboran on peminjaman.id_laboran=laboran.id_laboran JOIN member on peminjaman.id_member=member.id_member order by kondisi desc ;";
                 } else if(jComboBoxfilter.getSelectedItem()=="Laboran ID"){
-                    sql = "select * from peminjaman order by id_laboran;";
+                    sql = "SELECT * from peminjaman JOIN barang on peminjaman.id_barang = barang.id_barang JOIN laboran on peminjaman.id_laboran=laboran.id_laboran JOIN member on peminjaman.id_member=member.id_member order by id_laboran asc ;";
                 } else if(jComboBoxfilter.getSelectedItem()=="Status"){
-                    sql = "select * from peminjaman order by status;";
+                    sql = "SELECT * from peminjaman JOIN barang on peminjaman.id_barang = barang.id_barang JOIN laboran on peminjaman.id_laboran=laboran.id_laboran JOIN member on peminjaman.id_member=member.id_member order by status_peminjaman asc;";
                }
             DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID Peminjaman");

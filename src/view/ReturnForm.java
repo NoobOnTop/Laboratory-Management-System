@@ -186,6 +186,11 @@ public class ReturnForm extends javax.swing.JFrame {
         jLabel3.setText("Item Name");
 
         jButton2.setText("Cancel");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -499,6 +504,11 @@ dispose();        // TODO add your handling code here:
           //JOptionPane.showMessageDialog(null,"GAGAL");
       }
     }//GEN-LAST:event_jComboBoxconditionMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     public void load_search(int cari){
         try

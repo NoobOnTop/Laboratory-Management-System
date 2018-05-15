@@ -143,7 +143,7 @@ public class DetailLaboran extends javax.swing.JFrame {
             }
         });
 
-        jButtonsearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Laboratory-Management-System/src/icon/search.png"))); // NOI18N
+        jButtonsearch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search1.png"))); // NOI18N
         jButtonsearch.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButtonsearchMouseClicked(evt);

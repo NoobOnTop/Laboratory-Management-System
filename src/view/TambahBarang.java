@@ -168,6 +168,11 @@ public class TambahBarang extends javax.swing.JFrame {
         jButton2.setBackground(new java.awt.Color(253, 227, 167));
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Cancel");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Description");
@@ -417,6 +422,11 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jButtonaddMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments

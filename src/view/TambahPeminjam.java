@@ -179,6 +179,11 @@ public class TambahPeminjam extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancel");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Laboran Name");
@@ -418,6 +423,11 @@ dispose();        // TODO add your handling code here:
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        dispose();  
+    }//GEN-LAST:event_jButton2MouseClicked
 
     
     /**
