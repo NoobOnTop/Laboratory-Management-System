@@ -308,15 +308,15 @@ load_table();        // TODO add your handling code here:
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
  String sql="";
                 if(jComboBoxfilter.getSelectedItem()=="Asceding"){
-                    sql = "select * from barang order by `nama_barang` asc;";
+                    sql = "SELECT * FROM barang left join peminjaman on barang.id_barang=peminjaman.id_barang order by `nama_barang` asc;";
                 } else if(jComboBoxfilter.getSelectedItem()=="Desceding") {
-                    sql = "select * from barang order by `nama_barang` desc;";
+                    sql = "SELECT * FROM barang left join peminjaman on barang.id_barang=peminjaman.id_barang order by `nama_barang` desc;";
                 } else if(jComboBoxfilter.getSelectedItem()=="Highest Price"){
-                    sql = "select * from barang order by `harga` desc;";
+                    sql = "SELECT * FROM barang left join peminjaman on barang.id_barang=peminjaman.id_barang order by `harga` desc;";
                 } else if(jComboBoxfilter.getSelectedItem()=="Lowest Price"){
-                    sql = "select * from barang order by `harga` asc;";
+                    sql = "SELECT * FROM barang left join peminjaman on barang.id_barang=peminjaman.id_barang order by `harga` asc;";
                 } else if(jComboBoxfilter.getSelectedItem()=="Entry Date"){
-                    sql = "select * from barang order by `tgl_masuk` desc;";
+                    sql = "SELECT * FROM barang left join peminjaman on barang.id_barang=peminjaman.id_barang order by `tgl_masuk` desc;";
                 }
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("ID");
@@ -325,12 +325,14 @@ load_table();        // TODO add your handling code here:
             model.addColumn("Depretiation");
             model.addColumn("Tanggal Masuk");
             model.addColumn("Deskripsi");
+            model.addColumn("Status Peminjaman");
+            model.addColumn("Kondisi");
             try {
                 con = datacon.getConnection();
                 java.sql.Statement stm=con.createStatement();
                 java.sql.ResultSet res=stm.executeQuery(sql);
                 while(res.next()){
-                    model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
+                    model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(13),res.getString(16)});
                 }
                 jTable.setModel(model);
              } catch (Exception e) {
@@ -369,20 +371,20 @@ load_table();        // TODO add your handling code here:
         model.addColumn("Depretiation");
         model.addColumn("Tanggal Masuk");
         model.addColumn("Deskripsi");
-        //model.addColumn("Alamat");
-       // model.addColumn("Phone");
+        model.addColumn("Status Peminjaman");
+        model.addColumn("Kondisi");
         
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "select * from barang where id_barang="+id;
+            String sql = "SELECT * FROM barang left join peminjaman on barang.id_barang=peminjaman.id_barang where barang.id_barang="+id;
             //java.sql.Connection conn=(Connection)config.configDB();
             con = datacon.getConnection();
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
-            }
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(13),res.getString(16)});
+            }   
             jTable.setModel(model);
         } catch (Exception e) {
         }
@@ -396,19 +398,19 @@ load_table();        // TODO add your handling code here:
         model.addColumn("Depretiation");
         model.addColumn("Tanggal Masuk");
         model.addColumn("Deskripsi");
-        //model.addColumn("Alamat");
-       // model.addColumn("Phone");
+        model.addColumn("Status Peminjaman");
+        model.addColumn("Kondisi");
         
         //menampilkan data database kedalam tabel
         try {
             //int no=1;
-            String sql = "select * from barang";
+            String sql = "SELECT * FROM barang left join peminjaman on barang.id_barang=peminjaman.id_barang";
             //java.sql.Connection conn=(Connection)config.configDB();
             con = datacon.getConnection();
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6)});
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(13),res.getString(16)});
             }
             jTable.setModel(model);
         } catch (Exception e) {
