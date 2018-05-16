@@ -418,6 +418,10 @@
               <Color blue="fe" green="f1" red="e4" type="rgb"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextFieldfeeFocusLost"/>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldfeeKeyReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonupdate">
           <Properties>
@@ -536,6 +540,10 @@
           </Properties>
         </Component>
         <Component class="com.toedter.calendar.JDateChooser" name="jDateChooserreturn">
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jDateChooserreturnMouseClicked"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jDateChooserreturnMouseReleased"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFielditemid">
           <Properties>

@@ -15,6 +15,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import model.koneksidb;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 
 /**
@@ -23,7 +24,7 @@ import java.sql.Connection;
  */
 public class SendEmail {
     String id_barang,id_laboran,id_member,id_peminjaman,tgl_peminjaman,nama_barang
-            ,nama_laboran,nama_member,email,lama_peminjaman;
+            ,nama_laboran,nama_member,email,lama_peminjaman,username,password;
     koneksidb datacon = new koneksidb();
     private Connection con;
     //String email;
@@ -35,9 +36,68 @@ public class SendEmail {
     }
     
     public SendEmail(String id_member){
-        this.id_member=id_member;
+        this.email=email;
     }
     
+    public void loadDataMember(){
+        try{
+        String sql = "select * from member where member.email='"+email+"'";
+        con = datacon.getConnection();
+        java.sql.Statement stm=con.createStatement();
+        java.sql.ResultSet res=stm.executeQuery(sql);
+        while(res.next()){
+            this.id_member=res.getString(1);
+            this.nama_member=res.getString(2);
+            this.username=res.getString(4);
+            this.password=res.getString(5);
+        }
+    }catch(Exception e){
+    }
+    }
+    
+    public void kirimEmailMember(){
+                final String username = "laboranitera@gmail.com";
+		final String password = "laboranitera123";
+                
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+                
+		Session session = Session.getInstance(props,
+		  new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(username, password);
+			}
+		  });
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress("muhamadenrinal@gmail.com"));
+			message.setRecipients(Message.RecipientType.TO,
+				InternetAddress.parse(email));
+			message.setSubject("Detail Member "+nama_member);
+			message.setText("Dear ,"+nama_member
+				+ "\n\n Terima Kasih atas kepercayaan Anda telah menggunakan fasilitas Lab Management System. !"
+                                        + "\n\n Berikut merupakan informasi User Anda:"+
+                                "\n ID Member : "+id_member+
+                                "\n Nama  :"+nama_member+
+                                "\n Username : "+username+
+                                "\n Password :"+password+
+   
+                                "\n\n Hormat Kami"
+                                        + "\n Lab ITERA");
+
+			Transport.send(message);
+
+			System.out.println("Done");
+
+		} catch (MessagingException e) {
+			throw new RuntimeException(e);
+		}
+	}
     
     public void loadDataPeminjaman(){
         try {
