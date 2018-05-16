@@ -19,7 +19,7 @@ public class ListArray {
             rs=st.executeQuery("SELECT * FROM member");
             Member member;
             while(rs.next()){
-                member = new Member(rs.getString("nama_member"),rs.getString("address"),rs.getDate("tgl_lahir"), rs.getString("username"),rs.getString("password"),rs.getInt("id_member"));
+                member = new Member(rs.getString("nama_member"),rs.getString("address"),rs.getDate("tgl_lahir"), rs.getString("username"),rs.getString("password"),rs.getInt("id_member"),rs.getString("email"));
                 listArrayDataLogin.add(member);
             }
         }catch(SQLException e){
@@ -55,7 +55,7 @@ public class ListArray {
             rs=st.executeQuery("SELECT * FROM barang");
             Barang barang;
             while(rs.next()){
-                barang = new Barang(rs.getInt("id_barang"),rs.getString("nama_barang"),rs.getInt("harga"), rs.getInt("depreciation"),rs.getString("deskripsi"),rs.getDate("tgl_masuk"),rs.getString("status_peminjmana"),rs.getString("kondisi"));
+                barang = new Barang(rs.getInt("id_barang"),rs.getString("nama_barang"),rs.getInt("harga"), rs.getInt("depreciation"),rs.getString("deskripsi"),rs.getDate("tgl_masuk"),rs.getString("status_peminjaman"),rs.getString("kondisi"));
                 listArrayDataLogin.add(barang);
             }
         }catch(SQLException e){

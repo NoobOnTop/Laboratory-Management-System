@@ -6,6 +6,8 @@
 package view;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import model.koneksidb;
 import model.SendEmail;
 import java.text.SimpleDateFormat;
@@ -25,6 +27,7 @@ public class TambahPeminjam extends javax.swing.JFrame {
     public TambahPeminjam() {
         initComponents();
         setLocationRelativeTo(null);
+        dispose();
     }
 
     /**
@@ -390,26 +393,49 @@ dispose();        // TODO add your handling code here:
     }
     return null;
     }
+    boolean check(String id){
+        con=datacon.getConnection();
+        Statement st;
+        ResultSet rs;
+        try{
+            st=con.createStatement();
+            rs=st.executeQuery("SELECT id_barang FROM peminjaman");
+            while(rs.next()){
+                if(id == null ? rs.getString(1) == null : id.equals(rs.getString(1))){
+                    return true;
+                }
+            }
+        }catch(Exception e){
+        }
+        return false;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 //        String statusku = status.getSelectedItem().toString();
-        String lama = length.getSelectedItem().toString();
-        int lamawaktu = Integer.parseInt(lama);
-        try {
-            String sql = "INSERT INTO `peminjaman` (`id_peminjaman`, `id_barang`, `id_laboran`, `id_member`, `tgl_peminjaman`, `lama_peminjaman`) VALUES (NULL, '"+id_item.getText()+"', '"+id_laboran.getText()+"', '"+id_customer.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+lamawaktu+"')";
-            java.sql.PreparedStatement pst=con.prepareStatement(sql);
-            pst.execute();
-            String sql1="update barang set status_peminjaman = 'Borrowed' where id_barang="+id_item.getText();
-            java.sql.PreparedStatement psts=con.prepareStatement(sql1);
-            psts.execute();
+        if(!check(id_item.getText())){
+            String lama = length.getSelectedItem().toString();
+            int lamawaktu = Integer.parseInt(lama);
+            try {
+                String sql = "INSERT INTO `peminjaman` (`id_peminjaman`, `id_barang`, `id_laboran`, `id_member`, `tgl_peminjaman`, `lama_peminjaman`) VALUES (NULL, '"+id_item.getText()+"', '"+id_laboran.getText()+"', '"+id_customer.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+lamawaktu+"')";
+                java.sql.PreparedStatement pst=con.prepareStatement(sql);
+                pst.execute();
+                String sql1="update barang set status_peminjaman = 'Borrowed' where id_barang="+id_item.getText();
+                java.sql.PreparedStatement psts=con.prepareStatement(sql1);
+                psts.execute();
 
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+                JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+            SendEmail kirimemail = new SendEmail(id_item.getText(), id_laboran.getText(), id_customer.getText());
+            kirimemail.loadDataPeminjaman();
+            kirimemail.kirimEmailPeminjaman();
+        }else{
+            JOptionPane.showMessageDialog(this, "Barang tidak ready");
+            id_item.setText("");
         }
-        SendEmail kirimemail = new SendEmail(id_item.getText(), id_laboran.getText(), id_customer.getText());
-        kirimemail.loadDataPeminjaman();
-        kirimemail.kirimEmailPeminjaman();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked

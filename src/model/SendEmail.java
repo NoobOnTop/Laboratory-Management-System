@@ -124,7 +124,7 @@ public class SendEmail {
             while(res.next()){
                 this.id_peminjaman=res.getString(1);
                 this.tgl_peminjaman=res.getString(5);
-                this.nama_barang=res.getString(12);
+                this.nama_barang=res.getString(10);
                 this.nama_laboran=res.getString(18);
                 this.nama_member=res.getString(24);
                 this.email = res.getString(29);
@@ -156,7 +156,7 @@ public class SendEmail {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("muhamadenrinal@gmail.com"));
+			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(email));
 			message.setSubject("Invoice Peminjaman "+id_peminjaman);

@@ -23,7 +23,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public class createpdf {
     public String id_pinjam;
     private String FILE = "D:\\GitHub\\Laboratory-Management-System\\src\\invoice\\invoice";
-    private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+    private static Font catFont = new Font(Font.FontFamily.HELVETICA, 18,
             Font.BOLD);
     private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 24,
             Font.BOLD, BaseColor.RED);
@@ -65,7 +65,7 @@ public class createpdf {
             throws DocumentException {
         Paragraph preface1 = new Paragraph();
         
-        preface1.add(new Paragraph("                                INVOICE", redFont));
+        preface1.add(new Paragraph("\n                                    INVOICE", redFont));
         preface1.setAlignment(Element.ALIGN_CENTER);
         addEmptyLine(preface1, 4);
         document.add(preface1);
