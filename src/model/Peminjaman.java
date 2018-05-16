@@ -14,8 +14,7 @@ import java.util.Date;
 public class Peminjaman {
     int id_peminjaman,id_barang,id_laboran,id_member,lama_peminjaman,fee;
     Date tgl_peminjaman,tgl_pengembalian;
-    String status_peminjaman,kondisi;
-    public Peminjaman(int id_peminjaman,int id_barang,int id_laboran,int id_member,int lama_peminjaman,int fee,Date tgl_peminjaman,Date tgl_pengembalian,String status_peminjaman,String kondisi){
+    public Peminjaman(int id_peminjaman,int id_barang,int id_laboran,int id_member,int lama_peminjaman,int fee,Date tgl_peminjaman,Date tgl_pengembalian){
         this.id_peminjaman=id_peminjaman;
         this.id_barang=id_barang;
         this.id_member=id_member;
@@ -23,8 +22,7 @@ public class Peminjaman {
         this.fee=fee;
         this.tgl_peminjaman=tgl_peminjaman;
         this.tgl_pengembalian=tgl_pengembalian;
-        this.status_peminjaman=status_peminjaman;
-        this.kondisi=kondisi;
+       
     }
     public int getId(){
         return id_peminjaman;

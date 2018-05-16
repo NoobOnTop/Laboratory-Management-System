@@ -55,7 +55,7 @@ public class ListArray {
             rs=st.executeQuery("SELECT * FROM barang");
             Barang barang;
             while(rs.next()){
-                barang = new Barang(rs.getInt("id_barang"),rs.getString("nama_barang"),rs.getInt("harga"), rs.getInt("depreciation"),rs.getString("deskripsi"),rs.getDate("tgl_masuk"));
+                barang = new Barang(rs.getInt("id_barang"),rs.getString("nama_barang"),rs.getInt("harga"), rs.getInt("depreciation"),rs.getString("deskripsi"),rs.getDate("tgl_masuk"),rs.getString("status_peminjmana"),rs.getString("kondisi"));
                 listArrayDataLogin.add(barang);
             }
         }catch(SQLException e){
@@ -74,7 +74,7 @@ public class ListArray {
             rs=st.executeQuery("SELECT * FROM peminjaman");
             Peminjaman peminjaman;
             while(rs.next()){
-                peminjaman = new Peminjaman(rs.getInt("id_peminjaman"),rs.getInt("id_barang"),rs.getInt("id_laboran"), rs.getInt("id_member"),rs.getInt("lama_peminjaman"),rs.getInt("fee"),rs.getDate("tgl_peminjaman"),rs.getDate("tgl_pengembalian"),rs.getString("status_peminjaman"),rs.getString("kondisi"));
+                peminjaman = new Peminjaman(rs.getInt("id_peminjaman"),rs.getInt("id_barang"),rs.getInt("id_laboran"), rs.getInt("id_member"),rs.getInt("lama_peminjaman"),rs.getInt("fee"),rs.getDate("tgl_peminjaman"),rs.getDate("tgl_pengembalian"));
                 listArrayDataLogin.add(peminjaman);
             }
         }catch(SQLException e){

@@ -452,7 +452,7 @@ dispose();        // TODO add your handling code here:
             String sql = "UPDATE `peminjaman` SET `tgl_pengembalian` = '"+convertUtilDateToSqlDate(jDateChooserreturn.getDate())+"', `fee` = '"+jTextFieldfee.getText()+"' WHERE `peminjaman`.`id_peminjaman` = "+jTextFieldcari.getText();
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();
-            String sql1 = "UPDATE `barang` SET `status_peminjaman` = `Ready`, `kondisi` = '"+condition+"' WHERE `barang`.`id_barang` = "+jTextFielditemid.getText();            
+            String sql1 = "UPDATE `barang` SET `status_peminjaman` = 'Ready', `kondisi` = '"+condition+"' WHERE `barang`.`id_barang` = "+jTextFielditemid.getText();            
             java.sql.PreparedStatement pst1=con.prepareStatement(sql1);
             pst1.execute();
             JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
