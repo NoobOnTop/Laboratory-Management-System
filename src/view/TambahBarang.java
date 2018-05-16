@@ -357,6 +357,7 @@ public class TambahBarang extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
+            dispose();
             new TambahBarang().setVisible(true);
     }//GEN-LAST:event_jButtonaddActionPerformed
 

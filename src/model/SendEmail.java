@@ -15,6 +15,12 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import model.koneksidb;
 import java.sql.Connection;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
+import javax.mail.Multipart;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
 
 
 /**
@@ -106,7 +112,26 @@ public class SendEmail {
                                         + "Anda. Semoga informasi ini bermanfaat bagi Anda."+
                                 "\n\n Hormat Kami"
                                         + "\n"+nama_laboran);
+//          
+            createpdf cret=new createpdf(id_peminjaman,nama_member,id_barang,nama_barang,id_laboran,nama_laboran,lama_peminjaman,
+                    tgl_peminjaman);
+            
+            MimeBodyPart messageBodyPart2 = new MimeBodyPart();      
+            String filename = cret.namafile();//change accordingly     
+            String sumber = "D:\\GitHub\\Laboratory-Management-System\\src\\invoice\\"+filename;
+            DataSource source = new FileDataSource(sumber);    
+            messageBodyPart2.setDataHandler(new DataHandler(source));    
+            messageBodyPart2.setFileName(filename);             
 
+            //Create Multipart object and add MimeBodyPart objects to this object        
+            Multipart multipart = new MimeMultipart();    
+//            multipart.addBodyPart(messageBodyPart1);     
+            multipart.addBodyPart(messageBodyPart2);      
+
+            //Set the multiplart object to the message object    
+            message.setContent(multipart );        
+
+//
 			Transport.send(message);
 
 			System.out.println("Done");

@@ -332,7 +332,7 @@ load_table();        // TODO add your handling code here:
                 java.sql.Statement stm=con.createStatement();
                 java.sql.ResultSet res=stm.executeQuery(sql);
                 while(res.next()){
-                    model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(13),res.getString(16)});
+                    model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),ubahstatus(res.getString(13)),ubahkondisi(res.getString(16))});
                 }
                 jTable.setModel(model);
              } catch (Exception e) {
@@ -383,11 +383,30 @@ load_table();        // TODO add your handling code here:
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(13),res.getString(16)});
+                
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),ubahstatus(res.getString(13)),ubahkondisi(res.getString(16))});
             }   
             jTable.setModel(model);
         } catch (Exception e) {
         }
+    }
+    public String ubahkondisi(String kata){
+        if(kata != null){
+            return kata;
+        }else{
+            return "good";
+        }
+    }
+    public String ubahstatus(String kata){
+        if(kata != null){
+            if("borrowed".equals(kata)){
+                return kata;
+            }else{
+                return "ready";
+            }
+        }else{
+            return "ready";
+        } 
     }
     private void load_table(){
         // membuat tampilan model tabel
@@ -410,7 +429,7 @@ load_table();        // TODO add your handling code here:
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),res.getString(13),res.getString(16)});
+                model.addRow(new Object[]{res.getString(1),res.getString(2),res.getString(3),res.getString(4),res.getString(5),res.getString(6),ubahstatus(res.getString(13)),ubahkondisi(res.getString(16))});
             }
             jTable.setModel(model);
         } catch (Exception e) {
