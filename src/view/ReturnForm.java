@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class ReturnForm extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
+    String length;
     /**
      * Creates new form UpdateForm
      */
@@ -159,6 +160,16 @@ public class ReturnForm extends javax.swing.JFrame {
         });
 
         jTextFieldfee.setBackground(new java.awt.Color(228, 241, 254));
+        jTextFieldfee.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldfeeFocusLost(evt);
+            }
+        });
+        jTextFieldfee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldfeeKeyReleased(evt);
+            }
+        });
 
         jButtonupdate.setText("Update");
         jButtonupdate.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +217,15 @@ public class ReturnForm extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        jDateChooserreturn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jDateChooserreturnMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jDateChooserreturnMouseReleased(evt);
+            }
+        });
 
         jTextFielditemid.setEditable(false);
         jTextFielditemid.setBackground(new java.awt.Color(228, 241, 254));
@@ -487,15 +507,39 @@ dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxconditionMouseReleased
 
     private void jComboBoxconditionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxconditionMouseClicked
+
+    }//GEN-LAST:event_jComboBoxconditionMouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        try
+        dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jDateChooserreturnMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooserreturnMouseReleased
+
+    }//GEN-LAST:event_jDateChooserreturnMouseReleased
+
+    private void jDateChooserreturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jDateChooserreturnMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jDateChooserreturnMouseClicked
+
+    private void jTextFieldfeeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldfeeKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextFieldfeeKeyReleased
+
+    private void jTextFieldfeeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldfeeFocusLost
+        // TODO add your handling code here:
+        int lama=Integer.parseInt(length);
+         try
       {
           String sql="select datediff(NOW(),tgl_peminjaman) as selisih from peminjaman where peminjaman.id_peminjaman = "+jTextFieldcari.getText()+";";
           con = datacon.getConnection();
           java.sql.Statement stm=con.createStatement();
           java.sql.ResultSet rs=stm.executeQuery(sql);
           while(rs.next()){
-              int a = Integer.parseInt(rs.getString(1))*10000;
+              int a = (Integer.parseInt(rs.getString(1))-lama)*10000;
               String b= String.valueOf(a);
               jTextFieldfee.setText(b);
           }
@@ -503,12 +547,7 @@ dispose();        // TODO add your handling code here:
       {
           //JOptionPane.showMessageDialog(null,"GAGAL");
       }
-    }//GEN-LAST:event_jComboBoxconditionMouseClicked
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_jTextFieldfeeFocusLost
 
     public void load_search(int cari){
         try
@@ -525,6 +564,7 @@ dispose();        // TODO add your handling code here:
                     jTextFieldcustid.setText(rs.getString(17));
                     jTextFieldcustname.setText(rs.getString(24));
                     jDateChooserbor.setDate(rs.getDate(5));
+                    length=rs.getString(6);
 //                    jDateChooserreturn.setDate(rs.getDate(8));
 //                    jComboBoxcondition.setText(rs.getString(9))
                     
