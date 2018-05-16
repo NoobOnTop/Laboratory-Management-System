@@ -7,6 +7,7 @@ package view;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import model.koneksidb;
+import model.SendEmail;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -421,7 +422,9 @@ dispose();        // TODO add your handling code here:
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        
+        SendEmail kirimemail = new SendEmail(id_item.getText(), id_laboran.getText(), id_customer.getText());
+        kirimemail.loadmember();
+        kirimemail.kirimEmail();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
