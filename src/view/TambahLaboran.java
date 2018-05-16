@@ -5,8 +5,12 @@
  */
 package view;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import model.koneksidb;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 //import static view.TambahMember.convertUtilDateToSqlDate;
 /**
@@ -16,6 +20,8 @@ import javax.swing.JOptionPane;
 public class TambahLaboran extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
+    ArrayList<String> listArrayDataLogin = new ArrayList<String>();
+     boolean found=false;
     /**
      * Creates new form TambahLaboran
      */
@@ -23,6 +29,25 @@ public class TambahLaboran extends javax.swing.JFrame {
         initComponents();
         jButtonupdate.setVisible(false);
         setLocationRelativeTo(null);
+        con=datacon.getConnection();
+        Statement st;
+        ResultSet rs;
+       
+        try{
+            st=con.createStatement();
+            
+            rs=st.executeQuery("SELECT username FROM member");
+            
+            while(rs.next()){
+                listArrayDataLogin.add(rs.getString(1));
+            }
+            rs=st.executeQuery("SELECT username from laboran");
+            while(rs.next()){
+                listArrayDataLogin.add(rs.getString(1));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
     }
     public TambahLaboran(String username){
         initComponents();setLocationRelativeTo(null);
@@ -75,14 +100,15 @@ public class TambahLaboran extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        password = new javax.swing.JTextField();
-        confirm = new javax.swing.JTextField();
         jButtoncreate = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         address = new javax.swing.JTextField();
         date = new com.toedter.calendar.JDateChooser();
         jButtonupdate = new javax.swing.JButton();
+        showpass = new javax.swing.JRadioButton();
+        password = new javax.swing.JPasswordField();
+        confirm = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -163,17 +189,6 @@ public class TambahLaboran extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Confirm Password");
 
-        password.setBackground(new java.awt.Color(242, 241, 239));
-        password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
-            }
-        });
-
-        confirm.setBackground(new java.awt.Color(242, 241, 239));
-        confirm.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jButtoncreate.setText("Create");
         jButtoncreate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,12 +216,19 @@ public class TambahLaboran extends javax.swing.JFrame {
             }
         });
 
+        showpass.setText("show");
+        showpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showpassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jLabel1)
@@ -219,21 +241,6 @@ public class TambahLaboran extends javax.swing.JFrame {
                         .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addComponent(jLabel4)
-                        .addGap(91, 91, 91)
-                        .addComponent(usernames, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel5)
-                        .addGap(94, 94, 94)
-                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
                         .addComponent(jLabel7)
                         .addGap(104, 104, 104)
                         .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -243,7 +250,23 @@ public class TambahLaboran extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonupdate)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancel)))
+                        .addComponent(cancel))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(showpass, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(confirm)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(91, 91, 91)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernames, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                            .addComponent(password))))
                 .addGap(42, 42, 42))
         );
         jPanel2Layout.setVerticalGroup(
@@ -267,17 +290,17 @@ public class TambahLaboran extends javax.swing.JFrame {
                         .addGap(3, 3, 3)
                         .addComponent(jLabel4))
                     .addComponent(usernames, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel5))
+                .addGap(44, 44, 44)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
                     .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(44, 44, 44)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(showpass)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -308,27 +331,27 @@ public class TambahLaboran extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
-
     private void jButtoncreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncreateActionPerformed
         // TODO add your handling code here:
-        try {
-            String sql = "INSERT INTO `laboran` (`id_laboran`, `nama_laboran`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+usernames.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
-            con=datacon.getConnection();
-            java.sql.PreparedStatement pst=con.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        if(!checkusername(usernames.getText()) ){
+             if(confirmpass(confirm.getText(), password.getText())){
+                try {
+                    String sql = "INSERT INTO `laboran` (`id_laboran`, `nama_laboran`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+usernames.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
+                    con=datacon.getConnection();
+                    java.sql.PreparedStatement pst=con.prepareStatement(sql);
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                }
+                dispose();
+                new TambahLaboran().setVisible(true);
+             }
         }
-        dispose();
-        new TambahLaboran().setVisible(true);
     }//GEN-LAST:event_jButtoncreateActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-dispose();        // TODO add your handling code here:
+dispose();
     }//GEN-LAST:event_jLabel10MouseClicked
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
@@ -361,6 +384,38 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
         }
     }//GEN-LAST:event_jButtonupdateActionPerformed
 
+    private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
+        // TODO add your handling code here:
+        if (showpass.isSelected()) {
+            password.setEchoChar((char)0); //password = JPasswordField
+            confirm.setEchoChar((char)0);
+        } else {
+            password.setEchoChar('*');
+            confirm.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showpassActionPerformed
+boolean confirmpass(String confrm,String pass){
+        if(confrm == null ? pass == null : confrm.equals(pass)){
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(this, "confirm password tidak sama");
+            confirm.setText("");
+            return false;
+        }
+    }
+    public boolean checkusername(String user){
+        for(int i=0;i<listArrayDataLogin.size();i++){
+            if(listArrayDataLogin.get(i).equals(usernames.getText())){ 
+                found=true;
+            }
+        }
+       if(found==true){
+              JOptionPane.showMessageDialog(this, "username ini sudah ada!");
+              usernames.setText("");
+              
+         }
+       return found;
+    }
     /**
      * @param args the command line arguments
      */
@@ -400,7 +455,7 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address;
     private javax.swing.JButton cancel;
-    private javax.swing.JTextField confirm;
+    private javax.swing.JPasswordField confirm;
     private com.toedter.calendar.JDateChooser date;
     private datechooser.beans.DateChooserDialog dateChooserDialog1;
     private datechooser.beans.DateChooserDialog dateChooserDialog2;
@@ -419,7 +474,8 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldregister;
     private javax.swing.JTextField nama;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JRadioButton showpass;
     private javax.swing.JTextField usernames;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,9 +5,15 @@
  */
 package view;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
 import model.koneksidb;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import model.ListArray;
+import model.Member;
 /**
  *
  * @author USER
@@ -15,7 +21,8 @@ import java.text.SimpleDateFormat;
 public class TambahMember extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
-    
+    ArrayList<String> listArrayDataLogin = new ArrayList<String>();
+     boolean found=false;
     /**
      * Creates new form TambahMember
      */
@@ -23,6 +30,27 @@ public class TambahMember extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         jButtonupdate.setVisible(false);
+        
+        con=datacon.getConnection();
+        Statement st;
+        ResultSet rs;
+       
+        try{
+            st=con.createStatement();
+            
+            rs=st.executeQuery("SELECT username FROM member");
+            
+            while(rs.next()){
+                listArrayDataLogin.add(rs.getString(1));
+            }
+            rs=st.executeQuery("SELECT username from laboran");
+            while(rs.next()){
+                listArrayDataLogin.add(rs.getString(1));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+       
     }
     public TambahMember(String username){
         initComponents();setLocationRelativeTo(null);
@@ -53,10 +81,11 @@ public class TambahMember extends javax.swing.JFrame {
         jButtoncreate = new javax.swing.JButton();
         jButtoncancel = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        password = new javax.swing.JTextField();
-        confirm = new javax.swing.JTextField();
         jButtonupdate = new javax.swing.JButton();
         date = new com.toedter.calendar.JDateChooser();
+        showpass = new javax.swing.JRadioButton();
+        password = new javax.swing.JPasswordField();
+        confirm = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jTextFieldregisternewmembe = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -116,12 +145,6 @@ public class TambahMember extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel7.setText("Address");
 
-        password.setBackground(new java.awt.Color(242, 241, 239));
-        password.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        confirm.setBackground(new java.awt.Color(242, 241, 239));
-        confirm.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         jButtonupdate.setText("Update");
         jButtonupdate.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -132,6 +155,25 @@ public class TambahMember extends javax.swing.JFrame {
         date.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 datePropertyChange(evt);
+            }
+        });
+
+        showpass.setText("show");
+        showpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showpassActionPerformed(evt);
+            }
+        });
+
+        password.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordActionPerformed(evt);
+            }
+        });
+
+        confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmActionPerformed(evt);
             }
         });
 
@@ -155,17 +197,7 @@ public class TambahMember extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(jLabel4)
                         .addGap(91, 91, 91)
-                        .addComponent(usernametext, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel5)
-                        .addGap(94, 94, 94)
-                        .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(usernametext))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(jLabel7)
@@ -178,7 +210,22 @@ public class TambahMember extends javax.swing.JFrame {
                         .addComponent(jButtonupdate)
                         .addGap(7, 7, 7)
                         .addComponent(jButtoncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGap(48, 48, 48))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(94, 94, 94)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(showpass, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(password, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                    .addComponent(confirm))
+                .addGap(56, 56, 56))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,13 +253,13 @@ public class TambahMember extends javax.swing.JFrame {
                         .addGap(2, 2, 2)
                         .addComponent(jLabel5))
                     .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel6))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
                     .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(showpass)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -302,25 +349,52 @@ public class TambahMember extends javax.swing.JFrame {
     private void jButtoncreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtoncreateActionPerformed
         // TODO add your handling code here:
             
-            
-
-        try {
-           //String sql = "INSERT INTO member VALUES ('','"+nama.getText()+"','"+date.getText()+"','"+username.getText()+"','"+password.getText()+"','"+address.getText()+"')";
-            String sql = "INSERT INTO `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+usernametext.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
-            con=datacon.getConnection();
-            java.sql.PreparedStatement pst=con.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
-        dispose();
-        new TambahMember().setVisible(true);
+         if(!checkusername(usernametext.getText()) && confirmpass(confirm.getText(), password.getText()) ){
+             
+                 try {
+                    String sql = "INSERT INTO `member` (`id_member`, `nama_member`, `tgl_lahir`, `username`, `password`, `address`) VALUES (NULL, '"+nama.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+usernametext.getText()+"', '"+password.getText()+"', '"+address.getText()+"')";
+                    con=datacon.getConnection();
+                    java.sql.PreparedStatement pst=con.prepareStatement(sql);
+                    pst.execute();
+                    JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, e.getMessage());
+                }
+                dispose();
+                new TambahMember().setVisible(true);
+             
+             
+         }else{
+             found=false;
+         }
+        
+       
         
         //System.out.println(nama.getText()+date.getText()+username.getText()+password.getText()+address.getText());
        
     }//GEN-LAST:event_jButtoncreateActionPerformed
-
+boolean confirmpass(String confrm,String pass){
+        if(confrm == null ? pass == null : confrm.equals(pass)){
+            return true;
+        }else{
+            JOptionPane.showMessageDialog(this, "confirm password tidak sama");
+            confirm.setText("");
+            return false;
+        }
+    }
+    public boolean checkusername(String user){
+        for(int i=0;i<listArrayDataLogin.size();i++){
+            if(listArrayDataLogin.get(i).equals(usernametext.getText())){ 
+                found=true;
+            }
+        }
+       if(found==true){
+              JOptionPane.showMessageDialog(this, "username ini sudah ada!");
+              usernametext.setText("");
+              
+        }
+       return found;
+    }
     private void jButtoncancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoncancelMouseClicked
         // TODO add your handling code here:
        
@@ -365,6 +439,26 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
         // TODO add your handling code here:
     }//GEN-LAST:event_namaActionPerformed
 
+    private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmActionPerformed
+
+    private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
+        // TODO add your handling code here:
+        if (showpass.isSelected()) {
+            password.setEchoChar((char)0); //password = JPasswordField
+            confirm.setEchoChar((char)0);
+        } else {
+            password.setEchoChar('*');
+            confirm.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showpassActionPerformed
+
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_passwordActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -403,7 +497,7 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField address;
-    private javax.swing.JTextField confirm;
+    private javax.swing.JPasswordField confirm;
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JButton jButtoncancel;
     private javax.swing.JButton jButtoncreate;
@@ -420,7 +514,8 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldregisternewmembe;
     private javax.swing.JTextField nama;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
+    private javax.swing.JRadioButton showpass;
     private javax.swing.JTextField usernametext;
     // End of variables declaration//GEN-END:variables
 }
