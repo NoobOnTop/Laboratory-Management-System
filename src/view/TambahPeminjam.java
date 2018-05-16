@@ -58,8 +58,6 @@ public class TambahPeminjam extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        status = new javax.swing.JComboBox<>();
         nama_customer = new javax.swing.JTextField();
         date = new com.toedter.calendar.JDateChooser();
 
@@ -189,12 +187,6 @@ public class TambahPeminjam extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Laboran Name");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("Status");
-
-        status.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Borrowed", "Return", " " }));
-
         nama_customer.setEditable(false);
         nama_customer.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -246,11 +238,6 @@ public class TambahPeminjam extends javax.swing.JFrame {
                         .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(length, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel15)
-                        .addGap(121, 121, 121)
-                        .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(203, 203, 203)
                         .addComponent(jButton1)
@@ -306,13 +293,7 @@ public class TambahPeminjam extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(length, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel15))
-                    .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
+                .addGap(107, 107, 107)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -411,13 +392,17 @@ dispose();        // TODO add your handling code here:
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String statusku = status.getSelectedItem().toString();
+//        String statusku = status.getSelectedItem().toString();
         String lama = length.getSelectedItem().toString();
         int lamawaktu = Integer.parseInt(lama);
         try {
-            String sql = "INSERT INTO `peminjaman` (`id_peminjaman`, `id_barang`, `id_laboran`, `id_member`, `tgl_peminjaman`, `lama_peminjaman`,`status_peminjaman`) VALUES (NULL, '"+id_item.getText()+"', '"+id_laboran.getText()+"', '"+id_customer.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+lamawaktu+"', '"+statusku+"')";
+            String sql = "INSERT INTO `peminjaman` (`id_peminjaman`, `id_barang`, `id_laboran`, `id_member`, `tgl_peminjaman`, `lama_peminjaman`) VALUES (NULL, '"+id_item.getText()+"', '"+id_laboran.getText()+"', '"+id_customer.getText()+"', '"+convertUtilDateToSqlDate(date.getDate())+"', '"+lamawaktu+"')";
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();
+            String sql1="update barang set status_peminjaman = 'Borrowed' where id_barang="+id_item.getText();
+            java.sql.PreparedStatement psts=con.prepareStatement(sql1);
+            psts.execute();
+
             JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -479,7 +464,6 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -494,6 +478,5 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JComboBox<String> length;
     private javax.swing.JTextField nama_customer;
     private javax.swing.JTextField nama_laboran;
-    private javax.swing.JComboBox<String> status;
     // End of variables declaration//GEN-END:variables
 }

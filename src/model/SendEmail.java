@@ -23,6 +23,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMultipart;
 
 import java.sql.SQLException;
+import javax.mail.BodyPart;
 
 
 /**
@@ -159,10 +160,31 @@ public class SendEmail {
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(email));
 			message.setSubject("Invoice Peminjaman "+id_peminjaman);
-			message.setText("Dear ,"+nama_member
+//			message.setText("Dear ,"+nama_member
+//				+ "\n\n Terima Kasih atas kepercayaan Anda telah menggunakan fasilitas Pinjam Lab ITERA. !"
+//                                        + "\n\n Berikut merupakan informasi Peminjaman yang telah Anda lakukan:"+
+//                                "\n ID Barang : "+id_barang+
+//                                "\n Nama Barang :"+nama_barang+
+//                                "\n ID Laboran : "+id_laboran+
+//                                "\n Nama Laboran :"+nama_laboran+
+//                                "\n Tanggal Peminjaman :"+tgl_peminjaman+
+//                                "\n Lama Peminjaman :"+lama_peminjaman+
+//                                "\n\n Kami menyarankan Anda untuk menyimpan email "
+//                                        + "ini sebagai referensi dari peminjaman "
+//                                        + "Anda. Semoga informasi ini bermanfaat bagi Anda."+
+//                                "\n\n Hormat Kami"
+//                                        + "\n"+nama_laboran);
+//          
+            createpdf cret=new createpdf(id_peminjaman,nama_member,id_barang,nama_barang,id_laboran,nama_laboran,lama_peminjaman,
+                    tgl_peminjaman);
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(" Dear ,"+nama_member
 				+ "\n\n Terima Kasih atas kepercayaan Anda telah menggunakan fasilitas Pinjam Lab ITERA. !"
-                                        + "\n\n Berikut merupakan informasi Peminjaman yang telah Anda lakukan:"+
-                                "\n ID Barang : "+id_barang+
+                                        + "\n\n Peminjaman barang anda telah berhasil dikonfirmasi"
+                                        + "\n Tanda Terima Peminjaman dilampirkan di bawah ini"
+                                        + "\n ================================================"
+                                        + "\n Detail Peminjaman :"+
+                                "\n\n ID Barang : "+id_barang+
                                 "\n Nama Barang :"+nama_barang+
                                 "\n ID Laboran : "+id_laboran+
                                 "\n Nama Laboran :"+nama_laboran+
@@ -172,30 +194,31 @@ public class SendEmail {
                                         + "ini sebagai referensi dari peminjaman "
                                         + "Anda. Semoga informasi ini bermanfaat bagi Anda."+
                                 "\n\n Hormat Kami"
-                                        + "\n"+nama_laboran);
-//          
-            createpdf cret=new createpdf(id_peminjaman,nama_member,id_barang,nama_barang,id_laboran,nama_laboran,lama_peminjaman,
-                    tgl_peminjaman);
-            
-            MimeBodyPart messageBodyPart2 = new MimeBodyPart();      
+                                        + "\n "+nama_laboran+"\n Laboran ITERA");
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            //multipart.addBodyPart(messageBodyPart);
+            messageBodyPart = new MimeBodyPart();
+            //MimeBodyPart messageBodyPart2 = new MimeBodyPart();      
             String filename = cret.namafile();//change accordingly     
             String sumber = "D:\\GitHub\\Laboratory-Management-System\\src\\invoice\\"+filename;
             DataSource source = new FileDataSource(sumber);    
-            messageBodyPart2.setDataHandler(new DataHandler(source));    
-            messageBodyPart2.setFileName(filename);             
+            messageBodyPart.setDataHandler(new DataHandler(source));    
+            messageBodyPart.setFileName(filename);        
+            multipart.addBodyPart(messageBodyPart);
 
             //Create Multipart object and add MimeBodyPart objects to this object        
-            Multipart multipart = new MimeMultipart();    
+                
 //            multipart.addBodyPart(messageBodyPart1);     
-            multipart.addBodyPart(messageBodyPart2);      
+                  
 
             //Set the multiplart object to the message object    
             message.setContent(multipart );        
 
 //
-			Transport.send(message);
+            Transport.send(message);
 
-			System.out.println("Done");
+            System.out.println("Done");
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);

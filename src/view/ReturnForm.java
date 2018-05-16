@@ -45,10 +45,8 @@ public class ReturnForm extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBoxstatus = new javax.swing.JComboBox<>();
         jTextFieldcari = new javax.swing.JTextField();
         jComboBoxcondition = new javax.swing.JComboBox<>();
         jTextFieldfee = new javax.swing.JTextField();
@@ -129,17 +127,11 @@ public class ReturnForm extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel13.setText("Fee");
 
-        jLabel15.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel15.setText("Status");
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Item ID");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Cust ID");
-
-        jComboBoxstatus.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jComboBoxstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Borrowed", "Returned", "" }));
 
         jTextFieldcari.setBackground(new java.awt.Color(228, 241, 254));
         jTextFieldcari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -315,11 +307,6 @@ public class ReturnForm extends javax.swing.JFrame {
                 .addGap(121, 121, 121)
                 .addComponent(jTextFieldfee, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel15)
-                .addGap(103, 103, 103)
-                .addComponent(jComboBoxstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(183, 183, 183)
                 .addComponent(jButtonupdate)
                 .addGap(18, 18, 18)
@@ -417,13 +404,7 @@ public class ReturnForm extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
                             .addComponent(jTextFieldfee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel15))
-                            .addComponent(jComboBoxstatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
+                        .addGap(56, 56, 56)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonupdate)
                             .addComponent(jButton2)))
@@ -466,11 +447,14 @@ dispose();        // TODO add your handling code here:
     private void jButtonupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonupdateActionPerformed
         // TODO add your handling code here:
         String condition = jComboBoxcondition.getSelectedItem().toString();
-        String statusku = jComboBoxstatus.getSelectedItem().toString();
+       // String statusku = jComboBoxstatus.getSelectedItem().toString();
         try {
-            String sql = "UPDATE `peminjaman` SET `status_peminjaman` = '"+statusku+"', `tgl_pengembalian` = '"+convertUtilDateToSqlDate(jDateChooserreturn.getDate())+"', `fee` = '"+jTextFieldfee.getText()+"',`kondisi` = '"+condition+"' WHERE `peminjaman`.`id_peminjaman` = "+jTextFieldcari.getText()+"";
+            String sql = "UPDATE `peminjaman` SET `tgl_pengembalian` = '"+convertUtilDateToSqlDate(jDateChooserreturn.getDate())+"', `fee` = '"+jTextFieldfee.getText()+"' WHERE `peminjaman`.`id_peminjaman` = "+jTextFieldcari.getText();
             java.sql.PreparedStatement pst=con.prepareStatement(sql);
             pst.execute();
+            String sql1 = "UPDATE `barang` SET `status_peminjaman` = `Ready`, `kondisi` = '"+condition+"' WHERE `barang`.`id_barang` = "+jTextFielditemid.getText();            
+            java.sql.PreparedStatement pst1=con.prepareStatement(sql1);
+            pst1.execute();
             JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -558,15 +542,15 @@ dispose();        // TODO add your handling code here:
                 java.sql.ResultSet rs=stm.executeQuery(sql);
                 while(rs.next()){
                     jTextFielditemid.setText(rs.getString(2));
-                    jTextFielditemname.setText(rs.getString(12));
+                    jTextFielditemname.setText(rs.getString(10));
                     jTextFieldlaboranid.setText(rs.getString(3));
                     jTextFieldlaboranname.setText(rs.getString(18));
-                    jTextFieldcustid.setText(rs.getString(17));
+                    jTextFieldcustid.setText(rs.getString(23));
                     jTextFieldcustname.setText(rs.getString(24));
                     jDateChooserbor.setDate(rs.getDate(5));
                     length=rs.getString(6);
-//                    jDateChooserreturn.setDate(rs.getDate(8));
-//                    jComboBoxcondition.setText(rs.getString(9))
+//                  jDateChooserreturn.setDate(rs.getDate(8));
+//                  jComboBoxcondition.setText(rs.getString(9))
                     
                 }
             }catch(Exception e)
@@ -615,7 +599,6 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JButton jButtoncari;
     private javax.swing.JButton jButtonupdate;
     private javax.swing.JComboBox<String> jComboBoxcondition;
-    private javax.swing.JComboBox<String> jComboBoxstatus;
     private com.toedter.calendar.JDateChooser jDateChooserbor;
     private com.toedter.calendar.JDateChooser jDateChooserreturn;
     private javax.swing.JLabel jLabel1;
@@ -624,7 +607,6 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
