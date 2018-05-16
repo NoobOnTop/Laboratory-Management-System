@@ -34,7 +34,12 @@ public class SendEmail {
         this.id_member=id_member;
     }
     
-    public void loadmember(){
+    public SendEmail(String id_member){
+        this.id_member=id_member;
+    }
+    
+    
+    public void loadDataPeminjaman(){
         try {
             //int no=1;
             String sql = "SELECT * "
@@ -63,7 +68,7 @@ public class SendEmail {
         }
     }
     
-    public void kirimEmail(){
+    public void kirimEmailPeminjaman(){
                 final String username = "laboranitera@gmail.com";
 		final String password = "laboranitera123";
                 
@@ -88,13 +93,19 @@ public class SendEmail {
 				InternetAddress.parse(email));
 			message.setSubject("Invoice Peminjaman "+id_peminjaman);
 			message.setText("Dear ,"+nama_member
-				+ "\n\n Dibawah Ini adalah detail peminjaman anda!"+
+				+ "\n\n Terima Kasih atas kepercayaan Anda telah menggunakan fasilitas Pinjam Lab ITERA. !"
+                                        + "\n\n Berikut merupakan informasi Peminjaman yang telah Anda lakukan:"+
                                 "\n ID Barang : "+id_barang+
                                 "\n Nama Barang :"+nama_barang+
                                 "\n ID Laboran : "+id_laboran+
                                 "\n Nama Laboran :"+nama_laboran+
                                 "\n Tanggal Peminjaman :"+tgl_peminjaman+
-                                "\n Lama Peminjaman :"+lama_peminjaman);
+                                "\n Lama Peminjaman :"+lama_peminjaman+
+                                "\n\n Kami menyarankan Anda untuk menyimpan email "
+                                        + "ini sebagai referensi dari peminjaman "
+                                        + "Anda. Semoga informasi ini bermanfaat bagi Anda."+
+                                "\n\n Hormat Kami"
+                                        + "\n"+nama_laboran);
 
 			Transport.send(message);
 

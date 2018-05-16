@@ -423,8 +423,8 @@ dispose();        // TODO add your handling code here:
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
         SendEmail kirimemail = new SendEmail(id_item.getText(), id_laboran.getText(), id_customer.getText());
-        kirimemail.loadmember();
-        kirimemail.kirimEmail();
+        kirimemail.loadDataPeminjaman();
+        kirimemail.kirimEmailPeminjaman();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
