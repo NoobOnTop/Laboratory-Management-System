@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view;
+import java.awt.event.KeyEvent;
 import model.koneksidb;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,10 +26,14 @@ public class DetailStok extends javax.swing.JFrame {
     /**
      * Creates new form DetailStok
      */
-    public DetailStok() {
+    public DetailStok(char user) {
         initComponents();
         setLocationRelativeTo(null);
         load_table();
+        if(user=='m'){
+            buttondelete.setVisible(false);
+            jButtonedit.setVisible(false);
+        }
     }
 
     /**
@@ -98,6 +103,12 @@ public class DetailStok extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 110, 123));
 
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
+
         jTable.setBorder(javax.swing.BorderFactory.createCompoundBorder(null, javax.swing.BorderFactory.createEtchedBorder()));
         jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,12 +149,12 @@ public class DetailStok extends javax.swing.JFrame {
         });
         jTable.getTableHeader().setReorderingAllowed(false);
         jTable.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jTableAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
         jScrollPane1.setViewportView(jTable);
@@ -352,17 +363,38 @@ load_table();        // TODO add your handling code here:
 
     private void jButtonsearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonsearchMouseClicked
         // TODO add your handling code here:
-        String cari=jTextField1.getText();
-        int car=Integer.parseInt(cari);
-        ListArray listArray=new ListArray();
-        ArrayList<Barang> list = new ArrayList<>();
-        list=listArray.getListDataBarang();
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).getId()==car){
-                load_search(car);
+        try{
+            if(jTextField1.getText()!=null){
+            String cari=jTextField1.getText();
+            int car=Integer.parseInt(cari);
+            boolean found=false;
+            ListArray listArray=new ListArray();
+            ArrayList<Barang> list = new ArrayList<>();
+            list=listArray.getListDataBarang();
+        
+                for(int i=0;i<list.size();i++){
+                    if(list.get(i).getId()==car){
+                    load_search(car);
+                    found=true;
+                    }
+                }
+                if(found==false){
+                    JOptionPane.showMessageDialog(null, "data tidak ditemukan");
+                }
             }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ketik id yang ingin di cari");
         }
     }//GEN-LAST:event_jButtonsearchMouseClicked
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
     void load_search(int id){
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
@@ -438,37 +470,7 @@ load_table();        // TODO add your handling code here:
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DetailStok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DetailStok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DetailStok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DetailStok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DetailStok().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttondelete;

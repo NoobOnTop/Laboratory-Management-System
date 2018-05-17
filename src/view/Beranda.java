@@ -485,8 +485,8 @@ public class Beranda extends javax.swing.JFrame {
 
     private void labeldetailstockMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labeldetailstockMouseClicked
         // TODO add your handling code here:
-        DetailStok bor= new DetailStok();
         
+        DetailStok bor= new DetailStok(this.siapa);
         bor.setVisible(true);
     }//GEN-LAST:event_labeldetailstockMouseClicked
 
