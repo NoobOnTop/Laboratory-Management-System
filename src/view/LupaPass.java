@@ -196,7 +196,7 @@ public class LupaPass extends javax.swing.JFrame {
         try{
             st=con.createStatement();
             
-            rs=st.executeQuery("SELECT username FROM member");
+            rs=st.executeQuery("SELECT email FROM member");
             
             while(rs.next()){
                 listArrayDataEmail.add(rs.getString(7));
