@@ -71,6 +71,11 @@ public class LupaPass extends javax.swing.JFrame {
                 sendMouseClicked(evt);
             }
         });
+        send.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sendKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,6 +220,41 @@ public class LupaPass extends javax.swing.JFrame {
             email.setText("");
         }
     }//GEN-LAST:event_sendMouseClicked
+
+    private void sendKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sendKeyPressed
+        // TODO add your handling code here:
+         con=datacon.getConnection();
+        Statement st;
+        ResultSet rs;
+        
+        try{
+            st=con.createStatement();
+            
+            rs=st.executeQuery("SELECT email FROM member");
+            
+            while(rs.next()){
+                listArrayDataEmail.add(rs.getString(1));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        for(int i=0;i<listArrayDataEmail.size();i++){
+//            System.out.println(listArrayDataEmail.get(i));
+            if(listArrayDataEmail.get(i) == null ? email.getText() == null : listArrayDataEmail.get(i).equals(email.getText())){
+                found=true;
+                
+            }
+        }
+        if(found==true){
+            JOptionPane.showMessageDialog(this, "Berhasil! Silahkan cek email anda");
+            found=false;
+            dispose();
+            new LupaPass().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Gagal! Email yang anda masukkan tidak sesuai dimanapun");
+            email.setText("");
+        }
+    }//GEN-LAST:event_sendKeyPressed
 
     /**
      * @param args the command line arguments
