@@ -5,20 +5,28 @@
  */
 package view;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import model.koneksidb;
+
 /**
  *
  * @author USER
  */
 public class LupaPass extends javax.swing.JFrame {
 
-    /**
-     * Creates new form LupaPass
-     */
+   
+    koneksidb datacon = new koneksidb();
+    private Connection con;
+    ArrayList<String> listArrayDataEmail = new ArrayList<String>();
     public LupaPass() {
         initComponents();
         setLocationRelativeTo(null);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,7 +40,7 @@ public class LupaPass extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
         jButtonOK = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -53,10 +61,15 @@ public class LupaPass extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Email");
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        email.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jButtonOK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonOK.setText("Send");
+        jButtonOK.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonOKMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -71,7 +84,7 @@ public class LupaPass extends javax.swing.JFrame {
                         .addGap(92, 92, 92)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(152, 152, 152)
                         .addComponent(jButtonOK)))
@@ -90,7 +103,7 @@ public class LupaPass extends javax.swing.JFrame {
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jButtonOK))
         );
@@ -174,6 +187,39 @@ public class LupaPass extends javax.swing.JFrame {
         msk.setVisible(true);
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void jButtonOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOKMouseClicked
+        // TODO add your handling code here:
+         con=datacon.getConnection();
+        Statement st;
+        ResultSet rs;
+        boolean found=false;
+        try{
+            st=con.createStatement();
+            
+            rs=st.executeQuery("SELECT username FROM member");
+            
+            while(rs.next()){
+                listArrayDataEmail.add(rs.getString(7));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        for(int i=0;i<listArrayDataEmail.size();i++){
+            if(listArrayDataEmail.get(i)==email.getText()){
+                found=true;
+                break;
+            }
+        }
+        if(found==true){
+            JOptionPane.showMessageDialog(this, "Berhasil! Silahkan cek email anda");
+            dispose();
+            new LupaPass().setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "Gagal! Email yang anda masukkan tidak sesuai dimanapun");
+            email.setText("");
+        }
+    }//GEN-LAST:event_jButtonOKMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -210,6 +256,7 @@ public class LupaPass extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField email;
     private javax.swing.JButton jButtonOK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -221,6 +268,5 @@ public class LupaPass extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
