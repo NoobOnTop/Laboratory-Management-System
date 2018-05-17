@@ -16,6 +16,7 @@ public class LupaPass extends javax.swing.JFrame {
      */
     public LupaPass() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -56,21 +57,6 @@ public class LupaPass extends javax.swing.JFrame {
 
         jButtonOK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonOK.setText("Send");
-        jButtonOK.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonOKMouseClicked(evt);
-            }
-        });
-        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonOKActionPerformed(evt);
-            }
-        });
-        jButtonOK.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButtonOKKeyPressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -130,6 +116,11 @@ public class LupaPass extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Login");
         jLabel6.setToolTipText("");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/atomic (1).png"))); // NOI18N
 
@@ -172,63 +163,16 @@ public class LupaPass extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOKMouseClicked
-        username=jTextFieldUsername.getText();
-        password=jPasswordField.getText();
-        CheckLogin check = new CheckLogin(username, password);
-        if(check.checkLoginMember()){
-            JOptionPane.showMessageDialog(this, "Berhasil!");
-            Beranda beranda=new Beranda('m',username);
-            beranda.setVisible(true);
-            beranda.setLocationRelativeTo(null);
-            dispose();
-
-        }else{
-            if(check.checkLoginLaboran()){
-                JOptionPane.showMessageDialog(this, "Login laboran!");
-                dispose();
-                Beranda beranda=new Beranda('l',username);
-                beranda.setVisible(true);
-                beranda.setLocationRelativeTo(null);
-            }else{
-                JOptionPane.showMessageDialog(this, "Failed!");
-            }
-        }
-    }//GEN-LAST:event_jButtonOKMouseClicked
-
-    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonOKActionPerformed
-
-    private void jButtonOKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonOKKeyPressed
-        // TODO add your handling code here:
-        username=jTextFieldUsername.getText();
-        password=jPasswordField.getText();
-        CheckLogin check = new CheckLogin(username, password);
-        if(check.checkLoginMember()){
-            JOptionPane.showMessageDialog(this, "Berhasil!");
-            Beranda beranda=new Beranda('m',username);
-            beranda.setVisible(true);
-            beranda.setLocationRelativeTo(null);
-            dispose();
-
-        }else{
-            if(check.checkLoginLaboran()){
-                JOptionPane.showMessageDialog(this, "Login laboran!");
-                dispose();
-                Beranda beranda=new Beranda('l',username);
-                beranda.setVisible(true);
-                beranda.setLocationRelativeTo(null);
-            }else{
-                JOptionPane.showMessageDialog(this, "Failed!");
-            }
-        }
-
-    }//GEN-LAST:event_jButtonOKKeyPressed
-
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        dispose();
+        Masuk msk=new Masuk();
+        msk.setVisible(true);
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments
