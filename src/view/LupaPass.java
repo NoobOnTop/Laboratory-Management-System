@@ -72,6 +72,11 @@ public class LupaPass extends javax.swing.JFrame {
                 sendMouseClicked(evt);
             }
         });
+        send.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                sendKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -220,6 +225,10 @@ public class LupaPass extends javax.swing.JFrame {
             email.setText("");
         }
     }//GEN-LAST:event_sendMouseClicked
+
+    private void sendKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sendKeyPressed
+        
+    }//GEN-LAST:event_sendKeyPressed
 
     /**
      * @param args the command line arguments
