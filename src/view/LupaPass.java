@@ -23,9 +23,11 @@ public class LupaPass extends javax.swing.JFrame {
     koneksidb datacon = new koneksidb();
     private Connection con;
     ArrayList<String> listArrayDataEmail = new ArrayList<String>();
+    boolean found=false;
     public LupaPass() {
         initComponents();
         setLocationRelativeTo(null);
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -41,13 +43,12 @@ public class LupaPass extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
-        jButtonOK = new javax.swing.JButton();
+        send = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -63,11 +64,11 @@ public class LupaPass extends javax.swing.JFrame {
 
         email.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jButtonOK.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButtonOK.setText("Send");
-        jButtonOK.addMouseListener(new java.awt.event.MouseAdapter() {
+        send.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        send.setText("Send");
+        send.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButtonOKMouseClicked(evt);
+                sendMouseClicked(evt);
             }
         });
 
@@ -87,7 +88,7 @@ public class LupaPass extends javax.swing.JFrame {
                         .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(152, 152, 152)
-                        .addComponent(jButtonOK)))
+                        .addComponent(send)))
                 .addGap(74, 74, 74))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel3)
@@ -105,18 +106,20 @@ public class LupaPass extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addComponent(jButtonOK))
+                .addComponent(send))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 88, 464, 300));
 
         jPanel2.setBackground(new java.awt.Color(228, 241, 254));
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/atomic (1).png"))); // NOI18N
+        jLabel2.setMaximumSize(new java.awt.Dimension(10, 10));
+        jLabel2.setPreferredSize(new java.awt.Dimension(105, 44));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(37, 116, 169));
         jLabel1.setText("LabMS");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Laboratory-Management-System/src/icon/atomic (1).png"))); // NOI18N
 
         jTextField1.setBackground(new java.awt.Color(37, 116, 169));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -135,40 +138,31 @@ public class LupaPass extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/atomic (1).png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(194, 194, 194)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(3, 3, 3))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
-                .addGap(28, 28, 28))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField1)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 90));
@@ -187,38 +181,40 @@ public class LupaPass extends javax.swing.JFrame {
         msk.setVisible(true);
     }//GEN-LAST:event_jLabel6MouseClicked
 
-    private void jButtonOKMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonOKMouseClicked
+    private void sendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMouseClicked
         // TODO add your handling code here:
-         con=datacon.getConnection();
+        con=datacon.getConnection();
         Statement st;
         ResultSet rs;
-        boolean found=false;
+        
         try{
             st=con.createStatement();
             
             rs=st.executeQuery("SELECT email FROM member");
             
             while(rs.next()){
-                listArrayDataEmail.add(rs.getString(7));
+                listArrayDataEmail.add(rs.getString(1));
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
         for(int i=0;i<listArrayDataEmail.size();i++){
-            if(listArrayDataEmail.get(i)==email.getText()){
+//            System.out.println(listArrayDataEmail.get(i));
+            if(listArrayDataEmail.get(i) == null ? email.getText() == null : listArrayDataEmail.get(i).equals(email.getText())){
                 found=true;
-                break;
+                
             }
         }
         if(found==true){
             JOptionPane.showMessageDialog(this, "Berhasil! Silahkan cek email anda");
+            found=false;
             dispose();
             new LupaPass().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Gagal! Email yang anda masukkan tidak sesuai dimanapun");
             email.setText("");
         }
-    }//GEN-LAST:event_jButtonOKMouseClicked
+    }//GEN-LAST:event_sendMouseClicked
 
     /**
      * @param args the command line arguments
@@ -257,16 +253,15 @@ public class LupaPass extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField email;
-    private javax.swing.JButton jButtonOK;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton send;
     // End of variables declaration//GEN-END:variables
 }
