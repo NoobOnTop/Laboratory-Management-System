@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.koneksidb;
+import model.SendEmail;
 
 /**
  *
@@ -208,8 +209,12 @@ public class LupaPass extends javax.swing.JFrame {
         if(found==true){
             JOptionPane.showMessageDialog(this, "Berhasil! Silahkan cek email anda");
             found=false;
+            SendEmail kirimemail = new SendEmail(email.getText());
+            kirimemail.loadDataMember();
             dispose();
-            new LupaPass().setVisible(true);
+            kirimemail.kirimEmailMember();
+            
+            //new LupaPass().setVisible(true);
         }else{
             JOptionPane.showMessageDialog(this, "Gagal! Email yang anda masukkan tidak sesuai dimanapun");
             email.setText("");

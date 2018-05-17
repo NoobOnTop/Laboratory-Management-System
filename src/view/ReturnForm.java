@@ -452,6 +452,7 @@ dispose();        // TODO add your handling code here:
             java.sql.PreparedStatement pst1=con.prepareStatement(sql1);
             pst1.execute();
             JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+            dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

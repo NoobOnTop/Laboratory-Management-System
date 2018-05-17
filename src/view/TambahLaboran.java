@@ -362,6 +362,7 @@ dispose();
         }else if(jTextFieldregister.getText()=="Account Detail"){
             isiform(usernames.getText());
         }
+        dispose();
     }//GEN-LAST:event_cancelActionPerformed
 public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
     if(date != null) {

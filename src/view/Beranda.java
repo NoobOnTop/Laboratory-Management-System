@@ -204,7 +204,6 @@ public class Beranda extends javax.swing.JFrame {
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/stockd.png"))); // NOI18N
 
-        jButtonstock.setBackground(new java.awt.Color(255, 255, 255));
         jButtonstock.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonstock.setText("Stock");
         jButtonstock.addMouseListener(new java.awt.event.MouseAdapter() {

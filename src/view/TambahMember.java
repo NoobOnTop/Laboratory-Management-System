@@ -87,8 +87,7 @@ public class TambahMember extends javax.swing.JFrame {
         confirm = new javax.swing.JPasswordField();
         email = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        showpass = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jTextFieldregisternewmembe = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -187,11 +186,12 @@ public class TambahMember extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Email Address");
 
-        jLabel9.setForeground(new java.awt.Color(37, 116, 169));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/blind.png"))); // NOI18N
-
-        jLabel10.setForeground(new java.awt.Color(37, 116, 169));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/blind.png"))); // NOI18N
+        showpass.setText("show");
+        showpass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                showpassActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -228,15 +228,14 @@ public class TambahMember extends javax.swing.JFrame {
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(password)
                                             .addComponent(confirm))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                        .addGap(28, 28, 28))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(address, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
-                                            .addComponent(email)
-                                            .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(address, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                                                .addComponent(email)
+                                                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(showpass, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(0, 0, Short.MAX_VALUE)))))))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
@@ -256,14 +255,14 @@ public class TambahMember extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(showpass)
+                .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -427,8 +426,9 @@ boolean confirmpass(String confrm,String pass){
             new TambahMember().setVisible(true);
         }else if(jTextFieldregisternewmembe.getText()=="Account Detail"){
             isiform(usernametext.getText());
+            dispose();
         }
-        
+        dispose();
     }//GEN-LAST:event_jButtoncancelMouseClicked
 
     private void jLabelbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelbackMouseClicked
@@ -475,6 +475,17 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
     private void usernametextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernametextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_usernametextActionPerformed
+
+    private void showpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showpassActionPerformed
+        // TODO add your handling code here:
+        if (showpass.isSelected()) {
+            password.setEchoChar((char)0); //password = JPasswordField
+            confirm.setEchoChar((char)0);
+        } else {
+            password.setEchoChar('*');
+            confirm.setEchoChar('*');
+        }
+    }//GEN-LAST:event_showpassActionPerformed
     
     /**
      * @param args the command line arguments
@@ -521,7 +532,6 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
     private javax.swing.JButton jButtoncreate;
     private javax.swing.JButton jButtonupdate;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -529,13 +539,13 @@ public static java.sql.Date convertUtilDateToSqlDate(java.util.Date date){
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelback;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldregisternewmembe;
     private javax.swing.JTextField nama;
     private javax.swing.JPasswordField password;
+    private javax.swing.JRadioButton showpass;
     private javax.swing.JTextField usernametext;
     // End of variables declaration//GEN-END:variables
 }

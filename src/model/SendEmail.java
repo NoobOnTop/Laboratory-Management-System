@@ -43,7 +43,7 @@ public class SendEmail {
         this.id_member=id_member;
     }
     
-    public SendEmail(String id_member){
+    public SendEmail(String email){
         this.email=email;
     }
     

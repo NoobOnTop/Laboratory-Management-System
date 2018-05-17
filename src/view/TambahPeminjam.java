@@ -425,6 +425,7 @@ dispose();        // TODO add your handling code here:
                 psts.execute();
 
                 JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
+                dispose();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
