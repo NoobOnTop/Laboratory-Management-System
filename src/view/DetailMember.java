@@ -287,15 +287,26 @@ dispose();        // TODO add your handling code here:
 
     private void jButtoncariMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtoncariMouseClicked
         // TODO add your handling code here:
-        String cari=jTextField1.getText();
-        int car=Integer.parseInt(cari);
-        ListArray listArray=new ListArray();
-        ArrayList<Member> list = new ArrayList<>();
-        list=listArray.getListDataMembers();
-        for(int i=0;i<list.size();i++){
-            if(list.get(i).getId()==car){
-                load_search(car);
+        try{
+            if(jTextField1.getText()!=null){
+                String cari=jTextField1.getText();
+                int car=Integer.parseInt(cari);
+                boolean found=false;
+                ListArray listArray=new ListArray();
+                ArrayList<Member> list = new ArrayList<>();
+                list=listArray.getListDataMembers();
+                for(int i=0;i<list.size();i++){
+                    if(list.get(i).getId()==car){
+                        load_search(car);
+                        found=true;
+                    }
+                }
+                if(found==false){
+                    JOptionPane.showMessageDialog(null, "data tidak ditemukan");
+                }
             }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ketik id yang ingin di cari");
         }
     }//GEN-LAST:event_jButtoncariMouseClicked
 
