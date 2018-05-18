@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.util.ArrayList;
 import model.ListArray;
@@ -134,6 +135,11 @@ public class ReturnForm extends javax.swing.JFrame {
 
         jTextFieldcari.setBackground(new java.awt.Color(228, 241, 254));
         jTextFieldcari.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldcari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldcariKeyTyped(evt);
+            }
+        });
 
         jComboBoxcondition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Good", "Broken", " " }));
         jComboBoxcondition.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,6 +156,7 @@ public class ReturnForm extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldfee.setEditable(false);
         jTextFieldfee.setBackground(new java.awt.Color(228, 241, 254));
         jTextFieldfee.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -223,18 +230,33 @@ public class ReturnForm extends javax.swing.JFrame {
                 jTextFielditemidActionPerformed(evt);
             }
         });
+        jTextFielditemid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFielditemidKeyTyped(evt);
+            }
+        });
 
         jTextFielditemname.setEditable(false);
         jTextFielditemname.setBackground(new java.awt.Color(228, 241, 254));
 
         jTextFieldlaboranid.setEditable(false);
         jTextFieldlaboranid.setBackground(new java.awt.Color(228, 241, 254));
+        jTextFieldlaboranid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldlaboranidKeyTyped(evt);
+            }
+        });
 
         jTextFieldlaboranname.setEditable(false);
         jTextFieldlaboranname.setBackground(new java.awt.Color(228, 241, 254));
 
         jTextFieldcustid.setEditable(false);
         jTextFieldcustid.setBackground(new java.awt.Color(228, 241, 254));
+        jTextFieldcustid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldcustidKeyTyped(evt);
+            }
+        });
 
         jTextFieldcustname.setEditable(false);
         jTextFieldcustname.setBackground(new java.awt.Color(228, 241, 254));
@@ -318,7 +340,7 @@ public class ReturnForm extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addComponent(jLabel14)
                         .addGap(86, 86, 86)
-                        .addComponent(jComboBoxcondition, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxcondition, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(183, 183, 183)
                         .addComponent(jButtonupdate)
@@ -534,6 +556,42 @@ dispose();        // TODO add your handling code here:
           //JOptionPane.showMessageDialog(null,"GAGAL");
       }
     }//GEN-LAST:event_jTextFieldfeeFocusLost
+
+    private void jTextFieldcariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldcariKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldcariKeyTyped
+
+    private void jTextFielditemidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFielditemidKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFielditemidKeyTyped
+
+    private void jTextFieldlaboranidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldlaboranidKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldlaboranidKeyTyped
+
+    private void jTextFieldcustidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldcustidKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextFieldcustidKeyTyped
 
     public void load_search(int cari){
         try

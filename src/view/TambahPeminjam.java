@@ -140,6 +140,9 @@ public class TambahPeminjam extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 id_itemKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                id_itemKeyTyped(evt);
+            }
         });
 
         jTextField2.setEditable(false);
@@ -159,6 +162,9 @@ public class TambahPeminjam extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 id_customerKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                id_customerKeyTyped(evt);
+            }
         });
 
         length.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7" }));
@@ -170,6 +176,9 @@ public class TambahPeminjam extends javax.swing.JFrame {
         id_laboran.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 id_laboranKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                id_laboranKeyTyped(evt);
             }
         });
 
@@ -443,6 +452,33 @@ dispose();        // TODO add your handling code here:
         // TODO add your handling code here:
         dispose();  
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void id_itemKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_itemKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_id_itemKeyTyped
+
+    private void id_laboranKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_laboranKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_id_laboranKeyTyped
+
+    private void id_customerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_customerKeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_id_customerKeyTyped
 
     
     /**

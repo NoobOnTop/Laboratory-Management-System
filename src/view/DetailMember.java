@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view;
+import java.awt.event.KeyEvent;
 import model.koneksidb;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -93,6 +94,12 @@ public class DetailMember extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(51, 110, 123));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField1KeyTyped(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -291,6 +298,15 @@ dispose();        // TODO add your handling code here:
             }
         }
     }//GEN-LAST:event_jButtoncariMouseClicked
+
+    private void jTextField1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyTyped
+        // TODO add your handling code here:
+        char karakter = evt.getKeyChar();
+        if(!(((karakter >= '0') && (karakter <= '9') || (karakter == KeyEvent.VK_BACK_SPACE) || (karakter == KeyEvent.VK_DELETE)))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField1KeyTyped
     void load_search(int id){
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("ID");
