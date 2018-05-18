@@ -520,7 +520,12 @@ dispose();        // TODO add your handling code here:
           java.sql.Statement stm=con.createStatement();
           java.sql.ResultSet rs=stm.executeQuery(sql);
           while(rs.next()){
-              int a = (Integer.parseInt(rs.getString(1))-lama)*10000;
+              int a = (Integer.parseInt(rs.getString(1))-lama);
+              if (a>=0){
+                     a=a*10000;
+                  } else {
+                      a=0;
+                  }
               String b= String.valueOf(a);
               jTextFieldfee.setText(b);
           }
