@@ -408,10 +408,12 @@ dispose();        // TODO add your handling code here:
         ResultSet rs;
         try{
             st=con.createStatement();
-            rs=st.executeQuery("SELECT id_barang FROM peminjaman");
+            rs=st.executeQuery("SELECT status_peminjaman,kondisi FROM barang where id_barang="+id);
             while(rs.next()){
-                if(id == null ? rs.getString(1) == null : id.equals(rs.getString(1))){
+                if (rs.getString(1)=="Ready"&&rs.getString(2)=="Good"){
                     return true;
+                }else{
+                    return false;
                 }
             }
         }catch(Exception e){
@@ -422,7 +424,7 @@ dispose();        // TODO add your handling code here:
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 //        String statusku = status.getSelectedItem().toString();
-        if(!check(id_item.getText())){
+        if(check(id_item.getText())){
             String lama = length.getSelectedItem().toString();
             int lamawaktu = Integer.parseInt(lama);
             try {
