@@ -298,7 +298,7 @@ dispose();        // TODO add your handling code here:
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
+                model.addRow(new Object[]{res.getString(1),res.getString(10),res.getString(18),res.getString(24),res.getString(5),
                     res.getString(6),res.getString(15),res.getString(7),res.getString(8),res.getString(16)});
             }
             jTable.setModel(model);
@@ -346,7 +346,7 @@ dispose();        // TODO add your handling code here:
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
+                model.addRow(new Object[]{res.getString(1),res.getString(10),res.getString(18),res.getString(24),res.getString(5),
                     res.getString(6),res.getString(15),res.getString(7),res.getString(8),res.getString(16)});
             }
             jTable.setModel(model);
@@ -378,7 +378,7 @@ dispose();        // TODO add your handling code here:
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
+                model.addRow(new Object[]{res.getString(1),res.getString(10),res.getString(18),res.getString(24),res.getString(5),
                     res.getString(6),res.getString(15),res.getString(7),res.getString(8),res.getString(16)});
             }
             jTable.setModel(model);
@@ -410,7 +410,7 @@ dispose();        // TODO add your handling code here:
             java.sql.Statement stm=con.createStatement();
             java.sql.ResultSet res=stm.executeQuery(sql);
             while(res.next()){
-                model.addRow(new Object[]{res.getString(1),res.getString(12),res.getString(18),res.getString(24),res.getString(5),
+                model.addRow(new Object[]{res.getString(1),res.getString(10),res.getString(18),res.getString(24),res.getString(5),
                     res.getString(6),res.getString(15),res.getString(7),res.getString(8),res.getString(16)});
             }
             jTable.setModel(model);
