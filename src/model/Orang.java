@@ -1,6 +1,7 @@
+
 package model;
 import java.util.Date;
-public class Orang {
+public abstract class Orang {
     public String nama,address;
     public Date tgl_lahir;
     public Orang(String nama,String address,Date tgl_lahir){
@@ -18,4 +19,8 @@ public class Orang {
     public Date getDate(){
         return tgl_lahir;
     }
+    
+    public abstract String getUsername();
+    public abstract String getPassword();
+    public abstract int getId();
 }

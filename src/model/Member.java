@@ -10,12 +10,15 @@ public class Member extends Orang{
         this.id_member=id_member;
         this.email=email;
     }
+    @Override
     public String getUsername(){
         return username;
     }
+    @Override
     public String getPassword(){
         return password;
     }
+    @Override
     public int getId(){
         return id_member;
     }

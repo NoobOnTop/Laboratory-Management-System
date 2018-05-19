@@ -9,12 +9,15 @@ public class Laboran extends Orang {
         this.password=password;
         this.id_laboran=id_laboran;
     }
+    @Override
     public String getUsername(){
         return username;
     }
+    @Override
     public String getPassword(){
         return password;
     }
+    @Override
     public int getId(){
         return id_laboran;
     }
